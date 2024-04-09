@@ -1,0 +1,53 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Backend Application debug",
+            "type": "php",
+            "request": "launch",
+            // "mode": "auto",
+            // "program": "${file}",
+            // "cwd": "${fileDirname}",
+            "port": 9010,
+            "pathMappings": {
+                // {docker上のdocument root}: {ローカルのdocument root}
+                "/var/www/html": "${workspaceFolder}/laravel-project"
+            },
+            // "env": {},
+            // コマンドラインパラメーターを渡す場合
+            // "args": ["10", "20"]
+        },
+        {
+            "name": "Next.js Server Side Debug",
+            "type": "node",
+            "request": "attach",
+            "skipFiles": ["<node_internals>/**"],
+            "port": 9229
+        },
+        {
+            "name": "Next.js Clinet Side Debug",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3001",
+            "webRoot": "${workspaceFolder}/next-project",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+              "webpack://_N_E/*": "${webRoot}/*"
+            }
+        },
+        {
+          "name": "Next.js Server & Clinet Debug",
+          "type": "node-terminal",
+          "request": "launch",
+          "command": "npm run dev",
+          "serverReadyAction": {
+            "pattern": "started server debug on .+, url: (https?://.+)",
+            "uriFormat": "%s",
+            "action": "debugWithChrome"
+          }
+        }
+    ]
+}

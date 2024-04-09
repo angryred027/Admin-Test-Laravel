@@ -1,0 +1,7 @@
+check-partition.sh
+get-dump.sh
+get-partition-dump.sh
+restore-dump.sh
+
+### sql files
+*.sql

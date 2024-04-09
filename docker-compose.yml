@@ -1,0 +1,128 @@
+version: '3.7'
+
+services:
+  app:
+    build: ./app
+    container_name: ${PROJECT_NAME}_app
+    volumes:
+      - ./app/backend:/var/www/html
+      # - ./mysql/sql:/var/www/html/storage/app/sql # プロジェクトのコンテナに個別にファイルを置きかつホストに影響を与えさせない場合
+      # - ./mysql/sql/sample.sql:/var/www/html/storage/app/sql/sample.sql# ファイルは直接マウントさせる必要がある
+      - ./app/php.ini:/usr/local/etc/php/php.ini
+      - ./app/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./app/xhprof.ini:/usr/local/etc/php/conf.d/xhprof.ini
+    ports:
+      - "${PHP_FPM_PORT}:9000"
+    expose:
+      - "${PHP_FPM_PORT}"
+    depends_on:
+      - db
+    environment:
+      TZ: "Asia/Tokyo"
+      APP_URL: ${APP_URL}
+      # APP_ENV: ${APP_ENV} # unit test時に影響が出る為コメントアウト
+    networks:
+      default:
+
+  nginx:
+    build: ./node/nginx
+    container_name: ${PROJECT_NAME}_nginx
+    volumes:
+      - ./node/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./node/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./node/nginx/logs:/var/log/nginx
+      # - ./frontend:/var/www/frontend/
+    depends_on:
+      - app
+    ports:
+      - "${NGINX_HOST_HTTP_PORT}:80"
+      # - "${NGINX_HOST_HTTPS_PORT}:443"
+      # - "${NGINX_BACK_END_PORT}:${NGINX_BACK_END_PORT}"
+      # - "${NGINX_FRONT_END_PORT}:${NGINX_FRONT_END_PORT}"
+    environment:
+      TZ: "Asia/Tokyo"
+    networks:
+      default:
+        ipv4_address: ${SERVICE_NETWORK_IP}
+
+  db:
+    platform: 'linux/amd64'
+    build: ./mysql
+    container_name: ${PROJECT_NAME}_db
+    volumes:
+      - db-volume:/var/lib/mysql # データの永続化
+      # - ./mysql/sql:/docker-entrypoint-initdb.d # SQLで設定する場合
+      - ./mysql/files:/var/lib/mysql-files
+      - ./mysql/initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}" # MYSQL_TCP_PORTによってコンテナ側の接続すべきportが変わる
+    environment:
+      DB_USER: ${DB_USER}
+      DB_DATABASE: ${DB_DATABASE}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_TCP_PORT: ${MYSQL_TCP_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TZ: "Asia/Tokyo"
+    networks:
+      default:
+
+  node:
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile
+    container_name: ${PROJECT_NAME}_node
+    volumes:
+      # - ./node/next:/frontend
+      # - ./next:/usr/src/app
+      - ./frontend:/frontend
+    depends_on:
+      - app
+    ports:
+      - "${NODE_APPLICATION_PORT}:${NODE_APPLICATION_PORT}"
+    networks:
+      default:
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: ${PROJECT_NAME}_redis
+    volumes:
+      - redis-volume:/data
+      - ./redis/lua:/usr/local/share/lua
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    command: --port "${REDIS_PORT}" # TCP接続を考慮してredis-serverを起動するportを指定
+    environment:
+      TZ: "Asia/Tokyo"
+    networks:
+      default:
+
+  mail:
+    image: mailhog/mailhog
+    container_name: ${PROJECT_NAME}_mail
+    volumes:
+      - mail-volume:/tmp
+    ports:
+      - "${MAIL_PORT}:8025"
+    environment:
+      TZ: "Asia/Tokyo"
+      # MH_STORAGE: maildir
+      MH_MAILDIR_PATH: /tmp
+    networks:
+      default:
+
+volumes:
+  redis-volume:
+    name: ${REDIS_VOLUME_NAME}
+    external: true
+  mail-volume:
+    name: ${MAIL_VOLUME_NAME}
+    external: true
+  db-volume:
+    name: ${VOLUME_NAME}
+    # driver: local
+    external: true
+
+networks:
+  default:
+    external: true
+    name: ${NETWORK_NAME}

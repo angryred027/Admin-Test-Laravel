@@ -1,0 +1,16 @@
+# C extensions
+*.so
+
+# log
+*.log
+
+# Environments
+.env
+
+.DS_Store
+
+# mysql data
+mysql_data
+
+# debug setting file
+.vscode/launch.json
