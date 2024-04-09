@@ -2008,6 +2008,38 @@ $ npm audit fix --force
 
 ---
 
+## Laravel-AdminLTEのインストール
+
+### パッケージのインストール
+
+```shell
+# パッケージのインストール
+composer require jeroennoten/laravel-adminlte
+# AdminLTEテンプレートと依存関係(Bootstrapなど)をインストール
+## 下記のファイルとディレクトリが作成される
+### config/adminlte.php
+### lang/* (日本語以外の不要の言語は削除して良い。)
+### public/vendor/* (/public/vendor自体は.gitigoreで除外した方が良い)
+php artisan adminlte:install
+
+# ログイン画面のテンプレートをインストール
+### resources/viewsに、authディレクトリとファイルが作成される。
+php artisan adminlte:install --only=auth_views
+
+```
+
+### ログイン画面の表示
+
+`routes/web.php`に下記の記述を追加
+
+```php
+Route::get('/admin/login', function () {
+    return view('/auth/login');
+})->name('admin.login');
+```
+
+---
+
 ### Docker Container内のユーザーの変更
 
 ユーザーのUID/GUIDの確認
