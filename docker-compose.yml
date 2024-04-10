@@ -31,6 +31,7 @@ services:
       - ./node/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./node/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
       - ./node/nginx/logs:/var/log/nginx
+      - ./app/backend/public:/var/www/html/public:ro # js,cssなどの配信用(ReadOnly)
       # - ./frontend:/var/www/frontend/
     depends_on:
       - app
