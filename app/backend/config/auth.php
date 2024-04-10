@@ -40,6 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api-admins' => [
+            // 'driver' => 'token',
+            // 'driver'   => 'jwt', // tymon-jwtを使う場合
+            'driver'   => 'session',
+            'provider' => 'admins',
+            'hash'     => false,
+        ],
     ],
 
     /*
@@ -60,6 +67,10 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Masters\Admins::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
