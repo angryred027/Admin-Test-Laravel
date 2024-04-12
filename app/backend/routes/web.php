@@ -24,8 +24,9 @@ Route::get('/admin/login', function () {
 Route::post('/admin/auth', [\App\Http\Controllers\Admins\AuthController::class, 'login'])->name('admin.auth');
 
 Route::middleware(['auth:api-admins'])->group(function () {
-    // ログイン認証が通ってない場合、URLで直接homeにアクセスしても画面が見れないように
     Route::get('/admin/home', function () {
         return view('/admin/home');
     })->name('admin.home');
+
+    Route::get('/admin/test', [\App\Http\Controllers\Admins\AdminSampleController::class, 'test'])->name('admin.test');
  });
