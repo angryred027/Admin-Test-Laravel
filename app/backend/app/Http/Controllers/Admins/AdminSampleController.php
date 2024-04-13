@@ -51,8 +51,18 @@ class AdminSampleController extends Controller
      *
      * @return View|Factory
      */
-    public function test()
+    public function test(): View|Factory
     {
         return view('/admin/test');
+    }
+
+    /**
+     * sample page.
+     *
+     * @return View|Factory
+     */
+    public function sample(): View|Factory
+    {
+        return view('/admin/sample');
     }
 }

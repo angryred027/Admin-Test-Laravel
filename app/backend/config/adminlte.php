@@ -332,11 +332,20 @@ return [
             'label_color' => 'warning',
         ],
         [
+            'text' => 'sample',
+            'url' => 'admin/sample',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'info',
+        ],
+        [
             'text' => 'multilevel-test',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
                     'text' => 'level_one1',
+                    'icon' => 'fas fa-fw fa-share',
+                    // 'icon' => '', // アイコンを無くしたい場合
                     'url' => '#',
                 ],
                 [
