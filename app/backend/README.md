@@ -2038,6 +2038,36 @@ Route::get('/admin/login', function () {
 })->name('admin.login');
 ```
 
+### CLIでAdmin-LTEのステータスの確認
+
+```shell
+php artisan adminlte:status
+Checking the resources installation ...
+ 7/7 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+All resources checked succesfully!
+
++------------------+------------------------------------------+---------------+----------+
+| Package Resource | Description                              | Status        | Required |
++------------------+------------------------------------------+---------------+----------+
+| assets           | The AdminLTE required assets             | Installed     | true     |
+| config           | The default package configuration file   | Mismatch      | true     |
+| translations     | The default package translations files   | Mismatch      | true     |
+| main_views       | The default package main views           | Not Installed | false    |
+| auth_views       | The default package authentication views | Installed     | false    |
+| basic_views      | The default package basic views          | Not Installed | false    |
+| basic_routes     | The package routes                       | Not Installed | false    |
++------------------+------------------------------------------+---------------+----------+
+
+Status legends:
++---------------+----------------------------------------------------------------------------------------------+
+| Status        | Description                                                                                  |
++---------------+----------------------------------------------------------------------------------------------+
+| Installed     | The resource is installed and matches with the default package resource                      |
+| Mismatch      | The installed resource mismatch the package resource (update available or resource modified) |
+| Not Installed | The package resource is not installed                                                        |
++---------------+----------------------------------------------------------------------------------------------+
+```
+
 ---
 
 ### Docker Container内のユーザーの変更
