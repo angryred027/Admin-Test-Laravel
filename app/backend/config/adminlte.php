@@ -317,11 +317,18 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
+            'text' => 'home',
+            'url' => 'admin/home',
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
+        ],
+        [
+            'text' => 'test',
+            'url' => 'admin/test',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'warning',
         ],
         ['header' => 'account_settings'],
         [
