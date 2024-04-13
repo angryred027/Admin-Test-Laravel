@@ -9,10 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Masters\Admins;
 use App\Library\Session\SessionLibrary;
 use App\Library\Message\StatusCodeMessages;
-use App\Repositories\Masters\AdminsRoles\AdminsRolesRepositoryInterface;
 use App\Trait\CheckHeaderTrait;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Config;
 
 class AuthController extends Controller
@@ -43,15 +45,16 @@ class AuthController extends Controller
     public function __construct()
     {
         // Illuminate\Routing\Controller
-        $this->middleware('customAuth:api-admins', ['except' => ['login']]);
+        // $this->middleware('customAuth:api-admins', ['except' => ['login']]);
+        $this->middleware('auth:api-admins', ['except' => ['login']]);
     }
 
     /**
      * ログイン
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|Redirector|RedirectResponse
      */
-    public function login()
+    public function login(): JsonResponse|Redirector|RedirectResponse
     {
         // $credentials = request(['email', 'password']);
 
@@ -72,7 +75,10 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        // json形式のレスポンスを返す場合
+        // return $this->respondWithToken($token);
+        // ホーム画面のviewにリダイレクトする場合
+        return redirect(route('admin.home'));
     }
 
     /**
