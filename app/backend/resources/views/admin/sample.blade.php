@@ -331,4 +331,133 @@
         </x-slot>
     </x-adminlte-textarea>
 
+
+
+
+    {{-- Alert --}}
+    {{-- Minimal --}}
+    <x-adminlte-alert>Minimal example</x-adminlte-alert>
+
+    {{-- Minimal with title and dismissable --}}
+    <x-adminlte-alert title="Well done!" dismissable>
+        Minimal example
+    </x-adminlte-alert>
+
+    {{-- Minimal with icon only --}}
+    <x-adminlte-alert icon="fas fa-user">
+        User has logged in!
+    </x-adminlte-alert>
+
+    {{-- Themes --}}
+    <x-adminlte-alert theme="light" title="Tip">
+        Light theme alert!
+    </x-adminlte-alert>
+    <x-adminlte-alert theme="dark" title="Important">
+        Dark theme alert!
+    </x-adminlte-alert>
+    <x-adminlte-alert theme="primary" title="Primary Notification">
+        Primary theme alert!
+    </x-adminlte-alert>
+    <x-adminlte-alert theme="secondary" icon="" title="Secondary Notification">
+        Secondary theme alert!
+    </x-adminlte-alert>
+    <x-adminlte-alert theme="info" title="Info">
+        Info theme alert!
+    </x-adminlte-alert>
+    <x-adminlte-alert theme="success" title="Success">
+        Success theme alert!
+    </x-adminlte-alert>
+    <x-adminlte-alert theme="warning" title="Warning">
+        Warning theme alert!
+    </x-adminlte-alert>
+    <x-adminlte-alert theme="danger" title="Danger">
+        Danger theme alert!
+    </x-adminlte-alert>
+
+    {{-- Custom --}}
+    <x-adminlte-alert class="bg-teal text-uppercase" icon="fa fa-lg fa-thumbs-up" title="Done" dismissable>
+        Your payment was complete!
+    </x-adminlte-alert>
+
+    {{-- Minimal --}}
+    <x-adminlte-callout>Minimal example</x-adminlte-callout>
+
+    {{-- themes --}}
+    <x-adminlte-callout theme="info" title="Information">
+        Info theme callout!
+    </x-adminlte-callout>
+    <x-adminlte-callout theme="success" title="Success">
+        Success theme callout!
+    </x-adminlte-callout>
+    <x-adminlte-callout theme="warning" title="Warning">
+        Warning theme callout!
+    </x-adminlte-callout>
+    <x-adminlte-callout theme="danger" title="Danger">
+        Danger theme callout!
+    </x-adminlte-callout>
+
+    {{-- Custom --}}
+    <x-adminlte-callout theme="success" class="bg-teal" icon="fas fa-lg fa-thumbs-up" title="Done">
+        <i class="text-dark">Your payment was complete!</i>
+    </x-adminlte-callout>
+    <x-adminlte-callout theme="danger" title-class="text-danger text-uppercase"
+        icon="fas fa-lg fa-exclamation-circle" title="Payment Error">
+        <i>There was an error on the payment procedure!</i>
+    </x-adminlte-callout>
+    <x-adminlte-callout theme="info" class="bg-gradient-info" title-class="text-bold text-dark"
+        icon="fas fa-lg fa-bell text-dark" title="Notification">
+        This is a notification.
+    </x-adminlte-callout>
+    <x-adminlte-callout theme="danger" class="bg-gradient-pink" title-class="text-uppercase"
+        icon="fas fa-lg fa-leaf text-purple" title="observation">
+        <i>A styled observation for the user.</i>
+    </x-adminlte-callout>
+
+
+
+    {{-- progress --}}
+    {{-- Minimal --}}
+    <x-adminlte-progress/>
+
+    {{-- themes --}}
+    <x-adminlte-progress theme="light" value=55/>
+    <x-adminlte-progress theme="dark" value=30/>
+    <x-adminlte-progress theme="primary" value=95/>
+    <x-adminlte-progress theme="secondary" value=40/>
+    <x-adminlte-progress theme="info" value=85/>
+    <x-adminlte-progress theme="warning" value=25/>
+    <x-adminlte-progress theme="danger" value=50/>
+    <x-adminlte-progress theme="success" value=75/>
+
+    {{-- Custom --}}
+    <x-adminlte-progress theme="teal" value=75 animated/>
+    <x-adminlte-progress size="sm" theme="indigo" value=85 animated/>
+    <x-adminlte-progress theme="pink" value=50 animated with-label/>
+
+    {{-- Vertical --}}
+    <x-adminlte-progress theme="purple" value=40 vertical/>
+    <x-adminlte-progress theme="orange" value=80 vertical animated/>
+    <x-adminlte-progress theme="navy" value=70 vertical striped with-label/>
+    <x-adminlte-progress theme="lime" size="xxs" value=90 vertical/>
+
+    {{-- Dinamic Change --}}
+    <x-adminlte-progress id="pbDinamic" value="5" theme="lighblue" animated with-label/>
+    {{-- Update the previous progress bar every 2 seconds, incrementing by 10% each step --}}
+    @push('js')
+    <script>
+        $(document).ready(function() {
+
+            let pBar = new _AdminLTE_Progress('pbDinamic');
+
+            let inc = (val) => {
+                let v = pBar.getValue() + val;
+                return v > 100 ? 0 : v;
+            };
+
+            setInterval(() => pBar.setValue(inc(10)), 2000);
+        })
+    </script>
+    @endpush
+
+
 @stop
