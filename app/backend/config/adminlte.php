@@ -258,7 +258,8 @@ return [
 
     'use_route_url' => false,
     'dashboard_url' => 'home',
-    'logout_url' => 'logout',
+    // 'logout_url' => 'logout',
+    'logout_url' => 'admin/logout',
     // 'login_url' => 'login',
     'login_url' => 'admin/auth', // ログインする時のformリクエストのエンドポイント
     'register_url' => 'register',

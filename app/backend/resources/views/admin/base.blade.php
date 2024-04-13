@@ -1,7 +1,6 @@
 @extends('adminlte::page')
 
 @section('title', 'Base Dashboard')
-<!-- @section('title_postfix', 'test') -->
 
 @section('content_header')
     <h1>Base Dashboard</h1>

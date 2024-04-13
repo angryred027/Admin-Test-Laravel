@@ -52,7 +52,7 @@ class AuthController extends Controller
     /**
      * ログイン
      *
-     * @return \Illuminate\Http\JsonResponse|Redirector|RedirectResponse
+     * @return JsonResponse|Redirector|RedirectResponse
      */
     public function login(): JsonResponse|Redirector|RedirectResponse
     {
@@ -120,13 +120,16 @@ class AuthController extends Controller
      * @header Accept application/json
      * @header Authorization Bearer
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse|Redirector|RedirectResponse
      */
-    public function logout()
+    public function logout(): JsonResponse|Redirector|RedirectResponse
     {
         auth('api-admins')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        // APIで返す場合
+        // return response()->json(['message' => 'Successfully logged out']);
+
+        return redirect(route('admin.login'));
     }
 
     /**
