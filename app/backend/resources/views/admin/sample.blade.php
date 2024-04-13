@@ -206,5 +206,129 @@
         <x-adminlte-options :options="['News', 'Sports', 'Science', 'Games']"/>
     </x-adminlte-select-bs>
 
+    {{-- Select1 --}}
+    {{-- Minimal --}}
+    <x-adminlte-select name="selBasic">
+        <option>Option 1</option>
+        <option disabled>Option 2</option>
+        <option selected>Option 3</option>
+    </x-adminlte-select>
+
+    {{-- Disabled --}}
+    <x-adminlte-select name="selDisabled" disabled>
+        <option>Option 1</option>
+        <option>Option 2</option>
+    </x-adminlte-select>
+
+    {{-- With prepend slot, lg size, and label --}}
+    <x-adminlte-select name="selVehicle" label="Vehicle" label-class="text-lightblue"
+        igroup-size="lg">
+        <x-slot name="prependSlot">
+            <div class="input-group-text bg-gradient-info">
+                <i class="fas fa-car-side"></i>
+            </div>
+        </x-slot>
+        <option>Vehicle 1</option>
+        <option>Vehicle 2</option>
+    </x-adminlte-select>
+
+    {{-- With multiple slots and multiple options --}}
+    <x-adminlte-select id="selUser" name="selUser[]" label="User" label-class="text-danger" multiple>
+        <x-slot name="prependSlot">
+            <div class="input-group-text bg-gradient-red">
+                <i class="fas fa-lg fa-user"></i>
+            </div>
+        </x-slot>
+        <x-slot name="appendSlot">
+            <x-adminlte-button theme="outline-dark" label="Clear" icon="fas fa-lg fa-ban text-danger"/>
+        </x-slot>
+        <option>Admin</option>
+        <option>Guest</option>
+    </x-adminlte-select>
+
+
+
+    {{-- Select2 --}}
+    {{-- Minimal --}}
+    <x-adminlte-select2 name="sel2Basic">
+        <option>Option 1</option>
+        <option disabled>Option 2</option>
+        <option selected>Option 3</option>
+    </x-adminlte-select2>
+
+    {{-- Disabled --}}
+    <x-adminlte-select2 name="sel2Disabled" disabled>
+        <option>Option 1</option>
+        <option>Option 2</option>
+    </x-adminlte-select2>
+
+    {{-- With prepend slot, label, and data-placeholder config --}}
+    <x-adminlte-select2 name="sel2Vehicle" label="Vehicle" label-class="text-lightblue"
+        igroup-size="lg" data-placeholder="Select an option...">
+        <x-slot name="prependSlot">
+            <div class="input-group-text bg-gradient-info">
+                <i class="fas fa-car-side"></i>
+            </div>
+        </x-slot>
+        <option/>
+        <option>Vehicle 1</option>
+        <option>Vehicle 2</option>
+    </x-adminlte-select2>
+
+    {{-- With multiple slots, and plugin config parameters --}}
+    @php
+        $config = [
+            "placeholder" => "Select multiple options...",
+            "allowClear" => true,
+        ];
+    @endphp
+    <x-adminlte-select2 id="sel2Category" name="sel2Category[]" label="Categories"
+        label-class="text-danger" igroup-size="sm" :config="$config" multiple>
+        <x-slot name="prependSlot">
+            <div class="input-group-text bg-gradient-red">
+                <i class="fas fa-tag"></i>
+            </div>
+        </x-slot>
+        <x-slot name="appendSlot">
+            <x-adminlte-button theme="outline-dark" label="Clear" icon="fas fa-lg fa-ban text-danger"/>
+        </x-slot>
+        <option>Sports</option>
+        <option>News</option>
+        <option>Games</option>
+        <option>Science</option>
+        <option>Maths</option>
+    </x-adminlte-select2>
+
+    {{-- TextArea --}}
+    {{-- Minimal with placeholder --}}
+    <x-adminlte-textarea name="taBasic" placeholder="Insert description..."/>
+
+    {{-- Disabled --}}
+    <x-adminlte-textarea name="taDisabled" disabled>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis nibh massa.
+    </x-adminlte-textarea>
+
+    {{-- With prepend slot, sm size, and label --}}
+    <x-adminlte-textarea name="taDesc" label="Description" rows=5 label-class="text-warning"
+        igroup-size="sm" placeholder="Insert description...">
+        <x-slot name="prependSlot">
+            <div class="input-group-text bg-dark">
+                <i class="fas fa-lg fa-file-alt text-warning"></i>
+            </div>
+        </x-slot>
+    </x-adminlte-textarea>
+
+    {{-- With slots, sm size, and feedback disabled --}}
+    <x-adminlte-textarea name="taMsg" label="Message" rows=5 igroup-size="sm"
+        label-class="text-primary" placeholder="Write your message..." disable-feedback>
+        <x-slot name="prependSlot">
+            <div class="input-group-text">
+                <i class="fas fa-lg fa-comment-dots text-primary"></i>
+            </div>
+        </x-slot>
+        <x-slot name="appendSlot">
+            <x-adminlte-button theme="primary" icon="fas fa-paper-plane" label="Send"/>
+        </x-slot>
+    </x-adminlte-textarea>
 
 @stop
