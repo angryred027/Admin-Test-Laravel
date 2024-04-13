@@ -330,6 +330,44 @@ return [
             'label' => 4,
             'label_color' => 'warning',
         ],
+        [
+            'text' => 'multilevel-test',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'level_one1',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'level_one2',
+                    'url' => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'level_two1',
+                            'url' => '#',
+                        ],
+                        [
+                            'text' => 'level_two2',
+                            'url' => '#',
+                            'submenu' => [
+                                [
+                                    'text' => 'level_three1',
+                                    'url' => '#',
+                                ],
+                                [
+                                    'text' => 'level_three2',
+                                    'url' => '#',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'level_one3',
+                    'url' => '#',
+                ],
+            ],
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -393,6 +431,11 @@ return [
         [
             'text' => 'information',
             'icon_color' => 'cyan',
+            'url' => '#',
+        ],
+        [
+            'text' => 'success',
+            'icon_color' => 'green',
             'url' => '#',
         ],
     ],
