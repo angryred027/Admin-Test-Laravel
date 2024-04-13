@@ -17,18 +17,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/login', function () {
-    return view('/auth/login');
-})->name('admin.login');
 
-Route::post('/admin/auth', [\App\Http\Controllers\Admins\AuthController::class, 'login'])->name('admin.auth');
+// 未ログイン
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/login', function () {
+        return view('/auth/login');
+    })->name('admin.login');
+
+    Route::post('/auth', [\App\Http\Controllers\Admins\AuthController::class, 'login'])->name('admin.auth');
+
+});
 
 Route::middleware(['auth:api-admins'])->group(function () {
-    Route::get('/admin/home', function () {
-        return view('/admin/home');
-    })->name('admin.home');
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/home', function () {
+            return view('/admin/home');
+        })->name('admin.home');
 
-    Route::get('/admin/test', [\App\Http\Controllers\Admins\AdminSampleController::class, 'test'])->name('admin.test');
-
-    Route::post('/admin/logout', [\App\Http\Controllers\Admins\AuthController::class, 'logout'])->name('admin.logout');
+        Route::get('/test', [\App\Http\Controllers\Admins\AdminSampleController::class, 'test'])->name('admin.test');
+        Route::post('/logout', [\App\Http\Controllers\Admins\AuthController::class, 'logout'])->name('admin.logout');
+    });
  });
