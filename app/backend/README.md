@@ -2042,6 +2042,7 @@ Route::get('/admin/login', function () {
 
 ```shell
 php artisan adminlte:status
+
 Checking the resources installation ...
  7/7 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 All resources checked succesfully!
@@ -2066,6 +2067,19 @@ Status legends:
 | Mismatch      | The installed resource mismatch the package resource (update available or resource modified) |
 | Not Installed | The package resource is not installed                                                        |
 +---------------+----------------------------------------------------------------------------------------------+
+```
+
+### プラグインの追加
+
+```shell
+### セレクトボックス
+php artisan adminlte:plugins install --plugin=select2
+### カレンダー
+php artisan adminlte:plugins install --plugin=tempusdominusBootstrap4
+### ファイルアップロード
+php artisan adminlte:plugins install --plugin=bsCustomFileInput
+### データテーブル
+php artisan adminlte:plugins install --plugin=datatables
 ```
 
 
