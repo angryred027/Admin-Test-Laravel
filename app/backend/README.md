@@ -2068,6 +2068,18 @@ Status legends:
 +---------------+----------------------------------------------------------------------------------------------+
 ```
 
+
+### コンポーネントの作り方
+
+```shell
+### App/View/Componentsディレクトリにもファイルが作成される。
+php artisan make:component Forms/Input
+
+### resources/views/componentsディレクトリのみに作りたい場合(→sample-input.blage.phpが作成される)
+php artisan make:component sample.sampleInput --view
+
+```
+
 ---
 
 ### Docker Container内のユーザーの変更
