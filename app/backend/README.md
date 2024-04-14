@@ -2073,9 +2073,11 @@ Status legends:
 
 ```shell
 ### App/View/Componentsディレクトリにもファイルが作成される。
+#### この場合は専用のSeviceProviderに設定する必要がある。この時の呼び出し方は<x-forms-input/>
 php artisan make:component Forms/Input
 
 ### resources/views/componentsディレクトリのみに作りたい場合(→sample-input.blage.phpが作成される)
+#### 専用のSeviceProviderに設定する必要無し。この時の呼び出し方は<x-sample.sample-input/>
 php artisan make:component sample.sampleInput --view
 
 ```
