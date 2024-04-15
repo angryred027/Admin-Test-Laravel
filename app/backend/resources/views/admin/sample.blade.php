@@ -525,7 +525,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <x-sample.sample-input/>
+                <x-sample.sample-input name="test" value="TestValue"/>
             </div>
         </div>
     </div>

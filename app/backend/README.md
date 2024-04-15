@@ -2082,7 +2082,6 @@ php artisan adminlte:plugins install --plugin=bsCustomFileInput
 php artisan adminlte:plugins install --plugin=datatables
 ```
 
-
 ### コンポーネントの作り方
 
 ```shell
