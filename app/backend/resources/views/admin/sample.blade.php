@@ -525,7 +525,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <x-sample.sample-input name="test" value="TestValue"/>
+                <x-sample.sample-input type="text" name="test" value="TestValue" disabled="false"/>
             </div>
         </div>
     </div>

@@ -1,3 +1,3 @@
 <div class="sample-input">
-    <input class={{$name ?? ''}} type="date" name={{$name}} value={{$value}} disabled="false">
+    <input class={{$name ?? ''}} type="{{$type ?? 'date'}}" name={{$name}} value={{$value}} disabled={{$disabled ?? false}}>
 </div>
