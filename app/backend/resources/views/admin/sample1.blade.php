@@ -31,13 +31,19 @@
     </div>
 
 
-    {{-- Email type --}}
-    <x-adminlte-input name="iMail" type="email" placeholder="mail@example.com"/>
 
     {{-- With label, invalid feedback disabled, and form group class --}}
-    <div class="row">
-        <x-adminlte-input name="iLabel" label="Label" placeholder="placeholder"
-            fgroup-class="col-md-6" disable-feedback/>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <x-adminlte-input name="iMail" label="mail" type="email" placeholder="mail@example.com" fgroup-class="col-md-6" disable-feedback/>
+
+                <x-adminlte-input name="iName" label="name" placeholder="name" fgroup-class="col-md-6" disable-feedback/>
+
+                <x-adminlte-input name="iAddress" label="Address" placeholder="address" fgroup-class="col-md-6" disable-feedback/>
+                <x-adminlte-input name="iPassword" label="Password" type="password" placeholder="password" fgroup-class="col-md-6" disable-feedback/>
+            </div>
+        </div>
     </div>
 
     {{-- With prepend slot --}}
@@ -49,49 +55,24 @@
         </x-slot>
     </x-adminlte-input>
 
-    {{-- With append slot, number type, and sm size --}}
-    <x-adminlte-input name="iNum" label="Number" placeholder="number" type="number" igroup-size="sm" min=1 max=10>
-        <x-slot name="appendSlot">
-            <div class="input-group-text bg-dark">
-                <i class="fas fa-hashtag"></i>
-            </div>
-        </x-slot>
-    </x-adminlte-input>
-
-    {{-- With multiple slots, and lg size --}}
-    <x-adminlte-input name="iSearch" label="Search" placeholder="search" igroup-size="lg">
-        <x-slot name="appendSlot">
-            <x-adminlte-button theme="outline-danger" label="Go!"/>
-        </x-slot>
-        <x-slot name="prependSlot">
-            <div class="input-group-text text-danger">
-                <i class="fas fa-search"></i>
-            </div>
-        </x-slot>
-    </x-adminlte-input>
-
-
     {{-- Input File --}}
 
     {{-- Minimal --}}
     <x-adminlte-input-file name="ifMin"/>
 
-    {{-- Placeholder, sm size, and prepend icon --}}
-    <x-adminlte-input-file name="ifPholder" igroup-size="sm" placeholder="Choose a file...">
-        <x-slot name="prependSlot">
-            <div class="input-group-text bg-lightblue">
-                <i class="fas fa-upload"></i>
-            </div>
-        </x-slot>
-    </x-adminlte-input-file>
-
     {{-- With label and feedback disabled --}}
-    <x-adminlte-input-file name="ifLabel" label="Upload file" placeholder="Choose a file..."
-        disable-feedback/>
+    <x-adminlte-input-file name="ifLabel" label="Upload file" placeholder="Choose a file..." disable-feedback/>
 
     {{-- With multiple slots and multiple files --}}
-    <x-adminlte-input-file id="ifMultiple" name="ifMultiple[]" label="Upload files"
-        placeholder="Choose multiple files..." igroup-size="lg" legend="Choose" multiple>
+    <x-adminlte-input-file
+        id="ifMultiple"
+        name="ifMultiple[]"
+        label="Upload files"
+        placeholder="Choose multiple files..."
+        igroup-size="lg"
+        legend="Choose"
+        multiple
+    >
         <x-slot name="appendSlot">
             <x-adminlte-button theme="primary" label="Upload"/>
         </x-slot>
@@ -102,29 +83,6 @@
         </x-slot>
     </x-adminlte-input-file>
 
-    {{-- Example with empty option (for Select2) --}}
-    <x-adminlte-select2 name="optionsVehicles" igroup-size="lg" label-class="text-lightblue"
-        data-placeholder="Select an option...">
-        <x-slot name="prependSlot">
-            <div class="input-group-text bg-gradient-info">
-                <i class="fas fa-car-side"></i>
-            </div>
-        </x-slot>
-        <x-adminlte-options :options="['Car', 'Truck', 'Motorcycle']" empty-option/>
-    </x-adminlte-select2>
-
-    {{-- With prepend slot, lg size, and label --}}
-    <x-adminlte-select name="selVehicle" label="Vehicle" label-class="text-lightblue"
-        igroup-size="lg">
-        <x-slot name="prependSlot">
-            <div class="input-group-text bg-gradient-info">
-                <i class="fas fa-car-side"></i>
-            </div>
-        </x-slot>
-        <option>Vehicle 1</option>
-        <option>Vehicle 2</option>
-    </x-adminlte-select>
-
 
     {{-- Select2 --}}
     {{-- Minimal --}}
@@ -132,12 +90,6 @@
         <option>Option 1</option>
         <option disabled>Option 2</option>
         <option selected>Option 3</option>
-    </x-adminlte-select2>
-
-    {{-- Disabled --}}
-    <x-adminlte-select2 name="sel2Disabled" disabled>
-        <option>Option 1</option>
-        <option>Option 2</option>
     </x-adminlte-select2>
 
     {{-- With prepend slot, label, and data-placeholder config --}}
@@ -180,11 +132,6 @@
     {{-- Minimal with placeholder --}}
     <x-adminlte-textarea name="taBasic" placeholder="Insert description..."/>
 
-    {{-- Disabled --}}
-    <x-adminlte-textarea name="taDisabled" disabled>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis nibh massa.
-    </x-adminlte-textarea>
-
     {{-- With prepend slot, sm size, and label --}}
     <x-adminlte-textarea name="taDesc" label="Description" rows=5 label-class="text-warning"
         igroup-size="sm" placeholder="Insert description...">
@@ -223,26 +170,9 @@
         User has logged in!
     </x-adminlte-alert>
 
-    {{-- Themes --}}
-    <x-adminlte-alert theme="light" title="Tip">
-        Light theme alert!
-    </x-adminlte-alert>
     <x-adminlte-alert theme="dark" title="Important">
         Dark theme alert!
     </x-adminlte-alert>
-
-    {{-- Custom --}}
-    <x-adminlte-callout theme="success" class="bg-teal" icon="fas fa-lg fa-thumbs-up" title="Done">
-        <i class="text-dark">Your payment was complete!</i>
-    </x-adminlte-callout>
-    <x-adminlte-callout theme="danger" title-class="text-danger text-uppercase"
-        icon="fas fa-lg fa-exclamation-circle" title="Payment Error">
-        <i>There was an error on the payment procedure!</i>
-    </x-adminlte-callout>
-    <x-adminlte-callout theme="info" class="bg-gradient-info" title-class="text-bold text-dark"
-        icon="fas fa-lg fa-bell text-dark" title="Notification">
-        This is a notification.
-    </x-adminlte-callout>
 
 
     {{-- DataTable --}}
@@ -288,14 +218,6 @@
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <x-sample.sample-input type="text" name="test" value="TestValue" disabled="false"/>
             </div>
         </div>
     </div>
