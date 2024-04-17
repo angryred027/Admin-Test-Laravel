@@ -12,6 +12,23 @@
 
     <p>SampleComponents.</p>
 
+
+    {{-- Alert --}}
+
+    {{-- Minimal with title and dismissable --}}
+    <x-adminlte-alert title="Well done!" dismissable>
+        Minimal example
+    </x-adminlte-alert>
+
+    {{-- Minimal with icon only --}}
+    <x-adminlte-alert icon="fas fa-user">
+        User has logged in!
+    </x-adminlte-alert>
+
+    <x-adminlte-alert theme="dark" title="Important">
+        Dark theme alert!
+    </x-adminlte-alert>
+
     <div class="container">
         <div class="row">
             <div class="col-sm">
@@ -26,10 +43,8 @@
                 <x-adminlte-button label="Danger" theme="danger" icon="fas fa-ban"/>
                 <x-adminlte-button label="Success" theme="success" icon="fas fa-thumbs-up"/>
                 <x-adminlte-button label="Dark" theme="dark" icon="fas fa-adjust"/>
-            </div>
         </div>
     </div>
-
 
 
     {{-- With label, invalid feedback disabled, and form group class --}}
@@ -42,6 +57,8 @@
 
                 <x-adminlte-input name="iAddress" label="Address" placeholder="address" fgroup-class="col-md-6" disable-feedback/>
                 <x-adminlte-input name="iPassword" label="Password" type="password" placeholder="password" fgroup-class="col-md-6" disable-feedback/>
+                <x-adminlte-input-file name="ifMin" label="upload file"/>
+            </div>
             </div>
         </div>
     </div>
@@ -64,7 +81,7 @@
     <x-adminlte-input-file name="ifLabel" label="Upload file" placeholder="Choose a file..." disable-feedback/>
 
     {{-- With multiple slots and multiple files --}}
-    <x-adminlte-input-file
+    {{--  <x-adminlte-input-file
         id="ifMultiple"
         name="ifMultiple[]"
         label="Upload files"
@@ -81,7 +98,7 @@
                 <i class="fas fa-file-upload"></i>
             </div>
         </x-slot>
-    </x-adminlte-input-file>
+    </x-adminlte-input-file>  --}}
 
 
     {{-- Select2 --}}
@@ -155,24 +172,6 @@
         </x-slot>
     </x-adminlte-textarea>
 
-
-
-
-    {{-- Alert --}}
-
-    {{-- Minimal with title and dismissable --}}
-    <x-adminlte-alert title="Well done!" dismissable>
-        Minimal example
-    </x-adminlte-alert>
-
-    {{-- Minimal with icon only --}}
-    <x-adminlte-alert icon="fas fa-user">
-        User has logged in!
-    </x-adminlte-alert>
-
-    <x-adminlte-alert theme="dark" title="Important">
-        Dark theme alert!
-    </x-adminlte-alert>
 
 
     {{-- DataTable --}}
