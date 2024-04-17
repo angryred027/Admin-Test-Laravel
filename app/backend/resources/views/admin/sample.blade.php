@@ -264,7 +264,7 @@
 
     {{-- With prepend slot, label, and data-placeholder config --}}
     <x-adminlte-select2 name="sel2Vehicle" label="Vehicle" label-class="text-lightblue"
-        igroup-size="lg" data-placeholder="Select an option...">
+        igroup-size="lg" data-placeholder="Select an option... Select2">
         <x-slot name="prependSlot">
             <div class="input-group-text bg-gradient-info">
                 <i class="fas fa-car-side"></i>
@@ -552,21 +552,21 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Example select</label>
                         <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Example multiple select</label>
                         <select multiple class="form-control" id="exampleFormControlSelect2">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
                         </select>
                     </div>
                     <div class="form-group">
