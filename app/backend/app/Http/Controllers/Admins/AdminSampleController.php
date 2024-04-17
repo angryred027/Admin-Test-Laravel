@@ -65,4 +65,14 @@ class AdminSampleController extends Controller
     {
         return view('/admin/sample');
     }
+
+    /**
+     * sample page1.
+     *
+     * @return View|Factory
+     */
+    public function sample1(): View|Factory
+    {
+        return view('/admin/sample1');
+    }
 }

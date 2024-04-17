@@ -339,6 +339,20 @@ return [
             'label_color' => 'info',
         ],
         [
+            'text' => 'sample',
+            'url' => 'admin/sample',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'info',
+        ],
+        [
+            'text' => 'sample1',
+            'url' => 'admin/sample1',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'danger',
+        ],
+        [
             'text' => 'multilevel-test',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
