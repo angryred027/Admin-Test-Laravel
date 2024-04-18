@@ -2081,6 +2081,10 @@ php artisan adminlte:plugins install --plugin=bsCustomFileInput
 ### データテーブル
 php artisan adminlte:plugins install --plugin=datatables
 
+### 検索機能付きのセレクトボックスは`bootstrap-select`を使えば出来るがこれはartisanコマンドではインストール出来ない
+php artisan adminlte:plugins install --plugin=bootstrapSelect
+
+
 ```
 
 ### プラグインの一覧の確認
