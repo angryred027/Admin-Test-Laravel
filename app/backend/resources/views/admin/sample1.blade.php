@@ -58,6 +58,24 @@
                 <x-adminlte-input name="iAddress" label="Address" placeholder="address" fgroup-class="col-md-6" disable-feedback/>
                 <x-adminlte-input name="iPassword" label="Password" type="password" placeholder="password" fgroup-class="col-md-6" disable-feedback/>
                 <x-adminlte-input-file name="ifMin" label="upload file"/>
+                <x-adminlte-input-date name="idBasic" placeholder="input date"/>
+                @php
+                $config = [
+                    'format' => 'YYYY-MM-DD HH.mm',
+                    'dayViewHeaderFormat' => 'MMM YYYY',
+                    'minDate' => "js:moment().startOf('month')",
+                    'maxDate' => "js:moment().endOf('month')",
+                    'daysOfWeekDisabled' => [0, 6],
+                ];
+                @endphp
+                <x-adminlte-input-date name="idSizeSm" label="Working Datetime" igroup-size="sm"
+                    :config="$config" placeholder="Choose a working day...">
+                    <x-slot name="appendSlot">
+                        <div class="input-group-text bg-dark">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input-date>
             </div>
             </div>
         </div>
