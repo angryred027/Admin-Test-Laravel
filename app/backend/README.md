@@ -2080,6 +2080,12 @@ php artisan adminlte:plugins install --plugin=tempusdominusBootstrap4
 php artisan adminlte:plugins install --plugin=bsCustomFileInput
 ### データテーブル
 php artisan adminlte:plugins install --plugin=datatables
+
+```
+
+### プラグインの一覧の確認
+```shell
+php artisan adminlte:plugins list
 ```
 
 ### コンポーネントの作り方
