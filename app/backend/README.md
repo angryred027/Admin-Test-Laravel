@@ -2084,6 +2084,7 @@ php artisan adminlte:plugins install --plugin=datatables
 ```
 
 ### プラグインの一覧の確認
+
 ```shell
 php artisan adminlte:plugins list
 ```
