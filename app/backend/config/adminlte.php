@@ -353,6 +353,13 @@ return [
             'label_color' => 'danger',
         ],
         [
+            'text' => 'sample2',
+            'url' => 'admin/sample2',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'primary',
+        ],
+        [
             'text' => 'multilevel-test',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
