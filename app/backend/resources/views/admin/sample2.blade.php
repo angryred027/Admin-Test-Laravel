@@ -21,7 +21,16 @@
                 <x-adminlte-input name="iAddress" label="Address" placeholder="address" fgroup-class="col-md-6" disable-feedback/>
                 <x-adminlte-input name="iPassword" label="Password" type="password" placeholder="password" fgroup-class="col-md-6" disable-feedback/>
                 <x-adminlte-input-file name="ifMin" label="upload file" fgroup-class="col-md-6"/>
-                <x-adminlte-input-date name="idBasic" placeholder="input date" label="instaDate" fgroup-class="col-md-6"/>
+
+                <div class="form-group col-md-6">
+                    <label for="idDate">inputDate</label>
+                    <div class="input-group">
+                        <input name="idDate" type="date" placeholder="input date" label="inputDate" class="form-control"/>
+                        <input name="idTime" type="time" placeholder="HH:mm" label="instaTime" class="form-control"/>
+                    </div>
+                </div>
+
+                <x-adminlte-input-date name="idBasic" placeholder="input date" label="inputDate" fgroup-class="col-md-6"/>
                 <x-adminlte-select2 name="sel2Basic" label="testSelect" fgroup-class="col-md-6">
                     <option>Option 1</option>
                     <option disabled>Option 2</option>
