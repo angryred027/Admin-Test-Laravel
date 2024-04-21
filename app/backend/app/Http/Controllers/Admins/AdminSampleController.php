@@ -87,7 +87,7 @@ class AdminSampleController extends Controller
     }
 
     /**
-     * sample image uploader.
+     * sample image uploader index.
      *
      * @return View|Factory
      */
@@ -95,6 +95,19 @@ class AdminSampleController extends Controller
     {
         return view(
             '/admin/sample/imageUploader/index',
+            []
+        );
+    }
+
+    /**
+     * sample image uploader.
+     *
+     * @return View|Factory
+     */
+    public function sampleImageUploader1Edit(): View|Factory
+    {
+        return view(
+            '/admin/sample/imageUploader/edit',
             []
         );
     }
