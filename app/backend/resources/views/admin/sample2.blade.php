@@ -36,7 +36,7 @@
                     <option disabled>Option 2</option>
                     <option selected>Option 3</option>
                 </x-adminlte-select2>
-                <x-adminlte-textarea name="taBasic" label="testTextArea" placeholder="Insert description..." fgroup-class="col-md-6"/>
+                <x-adminlte-textarea name="taBasic" label="testTextArea" placeholder="Insert description..." fgroup-class="col-md-6" style="resize:none"/>
             </div>
             </div>
         </div>
