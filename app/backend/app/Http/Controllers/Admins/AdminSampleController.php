@@ -85,4 +85,14 @@ class AdminSampleController extends Controller
     {
         return view('/admin/sample2');
     }
+
+    /**
+     * sample image uploader.
+     *
+     * @return View|Factory
+     */
+    public function sampleImageUploader1(): View|Factory
+    {
+        return view('/admin/sampleImageUploader1');
+    }
 }
