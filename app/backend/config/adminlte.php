@@ -317,6 +317,7 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
+        ['header' => 'page_list'],
         [
             'text' => 'home',
             'url' => 'admin/home',
