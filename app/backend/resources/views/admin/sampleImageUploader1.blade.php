@@ -14,29 +14,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <x-adminlte-input name="iMail" label="mail" type="email" placeholder="mail@example.com" fgroup-class="col-md-6" disable-feedback/>
-
                 <x-adminlte-input name="iName" label="name" placeholder="name" fgroup-class="col-md-6" disable-feedback/>
-
-                <x-adminlte-input name="iAddress" label="Address" placeholder="address" fgroup-class="col-md-6" disable-feedback/>
-                <x-adminlte-input name="iPassword" label="Password" type="password" placeholder="password" fgroup-class="col-md-6" disable-feedback/>
                 <x-adminlte-input-file name="ifMin" label="upload file" fgroup-class="col-md-6"/>
-
-                <div class="form-group col-md-6">
-                    <label for="idDate">inputDate</label>
-                    <div class="input-group">
-                        <input name="idDate" type="date" placeholder="input date" label="inputDate" class="form-control"/>
-                        <input name="idTime" type="time" placeholder="HH:mm" label="instaTime" class="form-control"/>
-                    </div>
-                </div>
-
-                <x-adminlte-input-date name="idBasic" placeholder="input date" label="inputDate" fgroup-class="col-md-6"/>
                 <x-adminlte-select2 name="sel2Basic" label="testSelect" fgroup-class="col-md-6">
                     <option>Option 1</option>
                     <option disabled>Option 2</option>
                     <option selected>Option 3</option>
                 </x-adminlte-select2>
-                <x-adminlte-textarea name="taBasic" label="testTextArea" placeholder="Insert description..." fgroup-class="col-md-6" style="resize:none"/>
             </div>
             </div>
         </div>
@@ -45,10 +29,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <x-adminlte-button label="Primary" theme="primary" icon="fas fa-key"/>
-                <x-adminlte-button label="Secondary" theme="secondary" icon="fas fa-hashtag"/>
-                <x-adminlte-button label="Info" theme="info" icon="fas fa-info-circle"/>
-                <x-adminlte-button label="Warning" theme="warning" icon="fas fa-exclamation-triangle"/>
                 <x-adminlte-button label="Danger" theme="danger" icon="fas fa-ban"/>
                 <x-adminlte-button label="Success" theme="success" icon="fas fa-thumbs-up"/>
             </div>
