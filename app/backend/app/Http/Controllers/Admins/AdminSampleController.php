@@ -113,12 +113,13 @@ class AdminSampleController extends Controller
             $request->all(),
             [
                 'name' => ['required','string'],
-                'image' => ['file', 'image', 'max:512', 'mimes:jpg,png'. 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
+                'image' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png'. 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
                 // 'orderId' => ['required','uuid'],
             ]
         );
 
         if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
             throw new MyApplicationHttpException(
                 StatusCodeMessages::STATUS_422,
                 'validation error',
