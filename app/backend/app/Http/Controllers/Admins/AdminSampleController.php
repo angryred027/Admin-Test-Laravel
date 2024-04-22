@@ -108,7 +108,11 @@ class AdminSampleController extends Controller
     {
         return view(
             '/admin/sample/imageUploader/create',
-            ['subTitle' => 'testSubTitle1']
+            [
+                'subTitle' => 'testSubTitle1',
+                'name' => '',
+                'image' => null,
+            ]
         );
     }
 

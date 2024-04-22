@@ -14,9 +14,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <x-adminlte-input name="iName" label="name" placeholder="name" fgroup-class="col-md-6" disable-feedback/>
-                <x-adminlte-input-file name="ifMin" label="upload file" fgroup-class="col-md-6"/>
-                <x-adminlte-select2 name="sel2Basic" label="testSelect" fgroup-class="col-md-6">
+                <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" disable-feedback value={{$name}}/>
+                <x-adminlte-input-file name="image" label="upload file" fgroup-class="col-md-6" value={{$image}}/>
+                <x-adminlte-select2 name="testSelet" label="testSelect" fgroup-class="col-md-6">
                     <option>Option 1</option>
                     <option disabled>Option 2</option>
                     <option selected>Option 3</option>
