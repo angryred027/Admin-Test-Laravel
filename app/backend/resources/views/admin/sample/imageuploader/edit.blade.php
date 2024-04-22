@@ -9,7 +9,7 @@
 @section('content')
     <p>Welcome to this beautiful test admin panel.</p>
 
-    <p>SampleComponents.</p>
+    <p>{{$subTitle}}</p>
 
     <div class="container">
         <div class="row">
