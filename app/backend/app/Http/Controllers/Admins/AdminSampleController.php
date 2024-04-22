@@ -13,6 +13,7 @@ use App\Trait\CheckHeaderTrait;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 
 class AdminSampleController extends Controller
@@ -113,7 +114,7 @@ class AdminSampleController extends Controller
             $request->all(),
             [
                 'name' => ['required','string'],
-                'image' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png'. 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
+                'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png'. 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
                 // 'orderId' => ['required','uuid'],
             ]
         );
