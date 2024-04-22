@@ -13,6 +13,7 @@ use App\Trait\CheckHeaderTrait;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Validator;
 
 class AdminSampleController extends Controller
 {
@@ -93,6 +94,38 @@ class AdminSampleController extends Controller
      */
     public function sampleImageUploader1(): View|Factory
     {
+        return view(
+            '/admin/sample/imageUploader/index',
+            []
+        );
+    }
+
+    /**
+     * sample image uploader post.
+     *
+     * @param Request $request
+     * @return View|Factory
+     */
+    public function sampleImageUploader1Post(Request $request): View|Factory
+    {
+        // バリデーションチェック
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => ['required','string'],
+                'image' => ['file', 'image', 'max:512', 'mimes:jpg,png'. 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
+                // 'orderId' => ['required','uuid'],
+            ]
+        );
+
+        if ($validator->fails()) {
+            throw new MyApplicationHttpException(
+                StatusCodeMessages::STATUS_422,
+                'validation error',
+                $validator->errors()->toArray()
+            );
+        }
+
         return view(
             '/admin/sample/imageUploader/index',
             []
