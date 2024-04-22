@@ -39,6 +39,7 @@ Route::middleware(['auth:api-admins'])->group(function () {
         Route::get('/sample1', [\App\Http\Controllers\Admins\AdminSampleController::class, 'sample1'])->name('admin.sample1');
         Route::get('/sample2', [\App\Http\Controllers\Admins\AdminSampleController::class, 'sample2'])->name('admin.sample2');
         Route::get('/sampleImageUploader1', [\App\Http\Controllers\Admins\AdminSampleController::class, 'sampleImageUploader1'])->name('admin.sampleImageUploader1');
+        Route::get('/sampleImageUploader1/create', [\App\Http\Controllers\Admins\AdminSampleController::class, 'sampleImageUploader1Create'])->name('admin.sampleImageUploader1.create');
         Route::get('/sampleImageUploader1/edit', [\App\Http\Controllers\Admins\AdminSampleController::class, 'sampleImageUploader1Edit'])->name('admin.sampleImageUploader1.edit');
         Route::post('/logout', [\App\Http\Controllers\Admins\AuthController::class, 'logout'])->name('admin.logout');
     });

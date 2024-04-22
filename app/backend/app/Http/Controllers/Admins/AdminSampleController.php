@@ -100,7 +100,20 @@ class AdminSampleController extends Controller
     }
 
     /**
-     * sample image uploader.
+     * sample image uploader create.
+     *
+     * @return View|Factory
+     */
+    public function sampleImageUploader1Create(): View|Factory
+    {
+        return view(
+            '/admin/sample/imageUploader/create',
+            ['subTitle' => 'testSubTitle1']
+        );
+    }
+
+    /**
+     * sample image uploader edit.
      *
      * @return View|Factory
      */
