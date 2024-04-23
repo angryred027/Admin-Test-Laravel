@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <form method="POST" action={{route('admin.sampleImageUploader1.post')}}>
+                <form method="POST" enctype="multipart/form-data" action={{route('admin.sampleImageUploader1.post')}}>
                     @csrf
                     <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" disable-feedback value={{$name}}/>
                     <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" value={{$image}}/>

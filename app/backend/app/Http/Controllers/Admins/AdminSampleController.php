@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Exceptions\MyApplicationHttpException;
 use App\Http\Controllers\Controller;
+use App\Library\File\ImageLibrary;
 use App\Models\Masters\Admins;
 use App\Library\Session\SessionLibrary;
 use App\Library\Message\StatusCodeMessages;
@@ -114,7 +115,7 @@ class AdminSampleController extends Controller
             $request->all(),
             [
                 'name' => ['required','string'],
-                'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png'. 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
+                'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
                 // 'orderId' => ['required','uuid'],
             ]
         );
@@ -126,6 +127,12 @@ class AdminSampleController extends Controller
                 'validation error',
                 $validator->errors()->toArray()
             );
+        }
+        $name = $request->name;
+        $file = $request->file;
+        $test = null;
+        if (!is_null($file)) {
+            $test = ImageLibrary::getFileResource($file);
         }
 
         return view(
