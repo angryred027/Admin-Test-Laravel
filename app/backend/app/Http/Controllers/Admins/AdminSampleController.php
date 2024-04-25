@@ -8,6 +8,8 @@ use App\Exceptions\MyApplicationHttpException;
 use App\Http\Controllers\Controller;
 use App\Library\File\ImageLibrary;
 use App\Models\Masters\Admins;
+use App\Library\Banner\BannerLibrary;
+use App\Library\File\FileLibrary;
 use App\Library\Session\SessionLibrary;
 use App\Library\Message\StatusCodeMessages;
 use App\Trait\CheckHeaderTrait;
@@ -130,9 +132,22 @@ class AdminSampleController extends Controller
         }
         $name = $request->name;
         $file = $request->file;
-        $test = null;
+        // ファイルのアップロード処理
         if (!is_null($file)) {
-            $test = ImageLibrary::getFileResource($file);
+            // アップロードするディレクトリ名を指定
+            $directory = BannerLibrary::getBannerStorageDirctory();
+            $fileResource = ImageLibrary::getFileResource($file);
+            // ファイル名
+            $storageFileName = $fileResource[ImageLibrary::RESOURCE_KEY_NAME] . '.' . $fileResource[ImageLibrary::RESOURCE_KEY_EXTENTION];
+            $uuid = $fileResource[ImageLibrary::RESOURCE_KEY_UUID];
+
+            $result = $file->storeAs("$directory$uuid/", $storageFileName, FileLibrary::getStorageDiskByEnv());
+            if (!$result) {
+                throw new MyApplicationHttpException(
+                    StatusCodeMessages::STATUS_500,
+                    'store file failed.'
+                );
+            }
         }
 
         return view(
