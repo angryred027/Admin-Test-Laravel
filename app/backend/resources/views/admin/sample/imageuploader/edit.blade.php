@@ -31,6 +31,7 @@
             <div class="col-sm">
                 <x-adminlte-button label="Danger" theme="danger" icon="fas fa-ban"/>
                 <x-adminlte-button label="Back" theme="secondary" icon="fas fa-thumbs-down" onclick="location.href='{{route('admin.sampleImageUploader1')}}'"/>
+                <x-adminlte-button label="Back" theme="secondary" icon="fas fa-arrow-left"  onclick="location.href='{{route('admin.sampleImageUploader1')}}'"/>
                 <x-adminlte-button label="Success" theme="success" icon="fas fa-thumbs-up"/>
             </div>
         </div>
