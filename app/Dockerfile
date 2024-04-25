@@ -1,8 +1,5 @@
-# FROM php:7.4-fpm-alpine
-# FROM php:8.0.22-fpm-alpine
-# FROM php:8.1.9-fpm-alpine
-FROM php:8.2-fpm-alpine3.17
-# FROM php:8.2-rc-fpm-alpine
+# FROM php:8.2-fpm-alpine3.17
+FROM php:8.3-fpm-alpine3.19
 
 # tinker(psysh)
 ARG PSYSH_DIR=/usr/local/share/psysh

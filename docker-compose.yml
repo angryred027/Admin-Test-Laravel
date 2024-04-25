@@ -31,6 +31,7 @@ services:
       - ./node/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./node/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
       - ./node/nginx/logs:/var/log/nginx
+      - ./app/backend/public:/var/www/html/public:ro # js,cssなどの配信用(ReadOnly)
       # - ./frontend:/var/www/frontend/
     depends_on:
       - app
@@ -66,22 +67,6 @@ services:
     networks:
       default:
 
-  node:
-    build:
-      context: .
-      dockerfile: ./node/Dockerfile
-    container_name: ${PROJECT_NAME}_node
-    volumes:
-      # - ./node/next:/frontend
-      # - ./next:/usr/src/app
-      - ./frontend:/frontend
-    depends_on:
-      - app
-    ports:
-      - "${NODE_APPLICATION_PORT}:${NODE_APPLICATION_PORT}"
-    networks:
-      default:
-
   redis:
     image: redis:7.2-alpine
     container_name: ${PROJECT_NAME}_redis
@@ -96,19 +81,19 @@ services:
     networks:
       default:
 
-  mail:
-    image: mailhog/mailhog
-    container_name: ${PROJECT_NAME}_mail
-    volumes:
-      - mail-volume:/tmp
-    ports:
-      - "${MAIL_PORT}:8025"
-    environment:
-      TZ: "Asia/Tokyo"
-      # MH_STORAGE: maildir
-      MH_MAILDIR_PATH: /tmp
-    networks:
-      default:
+  # mail:
+  #   image: mailhog/mailhog
+  #   container_name: ${PROJECT_NAME}_mail
+  #   volumes:
+  #     - mail-volume:/tmp
+  #   ports:
+  #     - "${MAIL_PORT}:8025"
+  #   environment:
+  #     TZ: "Asia/Tokyo"
+  #     # MH_STORAGE: maildir
+  #     MH_MAILDIR_PATH: /tmp
+  #   networks:
+  #     default:
 
 volumes:
   redis-volume:
