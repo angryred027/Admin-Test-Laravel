@@ -16,7 +16,7 @@
             <div class="col-sm">
                 <form method="POST" enctype="multipart/form-data" action={{route('admin.sampleImageUploader1.post')}}>
                     @csrf
-                    <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" disable-feedback value={{$name}}/>
+                    <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" value={{$name}}/>
                     <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" value={{$image}}/>
                     <x-adminlte-select2 name="testSelet" label="testSelect" fgroup-class="col-md-6">
                         <option>Option 1</option>

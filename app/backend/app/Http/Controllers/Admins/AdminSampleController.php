@@ -16,6 +16,7 @@ use App\Trait\CheckHeaderTrait;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 
@@ -108,9 +109,9 @@ class AdminSampleController extends Controller
      * sample image uploader post.
      *
      * @param Request $request
-     * @return View|Factory
+     * @return View|Factory|RedirectResponse
      */
-    public function sampleImageUploader1Post(Request $request): View|Factory
+    public function sampleImageUploader1Post(Request $request): View|Factory|RedirectResponse
     {
         // バリデーションチェック
         $validator = Validator::make(
@@ -124,11 +125,12 @@ class AdminSampleController extends Controller
 
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
-            throw new MyApplicationHttpException(
+            return redirect(route('admin.sampleImageUploader1.create'))->withErrors($validator);
+            /* throw new MyApplicationHttpException(
                 StatusCodeMessages::STATUS_422,
                 'validation error',
                 $validator->errors()->toArray()
-            );
+            ); */
         }
         $name = $request->name;
         $file = $request->file;
