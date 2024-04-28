@@ -18,7 +18,11 @@
                     @csrf
                     <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" value={{$name}}/>
                     <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" value={{$image}}/>
-                    <x-adminlte-select2 name="testSelet" label="testSelect" fgroup-class="col-md-6">
+                    <x-adminlte-select name="testSelet1" label="testSelect1" fgroup-class="col-md-6">
+                        <x-adminlte-options :options="['Option 1', 'Option 2', 'Option 3']" disabled="1"
+                            empty-option="Select an option..."/>
+                    </x-adminlte-select>
+                    <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
                         <option>Option 1</option>
                         <option disabled>Option 2</option>
                         <option selected>Option 3</option>
