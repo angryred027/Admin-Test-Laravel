@@ -11,6 +11,7 @@ use App\Models\Masters\Admins;
 use App\Library\Banner\BannerLibrary;
 use App\Library\File\FileLibrary;
 use App\Library\Session\SessionLibrary;
+use App\Library\Time\TimeLibrary;
 use App\Library\Message\StatusCodeMessages;
 use App\Trait\CheckHeaderTrait;
 use Illuminate\Http\Request;
@@ -119,8 +120,12 @@ class AdminSampleController extends Controller
             [
                 'name' => ['required','string'],
                 'testSelet1' => ['required','int', 'min:1'],
+                'testDate' => ['required','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH],
+                'testTime' => ['required','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH, 'after:start_at'],
                 'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
-                // 'orderId' => ['required','uuid'],
+                // 'start_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH,
+                // 'end_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH.'|after:start_at',
+                //'image'  => 'file|image|max:512|mimes:png|mimetypes:application/png', // 最大512KB
             ]
         );
 
