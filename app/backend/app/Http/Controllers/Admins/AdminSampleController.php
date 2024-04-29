@@ -118,6 +118,7 @@ class AdminSampleController extends Controller
             $request->all(),
             [
                 'name' => ['required','string'],
+                'testSelet1' => ['required','int', 'min:1'],
                 'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
                 // 'orderId' => ['required','uuid'],
             ]
