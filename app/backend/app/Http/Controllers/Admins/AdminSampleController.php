@@ -11,11 +11,13 @@ use App\Models\Masters\Admins;
 use App\Library\Banner\BannerLibrary;
 use App\Library\File\FileLibrary;
 use App\Library\Session\SessionLibrary;
+use App\Library\Time\TimeLibrary;
 use App\Library\Message\StatusCodeMessages;
 use App\Trait\CheckHeaderTrait;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 
@@ -108,27 +110,33 @@ class AdminSampleController extends Controller
      * sample image uploader post.
      *
      * @param Request $request
-     * @return View|Factory
+     * @return View|Factory|RedirectResponse
      */
-    public function sampleImageUploader1Post(Request $request): View|Factory
+    public function sampleImageUploader1Post(Request $request): View|Factory|RedirectResponse
     {
         // バリデーションチェック
         $validator = Validator::make(
             $request->all(),
             [
                 'name' => ['required','string'],
+                'testSelet1' => ['required','int', 'min:1'],
+                'testDate' => ['required','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH],
+                'testTime' => ['required','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH, 'after:start_at'],
                 'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
-                // 'orderId' => ['required','uuid'],
+                // 'start_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH,
+                // 'end_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH.'|after:start_at',
+                //'image'  => 'file|image|max:512|mimes:png|mimetypes:application/png', // 最大512KB
             ]
         );
 
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
-            throw new MyApplicationHttpException(
+            return redirect(route('admin.sampleImageUploader1.create'))->withErrors($validator);
+            /* throw new MyApplicationHttpException(
                 StatusCodeMessages::STATUS_422,
                 'validation error',
                 $validator->errors()->toArray()
-            );
+            ); */
         }
         $name = $request->name;
         $file = $request->file;
