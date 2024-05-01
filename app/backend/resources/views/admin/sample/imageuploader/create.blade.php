@@ -24,8 +24,8 @@
                     <div class="form-group col-md-6">
                         <label for="testDate">inputDate</label>
                         <div class="input-group @error('testDate') adminlte-invalid-igroup @enderror  @error('testTime') adminlte-invalid-igroup @enderror">
-                            <input name="testDate" type="date" placeholder="input date" label="testDate" class="form-control @error('testDate') is-invalid @enderror"/>
-                            <input name="testTime" type="time" placeholder="HH:mm" label="testTime" class="form-control @error('testTime') is-invalid @enderror"/>
+                            <input name="testDate" type="date" placeholder="input date" label="testDate" required="true" class="form-control @error('testDate') is-invalid @enderror"/>
+                            <input name="testTime" type="time" placeholder="HH:mm" label="testTime" required="true" class="form-control @error('testTime') is-invalid @enderror"/>
                         </div>
                         @error('testDate')
                             <span class="invalid-feedback d-block" role="alert">
