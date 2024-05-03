@@ -21,7 +21,9 @@
                         <x-adminlte-options :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']" disabled="1"
                             empty-option="Select an option..."/>
                     </x-adminlte-select>
-                    <div class="form-group col-md-6">
+                    <x-form.sample-input-date name="statr_time" value="" startValue=""/>
+
+                    {{--  <div class="form-group col-md-6">
                         <label for="testDate">inputDate</label>
                         <div class="input-group @error('testDate') adminlte-invalid-igroup @enderror  @error('testTime') adminlte-invalid-igroup @enderror">
                             <input name="testDate" type="date" placeholder="input date" label="testDate" required="true" class="form-control @error('testDate') is-invalid @enderror"/>
@@ -37,7 +39,7 @@
                                 <strong>{{$message}}</strong>
                             </span>
                         @enderror
-                    </div>
+                    </div>  --}}
                     <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" value={{$image}}/>
                     <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
                         <option>Option 1</option>
