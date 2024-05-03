@@ -17,10 +17,11 @@
                 <form method="POST" enctype="multipart/form-data" action={{route('admin.sampleImageUploader1.post')}}>
                     @csrf
                     <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" value={{$name}}/>
-                    <x-adminlte-select name="testSelet1" label="testSelect1" fgroup-class="col-md-6">
+                    <x-form.sample-select name="testSelet1" value="" label="testSelet1" placeholder="placeholder" :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']"/>
+                    {{--  <x-adminlte-select name="testSelet1" label="testSelect1" fgroup-class="col-md-6">
                         <x-adminlte-options :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']" disabled="1"
                             empty-option="Select an option..."/>
-                    </x-adminlte-select>
+                    </x-adminlte-select>  --}}
                     <x-form.sample-input-date name="statr_time" value="" startValue=""/>
 
                     {{--  <div class="form-group col-md-6">
@@ -41,11 +42,11 @@
                         @enderror
                     </div>  --}}
                     <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" value={{$image}}/>
-                    <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
+                    {{--  <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
                         <option>Option 1</option>
                         <option disabled>Option 2</option>
                         <option selected>Option 3</option>
-                    </x-adminlte-select2>
+                    </x-adminlte-select2>  --}}
                 </form>
             </div>
             </div>
