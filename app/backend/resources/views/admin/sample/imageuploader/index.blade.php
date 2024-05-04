@@ -97,20 +97,44 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>22</td>
+                            <td>11</td>
                             <td>John Bender</td>
-                            <td>+02 (123) 123456789</td>
+                            <td>test</td>
                             <td><nobr>
                                 <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
-                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                                    <i class="fa fa-lg fa-fw fa-trash"></i>
-                                </button>
-                                <button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
-                                    <i class="fa fa-lg fa-fw fa-eye"></i>
-                                </button></nobr>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>John Bender</td>
+                            <td>test</td>
+                            <td><nobr>
+                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-bordered table-hover table-sm">
+                    <tbody>
+                        <tr>
+                            <th>test1</th>
+                            <td>value1</td>
+                        </tr>
+                        <tr>
+                            <th>test2</th>
+                            <td>value2</td>
+                        </tr>
+                        <tr>
+                            <th>test3</th>
+                            <td>value3</td>
                         </tr>
                     </tbody>
                 </table>
