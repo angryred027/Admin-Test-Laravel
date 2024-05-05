@@ -1,28 +1,16 @@
 <div
     class="parts-simple-file-input $className ? ' ' + $className : '' $isDraged ? ' parts-simple-file-input__drag_on' : ''"
-    onDragOver={(e) => {
-    changeDragedStateHandler(e, true)
-    }}
-    onDrop={dropFileHandler}
-    onDragLeave={(e) => {
-    changeDragedStateHandler(e, false)
-    }}
-    onDragEnd={(e) => {
-    changeDragedStateHandler(e, false)
-    }}
+    onDragOver=changeDragedStateHandler(e, true)
+    onDrop=dropFileHandler
+    onDragLeave=changeDragedStateHandler(e, false)
+    onDragEnd=changeDragedStateHandler(e, false)
 >
     <div
         class="parts-simple-file-input__drop-area $isDraged ? ' parts-simple-file-input__drag_on' : ''"
-        onDragOver={(e) => {
-            changeDragedStateHandler(e, true)
-        }}
-        onDrop={dropFileHandler}
-        onDragLeave={(e) => {
-            changeDragedStateHandler(e, false)
-        }}
-        onDragEnd={(e) => {
-            changeDragedStateHandler(e, false)
-        }}
+        onDragOver=changeDragedStateHandler(e, true)
+        onDrop=dropFileHandler
+        onDragLeave=changeDragedStateHandler(e, false)
+        onDragEnd=changeDragedStateHandler(e, false)
         >
         @if ($value) {
             @if ($isOpenPreview)
@@ -36,7 +24,7 @@
                 />
                 <span
                     class="parts-simple-file-input__reset-file-icon"
-                    onClick={resetFileHandler}
+                    onClick=resetFileHandler
                 >
                     ×
                 </span>
@@ -47,7 +35,7 @@
                         <span>{value.name}</span>
                         <span
                         class="parts-simple-file-input__reset-file-icon"
-                        onClick={resetFileHandler}
+                        onClick=resetFileHandler
                         >
                         ×
                         </span>
@@ -59,28 +47,24 @@
         @else
             <label>
                 <span class="parts-simple-file-input__form-label">
-                    {formLabel}
+                    {{$formLabel ?? 'ファイルの選択'}}
                 </span>
                 <input
                     class="parts-simple-file-input className ? ' ' + className : ''"
-                    ref={refElement}
+                    ref=refElement
                     type="file"
-                    accept={accept}
-                    onInput={(e) =>
-                    inputEventHandler(
-                        e as unknown as HTMLElementEvent<HTMLInputElement>
-                    )
-                    }
-                    required={required}
-                    disabled={disabled}
-                    readOnly={readOnly}
+                    accept=accept
+                    onInput=inputEventHandler
+                    required=required
+                    disabled=disabled
+                    readOnly=readOnly
                 />
             </label>
         @endif
 
     </div>
-    @if ($isFileValidationError)
-        <p class="parts-simple-file-input__error-text">{errorText}</p>
+    @if ($isFileValidationError ?? false)
+        <p className="parts-simple-file-input__error-text">errorText</p>
     @endif
 </div>
 
@@ -155,6 +139,10 @@
 @section('js')
     <script>
         console.log('Sample File Input');
+
+        let [isFileValidationError, setIsFileValidationError]
+        let errorText = $errorText ?? ''
+        let isFileValidationError = $isFileValidationError ?? ''
 
   // mount後に実行する処理
   const onDidMount = (): void => {
