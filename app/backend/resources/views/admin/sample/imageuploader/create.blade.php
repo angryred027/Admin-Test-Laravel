@@ -41,7 +41,21 @@
                             </span>
                         @enderror
                     </div>  --}}
-                    <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" value={{$image}}/>
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlFile1">Example file input</label>
+                        <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlFile1">Example file input</label>
+                        {{--  <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">  --}}
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
+                                <label class="custom-file-label text-truncate" for="file"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" :value="$image"/>
                     {{--  <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
                         <option>Option 1</option>
                         <option disabled>Option 2</option>
