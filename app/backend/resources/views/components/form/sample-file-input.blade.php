@@ -1,18 +1,10 @@
 <div
-    class="parts-simple-file-input $className ? ' ' + $className : '' $isDraged ? ' parts-simple-file-input__drag_on' : ''"
-    onDragOver=changeDragedStateHandler(e, true)
-    onDrop=dropFileHandler
-    onDragLeave=changeDragedStateHandler(e, false)
-    onDragEnd=changeDragedStateHandler(e, false)
+    class="parts-simple-file-input id="testId" $className ? ' ' + $className : '' $isDraged ? ' parts-simple-file-input__drag_on' : ''"
 >
     <div
         class="parts-simple-file-input__drop-area $isDraged ? ' parts-simple-file-input__drag_on' : ''"
-        onDragOver=changeDragedStateHandler(e, true)
-        onDrop=dropFileHandler
-        onDragLeave=changeDragedStateHandler(e, false)
-        onDragEnd=changeDragedStateHandler(e, false)
-        >
-        @if ($value) {
+    >
+        @if ($value)
             @if ($isOpenPreview)
                 <div class="parts-simple-file-input__selected-image-file">
                 <img
@@ -43,7 +35,6 @@
                 </div>
 
             @endif
-        }
         @else
             <label>
                 <span class="parts-simple-file-input__form-label">
@@ -132,6 +123,48 @@
     border: 2px dashed #bcbcbc;
     background-color: #fafdff;
   }
+
+  .parts-simple-file-input__form-label {
+    color: rgb(117, 117, 117);
+  }
+  .parts-simple-file-input__file-name {
+    font-size: 14px;
+    margin-left: 20px;
+    color: rgb(117, 117, 117);
+  }
+
+  .parts-simple-file-input__reset-file-icon {
+    color: #ff0000;
+    padding: 0 4px;
+    font-size: 12px;
+    border: 1px solid #c6c6c6;
+    border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+      border-color: #5f6674;
+    }
+  }
+  .parts-simple-file-input__selected-file {
+    font-size: 12px;
+    padding: 2px 3px;
+    word-break: break-all;
+  }
+  .parts-simple-file-input__error-text {
+    color: #d70035;
+  }
+  .parts-simple-file-input__drop-area {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border: 1px dashed #c6c6c6;
+    background-color: #f9f9f9;
+    border-radius: 2px;
+  }
+  .parts-simple-file-input__drag_on {
+    border: 2px dashed #bcbcbc;
+    background-color: #fafdff;
+  }
 }
     </style>
 @stop
@@ -140,18 +173,53 @@
     <script>
         console.log('Sample File Input');
 
-        let [isFileValidationError, setIsFileValidationError]
+    // const fileArea = document.getElementsByClassName('parts-simple-file-input');
+    const fileInput = document.getElementsByClassName('parts-simple-file-input');
+
+    const fileArea = document.getElementById('testId');
+
+    fileArea.addEventListener('dragleave', function(evt){
+        console.log('fileLeave: ')
+        evt.preventDefault();
+        fileArea.classList.remove('dragover');
+    });
+    fileArea.addEventListener('drop', function(evt){
+        console.log('drop: ')
+        evt.preventDefault();
+        fileArea.classList.remove('dragenter');
+        var files = evt.dataTransfer.files;
+        fileInput.files = files;
+    });
+
+
+    // $(function(){
+    //     //FormDataオブジェクトを作成
+    //     var formData = new FormData();
+    //
+    //     //ファイルがドロップされたときに呼ばれる
+    //     $('.parts-simple-file-input').on('drop', function(ev) {
+    //         var files = ev.originalEvent.dataTransfer.files;
+    //         console.log('files.length: ' + files.length)
+    //         for (var i = 0; i < files.length; i++) {
+    //             //FormDataオブジェクトにファイルを追加
+    //             //名前は'document_files[]'ってしてやる
+    //             formData.append('document_files[]', files[i]);
+    //         }
+    //     });
+    // });
+
+        let setIsFileValidationError = null;
         let errorText = $errorText ?? ''
         let isFileValidationError = $isFileValidationError ?? ''
 
   // mount後に実行する処理
-  const onDidMount = (): void => {
+  /*  const onDidMount = (): void => {
     // プレビュー設定ありかつファイルデータがある場合
     if (isOpenPreview && value) {
       createPreviewImage(value)
     }
   }
-  useEffect(onDidMount, [])
+  useEffect(onDidMount, [])  */
 
   // methods
   /**
@@ -159,7 +227,7 @@
    * @param {FileList} files
    * @return {void}
    */
-  const checkFileValidationHandler = (files: FileList): void => {
+  /* const checkFileValidationHandler = (files: FileList): void => {
     if (!checkFileLength(files.length, fileLength)) {
       setIsFileValidationError(true)
       setErrorText('invalid file length')
@@ -185,27 +253,27 @@
         setErrorText('')
       }
     })
-  }
+  } */
 
   /**
    * create preview image
    * @param {File} file
    * @return {void}
    */
-  const createPreviewImage = (file: File): void => {
+  /* const createPreviewImage = (file: File): void => {
     const reader = new FileReader()
     reader.onload = () => {
       setImageData(reader.result?.toString())
     }
     reader.readAsDataURL(file)
-  }
+  } */
 
   /**
    * input event handler
    * @param {Event} event
    * @return {void}
    */
-  const inputEventHandler = (
+  /* const inputEventHandler = (
     event: HTMLElementEvent<HTMLInputElement>
   ): void => {
     const data = event.target.files ? event.target.files : undefined
@@ -222,14 +290,14 @@
         }
       }
     }
-  }
+  } */
 
   /**
    * reset input file
    * @param {Event} event
    * @return {void}
    */
-  const resetFileHandler: MouseEventHandler<HTMLSpanElement> = (
+  /* const resetFileHandler: MouseEventHandler<HTMLSpanElement> = (
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _: MouseEvent<HTMLSpanElement>
   ): void => {
@@ -237,14 +305,14 @@
     onResetFile()
     setIsFileValidationError(false)
     setErrorText('')
-  }
+  } */
 
   /**
    * change file data by drag event
    * @param {DragEvent} event
    * @return {void}
    */
-  const changeFileByDropEvent = (event: DragEvent): void => {
+  /* const changeFileByDropEvent = (event: DragEvent): void => {
     if (event.dataTransfer?.files) {
       const files = event.dataTransfer?.files
       checkFileValidationHandler(files)
@@ -258,7 +326,7 @@
         }
       }
     }
-  }
+  } */
 
   /**
    * change draged status
@@ -266,7 +334,7 @@
    * @param {boolean} value
    * @return {void}
    */
-  const changeDragedStateHandler = (
+  /* const changeDragedStateHandler = (
     dragEvent: DragEvent,
     value = false
   ): void => {
@@ -276,14 +344,14 @@
     event.preventDefault()
 
     setIsDraged(value)
-  }
+  } */
 
   /**
    * drop file handler
    * @param {DragEvent} event
    * @return {void}
    */
-  const dropFileHandler = (dropEvent: DragEvent): void => {
+  /* const dropFileHandler = (dropEvent: DragEvent): void => {
     // イベントの伝播の中断とデフォルトアクションの抑制
     const event = dropEvent as unknown as Event
     event.stopPropagation()
@@ -291,6 +359,6 @@
 
     changeFileByDropEvent(dropEvent)
     changeDragedStateHandler(dropEvent)
-  }
+  } */
     </script>
 @stop
