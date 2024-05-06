@@ -121,7 +121,7 @@ class AdminSampleController extends Controller
                 'name' => ['required','string'],
                 'testSelet1' => ['required','int', 'min:1'],
                 'testDate' => ['required','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH],
-                'testTime' => ['required','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH, 'after:start_at'],
+                'testTime' => ['nullable','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH, 'after:start_at'],
                 'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
                 // 'start_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH,
                 // 'end_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH.'|after:start_at',

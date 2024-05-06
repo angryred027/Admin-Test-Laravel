@@ -84,5 +84,61 @@
                 </x-adminlte-datatable>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-bordered table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th style="width:40%">Phone</th>
+                            <th style="width:5%" dt-no-export="">Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>11</td>
+                            <td>John Bender</td>
+                            <td>test</td>
+                            <td><nobr>
+                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>John Bender</td>
+                            <td>test</td>
+                            <td><nobr>
+                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-bordered table-hover table-sm">
+                    <tbody>
+                        <tr>
+                            <th>test1</th>
+                            <td>value1</td>
+                        </tr>
+                        <tr>
+                            <th>test2</th>
+                            <td>value2</td>
+                        </tr>
+                        <tr>
+                            <th>test3</th>
+                            <td>value3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @stop
