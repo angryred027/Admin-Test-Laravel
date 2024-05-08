@@ -65,7 +65,6 @@
                         <option selected>Option 3</option>
                     </x-adminlte-select2>  --}}
 
-
                     <div class="form-group col-md-6">
                         <label for="testImage">inputDate</label>
                         <x-form.sample-file-input2 name="testFile" value="" startValue=""/>
