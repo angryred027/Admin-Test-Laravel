@@ -25,7 +25,7 @@
                     <x-form.sample-input-date name="statr_time" value="" startValue=""/>
 
 
-                    <x-form.sample-file-input name="testFile" value="" startValue=""/>
+                    {{--  <x-form.sample-file-input name="testFile" value="" startValue=""/>  --}}
 
                     {{--  <div class="form-group col-md-6">
                         <label for="testDate">inputDate</label>
@@ -64,6 +64,12 @@
                         <option disabled>Option 2</option>
                         <option selected>Option 3</option>
                     </x-adminlte-select2>  --}}
+
+
+                    <div class="form-group col-md-6">
+                        <label for="testImage">inputDate</label>
+                        <x-form.sample-file-input2 name="testFile" value="" startValue=""/>
+                    </div>
                 </form>
             </div>
             </div>
