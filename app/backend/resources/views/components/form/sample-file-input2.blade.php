@@ -70,7 +70,14 @@
             fileArea.classList.remove('upload-area_dragover');
             var files = evt.dataTransfer.files;
 
+            // TODO 検証用
             console.log('files: ' + JSON.stringify(files, null, 2));
+            console.log('files.length: ' + files.length);
+            console.log('file: ' + JSON.stringify(files[0], null, 2));
+            file = files[0];
+            console.log('file.size: ' + file.size);
+            console.log('file.type: ' + file.type);
+            console.log('file.size: ' + file.size);
             fileInput.files = files;
         });
 
