@@ -1,8 +1,9 @@
+@props(['multiple' => false])
 <div id="input-file-area" class="upload-area d-flex justify-content-center">
     <div class="d-flex justify-content-center flex-column">
         <i class="fas fa-cloud-upload-alt fa-5x"></i>
         <p>Click OR Drag and drop a file</p>
-    <div>
+    </div>
     <input type="file" name="upload_file" id="input-files">
 </div>
 
@@ -68,7 +69,8 @@
             console.log('drop: ');
             evt.preventDefault();
             fileArea.classList.remove('upload-area_dragover');
-            var files = evt.dataTransfer.files;
+            const files = evt.dataTransfer.files;
+            fileInput.files = files;
 
             // TODO 検証用
             console.log('files: ' + JSON.stringify(files, null, 2));
@@ -77,8 +79,7 @@
             file = files[0];
             console.log('file.size: ' + file.size);
             console.log('file.type: ' + file.type);
-            console.log('file.size: ' + file.size);
-            fileInput.files = files;
+            console.log('file.name: ' + file.name);
         });
 
     </script>

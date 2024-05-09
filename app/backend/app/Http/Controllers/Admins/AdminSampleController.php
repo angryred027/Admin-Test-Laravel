@@ -129,6 +129,9 @@ class AdminSampleController extends Controller
             ]
         );
 
+        // 検証用
+        $files = $request->files;
+
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
             return redirect(route('admin.sampleImageUploader1.create'))->withErrors($validator);
