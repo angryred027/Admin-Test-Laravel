@@ -54,6 +54,8 @@
         const fileArea = document.getElementById('input-file-area');
         const fileInput = document.getElementById('input-files');
 
+        let ImageData = null;
+
         fileArea.addEventListener('dragover', function(evt){
             console.log('dragover: ');
             evt.preventDefault();
@@ -80,6 +82,14 @@
             console.log('file.size: ' + file.size);
             console.log('file.type: ' + file.type);
             console.log('file.name: ' + file.name);
+
+            // ファイルの読み込み
+            const reader = new FileReader()
+                reader.onload = () => {
+                    ImageData = reader.result?.toString();
+                    console.log('ImageData: ' + ImageData);
+            }
+            reader.readAsDataURL(file);
         });
 
     </script>
