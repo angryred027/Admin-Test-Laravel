@@ -74,7 +74,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <x-adminlte-button label="Submint" type="submit" theme="success" icon="fas fa-thumbs-up"/>
+                                    <x-adminlte-button label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up"/>
                                 </div>
                             </div>
                         </div>
