@@ -67,7 +67,17 @@
 
                     <div class="form-group col-md-6">
                         <label for="testImage">inputDate</label>
-                        <x-form.sample-file-input2 name="testFile" value="" startValue=""/>
+                        <x-form.sample-file-input2 name="testFileTest" value="" startValue=""/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <x-adminlte-button label="Submint" type="submit" theme="success" icon="fas fa-thumbs-up"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
