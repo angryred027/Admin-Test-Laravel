@@ -1,10 +1,14 @@
 @props(['multiple' => false])
-<div id="input-file-area" class="upload-area d-flex justify-content-center">
-    <div class="d-flex justify-content-center flex-column">
-        <i class="fas fa-cloud-upload-alt fa-5x"></i>
-        <p>Click OR Drag and drop a file</p>
+<div class="">
+    <div id="input-file-area" class="upload-area d-flex justify-content-center">
+        <div class="d-flex justify-content-center flex-column">
+            <i class="fas fa-cloud-upload-alt fa-5x"></i>
+            <p>Click OR Drag and drop a file</p>
+        </div>
+        <input type="file" name="upload_file" id="input-files">
     </div>
-    <input type="file" name="upload_file" id="input-files">
+    <p class="upload_file_name"></p>
+    <div class="preview-image"></>
 </div>
 
 @section('css')
