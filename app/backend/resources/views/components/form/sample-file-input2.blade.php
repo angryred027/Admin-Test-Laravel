@@ -9,7 +9,7 @@
             <i class="fas fa-cloud-upload-alt fa-5x"></i>
             <p>Click OR Drag and drop a file</p>
         </div>
-        <input type="file" id="{{$name . '_input-files'}}"  name="upload_file" class="upload_file">
+        <input type="file" id="{{$name . '_input-files'}}"  name="{{$name}}" class="upload_file">
     </div>
     <p id="{{$name . '_file-name'}}" class="upload_file_name"></p>
     <div  id="{{$name . '_preview-image'}}" class="preview-image"></>
