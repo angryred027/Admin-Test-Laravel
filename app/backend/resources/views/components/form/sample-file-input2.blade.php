@@ -1,14 +1,18 @@
-@props(['multiple' => false])
+@props([
+    'class' => '',
+    'name' => '',
+    'multiple' => false,
+])
 <div class="">
-    <div id="input-file-area" class="upload-area d-flex justify-content-center">
+    <div id="{{$name . '_input-file-area'}}" class="upload-area d-flex justify-content-center">
         <div class="d-flex justify-content-center flex-column">
             <i class="fas fa-cloud-upload-alt fa-5x"></i>
             <p>Click OR Drag and drop a file</p>
         </div>
-        <input type="file" name="upload_file" id="input-files">
+        <input type="file" id="{{$name . '_input-files'}}"  name="upload_file" class="upload_file">
     </div>
-    <p class="upload_file_name"></p>
-    <div class="preview-image"></>
+    <p id="{{$name . '_file-name'}}" class="upload_file_name"></p>
+    <div  id="{{$name . '_preview-image'}}" class="preview-image"></>
 </div>
 
 @section('css')
@@ -35,7 +39,7 @@
             border: 4px dotted rgba(0, 0, 0, .4);
         }
 
-        #input-files {
+        .upload_file {
             top: 0;
             left: 0;
             opacity: 0;
@@ -55,8 +59,17 @@
     <script>
         console.log('Sample File Input');
 
-        const fileArea = document.getElementById('input-file-area');
-        const fileInput = document.getElementById('input-files');
+        const fileInputAreaId = `{{$name}}_input-file-area`
+        const fileInputId = `{{$name}}_input-files`
+        const fileNameId = `{{$name}}_file-name`
+        const previewImageId = `{{$name}}_preview-image`
+
+        // const fileArea = document.getElementById('input-file-area');
+        // const fileInput = document.getElementById('input-files');
+        const fileArea = document.getElementById(fileInputAreaId);
+        const fileInput = document.getElementById(fileInputId);
+        const fileNameArea = document.getElementById(fileNameId);
+        const preview = document.getElementById(previewImageId);
 
         let ImageData = null;
 
