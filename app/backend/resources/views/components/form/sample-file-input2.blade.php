@@ -174,8 +174,10 @@
 
         fileInput.addEventListener('change', function(evt){
             console.log('change: ');
+            // console.log('change2: ' + JSON.stringify(fileInput.files, null ,2));
 
-            const files = evt.dataTransfer.files;
+            evt.preventDefault();
+            const files = fileInput.files;
             // ファイルをアップロードした時
             if (files) {
                 let fileName = ''
@@ -201,8 +203,6 @@
 
                 fileArea.classList.add('upload-area_uploaded');
             }
-
-            evt.preventDefault();
         });
 
         fileArea.addEventListener('dragover', function(evt){
@@ -229,13 +229,14 @@
             fileInput.files = files;
 
             // TODO 検証用
+            /*
             console.log('files: ' + JSON.stringify(files, null, 2));
             console.log('files.length: ' + files.length);
             console.log('file: ' + JSON.stringify(files[0], null, 2));
             file = files[0];
             console.log('file.size: ' + file.size);
             console.log('file.type: ' + file.type);
-            console.log('file.name: ' + file.name);
+            console.log('file.name: ' + file.name);  */
 
             let fileName = ''
             for(i = 0; i < files.length; i++) {
