@@ -1,6 +1,7 @@
 @props([
     'class' => '',
     'name' => '',
+    'value' => null,
     'required' => false,
     'isMultiple' => false,
     'isPreview' => false,
@@ -15,6 +16,7 @@
             type="file"
             id="{{$name . '_input-files'}}"
             name="{{$name}}"
+            value="{{$value ?? ''}}"
             {{$required ? 'required' : ''}}
             {{$isMultiple ? 'multiple' : ''}}
             class="upload_file"
