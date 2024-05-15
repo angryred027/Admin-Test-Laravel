@@ -100,6 +100,7 @@
         const fileNameId = `{{$name}}_file-name`
         const fileResetId = `{{$name}}_file-reset`
         const previewImageId = `{{$name}}_preview-image`
+        const previewChildImageId = `{{$name}}_preview-image-image`
 
         const isMultiple = !!`{{$isMultiple}}`
         const isPreview = !!`{{$isPreview}}`
@@ -110,6 +111,7 @@
         const fileInput = document.getElementById(fileInputId);
         const fileNameArea = document.getElementById(fileNameId);
         const preview = document.getElementById(previewImageId);
+        const previewChildImage = document.getElementById(previewChildImageId);
 
         let ImageData = null;
 
@@ -119,6 +121,7 @@
         * @param {string} fileResetId
         * @param {string} fileNameId
         * @param {string} previewImageId
+        * @param {string} previewChildImageId
         * @param {HTMLElement} fileArea
         * @param {HTMLElement} fileInput
         * @param {HTMLElement} preview
@@ -126,7 +129,7 @@
         * @param {boolean} isPreview
         * @return {void}
         */
-        function setResetButton(fileInputAreaId, fileResetId, fileNameId, previewImageId, fileArea, fileInput, preview, fileNameArea, isPreview) {
+        function setResetButton(fileInputAreaId, fileResetId, fileNameId, previewImageId, previewChildImageId, fileArea, fileInput, preview, fileNameArea, isPreview) {
             const tmpResetButton = document.createElement('span')
             tmpResetButton.textContent = 'x'
             tmpResetButton.classList.add('upload_file_name_reset-file-icon');
@@ -143,8 +146,8 @@
                 fileNameArea.textContent = null
 
                 if (isPreview) {
-                    const tmpImg = document.getElementById('previewImageId')
-                    preview.removeChild(tmpImg)
+                    const tmpImg = document.getElementById(previewChildImageId)
+                    tmpImg.remove()
                 }
 
                 fileArea.classList.remove('upload-area_uploaded');
@@ -155,6 +158,7 @@
 
         /**
         * set preview image
+        * @param {string} previewChildImageId
         * @param {File} file
         * @param {HTMLElement} fileArea
         * @param {HTMLElement} fileInput
@@ -162,7 +166,7 @@
         * @param {HTMLElement} preview
         * @return {void}
         */
-        function setImage(file, fileArea, fileInput, fileNameArea, preview) {
+        function setImage(previewChildImageId, file, fileArea, fileInput, fileNameArea, preview) {
             // ファイルの読み込み
             const reader = new FileReader()
                 reader.onload = () => {
@@ -171,6 +175,7 @@
 
                     const tmpImg = document.createElement('img')
                     tmpImg.setAttribute('src', ImageData)
+                    tmpImg.setAttribute('id', previewChildImageId)
                     preview.appendChild(tmpImg)
             }
             reader.readAsDataURL(file);
@@ -199,12 +204,17 @@
                     fileResetId,
                     fileNameId,
                     previewImageId,
+                    previewChildImageId,
                     fileArea,
                     fileInput,
                     preview,
                     fileNameArea,
                     isPreview
                 )
+
+                if (!isMultiple && isPreview) {
+                    setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameArea, preview)
+                }
 
                 fileArea.classList.add('upload-area_uploaded');
             }
@@ -257,6 +267,7 @@
                 fileResetId,
                 fileNameId,
                 previewImageId,
+                previewChildImageId,
                 fileArea,
                 fileInput,
                 preview,
@@ -265,10 +276,11 @@
             )
 
             if (!isMultiple && isPreview) {
-                setImage(files[0], fileArea, fileInput, fileNameArea, preview)
+                setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameArea, preview)
                 // ファイル名
-                fileNameArea.textContent = file.name
+                // fileNameArea.textContent = file.name
 
+                /*
                 if (isPreview) {
                     // ファイルの読み込み
                     const reader = new FileReader()
@@ -278,6 +290,7 @@
                     }
                     reader.readAsDataURL(file);
                 }
+                */
             }
             fileArea.classList.add('upload-area_uploaded');
         });
