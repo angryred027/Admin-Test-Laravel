@@ -145,7 +145,7 @@
                 fileInput.value = null
                 fileNameArea.textContent = null
 
-                if (isPreview) {
+                if (!isMultiple && isPreview) {
                     const tmpImg = document.getElementById(previewChildImageId)
                     tmpImg.remove()
                 }
