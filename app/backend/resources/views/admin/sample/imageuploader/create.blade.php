@@ -24,9 +24,6 @@
                     </x-adminlte-select>  --}}
                     <x-form.sample-input-date name="statr_time" value="" startValue=""/>
 
-
-                    {{--  <x-form.sample-file-input name="testFile" value="" startValue=""/>  --}}
-
                     {{--  <div class="form-group col-md-6">
                         <label for="testDate">inputDate</label>
                         <div class="input-group @error('testDate') adminlte-invalid-igroup @enderror  @error('testTime') adminlte-invalid-igroup @enderror">
@@ -67,7 +64,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="testImage">inputDate</label>
-                        <x-form.sample-file-input2 name="testFileTest" value="" startValue=""/>
+                        <x-form.sample-file-input name="testFileTest" value="" :isPreview="true" :isMultiple="true" />
                     </div>
 
                     <div class="form-group col-md-6">

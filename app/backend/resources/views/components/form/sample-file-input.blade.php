@@ -1,171 +1,93 @@
-<div
-    class="parts-simple-file-input id="testId" $className ? ' ' + $className : '' $isDraged ? ' parts-simple-file-input__drag_on' : ''"
->
-    <div
-        class="parts-simple-file-input__drop-area $isDraged ? ' parts-simple-file-input__drag_on' : ''"
-    >
-        @if ($value)
-            @if ($isOpenPreview)
-                <div class="parts-simple-file-input__selected-image-file">
-                <img
-                    src={imageData}
-                    width="150"
-                    // async
-                    alt=""
-                    loading="lazy"
-                />
-                <span
-                    class="parts-simple-file-input__reset-file-icon"
-                    onClick=resetFileHandler
-                >
-                    ×
-                </span>
-                </div>
-            @else
-                <div class="parts-simple-file-input__selected-file">
-                    <span class="parts-simple-file-input__file-name">
-                        <span>{value.name}</span>
-                        <span
-                        class="parts-simple-file-input__reset-file-icon"
-                        onClick=resetFileHandler
-                        >
-                        ×
-                        </span>
-                    </span>
-                </div>
-
-            @endif
-        @else
-            <label>
-                <span class="parts-simple-file-input__form-label">
-                    {{$formLabel ?? 'ファイルの選択'}}
-                </span>
-                <input
-                    class="parts-simple-file-input className ? ' ' + className : ''"
-                    ref=refElement
-                    type="file"
-                    accept=accept
-                    onInput=inputEventHandler
-                    required=required
-                    disabled=disabled
-                    readOnly=readOnly
-                />
-            </label>
-        @endif
-
+@props([
+    'class' => '',
+    'name' => '',
+    'value' => null,
+    'required' => false,
+    'isMultiple' => false,
+    'isPreview' => false,
+])
+<div class="">
+    <div id="{{$name . '_input-file-area'}}" class="upload-area d-flex justify-content-center">
+        <div class="d-flex justify-content-center flex-column">
+            <i class="fas fa-cloud-upload-alt fa-5x"></i>
+            <p>Click OR Drag and drop a file</p>
+        </div>
+        <input
+            type="file"
+            id="{{$name . '_input-files'}}"
+            name="{{$name}}"
+            value="{{$value ?? ''}}"
+            {{$required ? 'required' : ''}}
+            {{$isMultiple ? 'multiple' : ''}}
+            class="upload_file"
+        >
     </div>
-    @if ($isFileValidationError ?? false)
-        <p className="parts-simple-file-input__error-text">errorText</p>
+    <p id="{{$name . '_file-name'}}" class="upload_file_name"></p>
+    @if ($isPreview)
+        <div id="{{$name . '_preview-image'}}" class="preview-image"></>
     @endif
 </div>
 
 @section('css')
     <style>
-.parts-simple-file-input {
-  label {
-    font-size: 12px;
-    padding: 2px 3px;
-  }
+        .upload-area {
+            margin: auto;
+            width: 85%;
+            height: 200px;
+            position: relative;
+            border: 2px dotted rgba(0, 0, 0, .4);
+        }
+        .upload-area i {
+            opacity: .1;
+            width: 100%;
+            text-align: center;
+        }
+        .upload-area p {
+            width: 100%;
+            opacity: .8;
+        }
 
-  label:hover {
-    cursor: pointer;
-  }
+        .upload-area_dragover {
+            background-color: rgba(0, 0, 0, .6);
+            border: 4px dotted rgba(0, 0, 0, .4);
+        }
 
-  label input {
-    display: none;
-  }
+        .upload-area_uploaded {
+            display: none !important;
+        }
 
-  &__form-label {
-    color: rgb(117, 117, 117);
-  }
+        .upload_file {
+            top: 0;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
 
-  &__file-name {
-    font-size: 14px;
-    margin-left: 20px;
-    color: rgb(117, 117, 117);
-  }
+            &:hover {
+                cursor: pointer;
+            }
+        }
 
-  &__reset-file-icon {
-    color: #ff0000;
-    padding: 0 4px;
-    font-size: 12px;
-    border: 1px solid #c6c6c6;
-    border-radius: 10px;
+        .upload_file_name {
+            &:hover {
+                cursor: pointer;
+            }
+        }
 
-    &:hover {
-      cursor: pointer;
-      border-color: #5f6674;
-    }
-  }
+        .upload_file_name_reset-file-icon {
+            color: #ff0000;
+            padding: 0 8px;
+            font-size: 16px;
+            border: 1px solid #c6c6c6;
+            border-radius: 10px;
 
-  &__selected-file {
-    font-size: 12px;
-    padding: 2px 3px;
-    word-break: break-all;
-  }
+            &:hover {
+              cursor: pointer;
+              border-color: #5f6674;
+            }
+          }
 
-  /* &__selected-image-file {} */
-
-  &__error-text {
-    color: #d70035;
-  }
-
-  &__drop-area {
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    border: 1px dashed #c6c6c6;
-    background-color: #f9f9f9;
-    border-radius: 2px;
-  }
-
-  &__drag_on {
-    border: 2px dashed #bcbcbc;
-    background-color: #fafdff;
-  }
-
-  .parts-simple-file-input__form-label {
-    color: rgb(117, 117, 117);
-  }
-  .parts-simple-file-input__file-name {
-    font-size: 14px;
-    margin-left: 20px;
-    color: rgb(117, 117, 117);
-  }
-
-  .parts-simple-file-input__reset-file-icon {
-    color: #ff0000;
-    padding: 0 4px;
-    font-size: 12px;
-    border: 1px solid #c6c6c6;
-    border-radius: 10px;
-
-    &:hover {
-      cursor: pointer;
-      border-color: #5f6674;
-    }
-  }
-  .parts-simple-file-input__selected-file {
-    font-size: 12px;
-    padding: 2px 3px;
-    word-break: break-all;
-  }
-  .parts-simple-file-input__error-text {
-    color: #d70035;
-  }
-  .parts-simple-file-input__drop-area {
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    border: 1px dashed #c6c6c6;
-    background-color: #f9f9f9;
-    border-radius: 2px;
-  }
-  .parts-simple-file-input__drag_on {
-    border: 2px dashed #bcbcbc;
-    background-color: #fafdff;
-  }
-}
     </style>
 @stop
 
@@ -173,192 +95,205 @@
     <script>
         console.log('Sample File Input');
 
-    // const fileArea = document.getElementsByClassName('parts-simple-file-input');
-    const fileInput = document.getElementsByClassName('parts-simple-file-input');
+        const fileInputAreaId = `{{$name}}_input-file-area`
+        const fileInputId = `{{$name}}_input-files`
+        const fileNameId = `{{$name}}_file-name`
+        const fileResetId = `{{$name}}_file-reset`
+        const previewImageId = `{{$name}}_preview-image`
+        const previewChildImageId = `{{$name}}_preview-image-image`
 
-    const fileArea = document.getElementById('testId');
+        const isMultiple = !!`{{$isMultiple}}`
+        const isPreview = !!`{{$isPreview}}`
 
-    fileArea.addEventListener('dragleave', function(evt){
-        console.log('fileLeave: ')
-        evt.preventDefault();
-        fileArea.classList.remove('dragover');
-    });
-    fileArea.addEventListener('drop', function(evt){
-        console.log('drop: ')
-        evt.preventDefault();
-        fileArea.classList.remove('dragenter');
-        var files = evt.dataTransfer.files;
-        fileInput.files = files;
-    });
+        // const fileArea = document.getElementById('input-file-area');
+        // const fileInput = document.getElementById('input-files');
+        const fileArea = document.getElementById(fileInputAreaId);
+        const fileInput = document.getElementById(fileInputId);
+        const fileNameArea = document.getElementById(fileNameId);
+        const preview = document.getElementById(previewImageId);
+        const previewChildImage = document.getElementById(previewChildImageId);
 
+        let ImageData = null;
 
-    // $(function(){
-    //     //FormDataオブジェクトを作成
-    //     var formData = new FormData();
-    //
-    //     //ファイルがドロップされたときに呼ばれる
-    //     $('.parts-simple-file-input').on('drop', function(ev) {
-    //         var files = ev.originalEvent.dataTransfer.files;
-    //         console.log('files.length: ' + files.length)
-    //         for (var i = 0; i < files.length; i++) {
-    //             //FormDataオブジェクトにファイルを追加
-    //             //名前は'document_files[]'ってしてやる
-    //             formData.append('document_files[]', files[i]);
-    //         }
-    //     });
-    // });
+        /**
+        * create reset button
+        * @param {string} fileInputAreaId
+        * @param {string} fileResetId
+        * @param {string} fileNameId
+        * @param {string} previewImageId
+        * @param {string} previewChildImageId
+        * @param {HTMLElement} fileArea
+        * @param {HTMLElement} fileInput
+        * @param {HTMLElement} preview
+        * @param {HTMLElement} fileNameArea
+        * @param {boolean} isPreview
+        * @return {void}
+        */
+        function setResetButton(fileInputAreaId, fileResetId, fileNameId, previewImageId, previewChildImageId, fileArea, fileInput, preview, fileNameArea, isPreview) {
+            const tmpResetButton = document.createElement('span')
+            tmpResetButton.textContent = 'x'
+            tmpResetButton.classList.add('upload_file_name_reset-file-icon');
+            tmpResetButton.setAttribute('id', fileResetId)
 
-        let setIsFileValidationError = null;
-        let errorText = $errorText ?? ''
-        let isFileValidationError = $isFileValidationError ?? ''
+            fileNameArea.appendChild(tmpResetButton)
 
-  // mount後に実行する処理
-  /*  const onDidMount = (): void => {
-    // プレビュー設定ありかつファイルデータがある場合
-    if (isOpenPreview && value) {
-      createPreviewImage(value)
-    }
-  }
-  useEffect(onDidMount, [])  */
+            tmpResetButton.addEventListener('click', function(evt){
+                evt.preventDefault();
+                console.log('click: ');
 
-  // methods
-  /**
-   * chcek file validatiaon
-   * @param {FileList} files
-   * @return {void}
-   */
-  /* const checkFileValidationHandler = (files: FileList): void => {
-    if (!checkFileLength(files.length, fileLength)) {
-      setIsFileValidationError(true)
-      setErrorText('invalid file length')
-      return
-    }
+                fileInput.files = null
+                fileInput.value = null
+                fileNameArea.textContent = null
 
-    // 下記の形で配列にも出来る
-    // const fileList = Array.from(files)
-    Object.keys(files).forEach((key: string) => {
-      let accepts: undefined | string[]
-      if (accept.includes(',')) {
-        accepts = accept.split(',')
-      }
-      const file = files[parseInt(key)]
-      if (!checkFileSize(file.size, fileSize)) {
-        setIsFileValidationError(true)
-        setErrorText('invalid file size')
-      } else if (!checkFileType(file.type, accepts ?? accept)) {
-        setIsFileValidationError(true)
-        setErrorText('invalid file type')
-      } else {
-        setIsFileValidationError(false)
-        setErrorText('')
-      }
-    })
-  } */
+                if (!isMultiple && isPreview) {
+                    const tmpImg = document.getElementById(previewChildImageId)
+                    tmpImg.remove()
+                }
 
-  /**
-   * create preview image
-   * @param {File} file
-   * @return {void}
-   */
-  /* const createPreviewImage = (file: File): void => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      setImageData(reader.result?.toString())
-    }
-    reader.readAsDataURL(file)
-  } */
+                fileArea.classList.remove('upload-area_uploaded');
+                tmpResetButton.remove()
 
-  /**
-   * input event handler
-   * @param {Event} event
-   * @return {void}
-   */
-  /* const inputEventHandler = (
-    event: HTMLElementEvent<HTMLInputElement>
-  ): void => {
-    const data = event.target.files ? event.target.files : undefined
-
-    if (data) {
-      checkFileValidationHandler(data)
-
-      if (!isFileValidationError) {
-        // update emit
-        onUpdateFile(data[0])
-
-        if (isOpenPreview) {
-          createPreviewImage(data[0])
+            });
         }
-      }
-    }
-  } */
 
-  /**
-   * reset input file
-   * @param {Event} event
-   * @return {void}
-   */
-  /* const resetFileHandler: MouseEventHandler<HTMLSpanElement> = (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _: MouseEvent<HTMLSpanElement>
-  ): void => {
-    // reset emit
-    onResetFile()
-    setIsFileValidationError(false)
-    setErrorText('')
-  } */
+        /**
+        * set preview image
+        * @param {string} previewChildImageId
+        * @param {File} file
+        * @param {HTMLElement} fileArea
+        * @param {HTMLElement} fileInput
+        * @param {HTMLElement} fileNameArea
+        * @param {HTMLElement} preview
+        * @return {void}
+        */
+        function setImage(previewChildImageId, file, fileArea, fileInput, fileNameArea, preview) {
+            // ファイルの読み込み
+            const reader = new FileReader()
+                reader.onload = () => {
+                    ImageData = reader.result?.toString();
+                    console.log('ImageData: ' + ImageData);
 
-  /**
-   * change file data by drag event
-   * @param {DragEvent} event
-   * @return {void}
-   */
-  /* const changeFileByDropEvent = (event: DragEvent): void => {
-    if (event.dataTransfer?.files) {
-      const files = event.dataTransfer?.files
-      checkFileValidationHandler(files)
-      // const data = event.target.files ? event.target.files![0] : undefined
-      if (!isFileValidationError) {
-        // update emit
-        onUpdateFile(files[0])
-
-        if (isOpenPreview) {
-          createPreviewImage(files[0])
+                    const tmpImg = document.createElement('img')
+                    tmpImg.setAttribute('src', ImageData)
+                    tmpImg.setAttribute('id', previewChildImageId)
+                    preview.appendChild(tmpImg)
+            }
+            reader.readAsDataURL(file);
         }
-      }
-    }
-  } */
 
-  /**
-   * change draged status
-   * @param {DragEvent} dragEvent
-   * @param {boolean} value
-   * @return {void}
-   */
-  /* const changeDragedStateHandler = (
-    dragEvent: DragEvent,
-    value = false
-  ): void => {
-    // イベントの伝播の中断とデフォルトアクションの抑制
-    const event = dragEvent as unknown as Event
-    event.stopPropagation()
-    event.preventDefault()
 
-    setIsDraged(value)
-  } */
+        fileInput.addEventListener('change', function(evt){
+            console.log('change: ');
+            // console.log('change2: ' + JSON.stringify(fileInput.files, null ,2));
 
-  /**
-   * drop file handler
-   * @param {DragEvent} event
-   * @return {void}
-   */
-  /* const dropFileHandler = (dropEvent: DragEvent): void => {
-    // イベントの伝播の中断とデフォルトアクションの抑制
-    const event = dropEvent as unknown as Event
-    event.stopPropagation()
-    event.preventDefault()
+            evt.preventDefault();
+            const files = fileInput.files;
+            // ファイルをアップロードした時
+            if (files) {
+                let fileName = ''
+                for(i = 0; i < files.length; i++) {
+                    if (fileName !== '') {
+                        fileName += ','
+                    }
+                    fileName += files[i].name
+                }
 
-    changeFileByDropEvent(dropEvent)
-    changeDragedStateHandler(dropEvent)
-  } */
+                fileNameArea.textContent = fileName
+                setResetButton(
+                    fileInputAreaId,
+                    fileResetId,
+                    fileNameId,
+                    previewImageId,
+                    previewChildImageId,
+                    fileArea,
+                    fileInput,
+                    preview,
+                    fileNameArea,
+                    isPreview
+                )
+
+                if (!isMultiple && isPreview) {
+                    setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameArea, preview)
+                }
+
+                fileArea.classList.add('upload-area_uploaded');
+            }
+        });
+
+        fileArea.addEventListener('dragover', function(evt){
+            console.log('dragover: ');
+            evt.preventDefault();
+            fileArea.classList.add('upload-area_dragover');
+        });
+
+        fileArea.addEventListener('dragleave', function(evt){
+            console.log('dragleave: ');
+            evt.preventDefault();
+            fileArea.classList.remove('upload-area_dragover');
+        });
+        fileArea.addEventListener('drop', function(evt){
+            console.log('drop: ');
+            evt.preventDefault();
+            fileArea.classList.remove('upload-area_dragover');
+            const files = evt.dataTransfer.files;
+            if (!isMultiple && files.length > 1) {
+                const errorMessage = 'drooped multi files'
+                alert(errorMessage)
+                throw new Error(errorMessage)
+            }
+            fileInput.files = files;
+
+            // TODO 検証用
+            /*
+            console.log('files: ' + JSON.stringify(files, null, 2));
+            console.log('files.length: ' + files.length);
+            console.log('file: ' + JSON.stringify(files[0], null, 2));
+            file = files[0];
+            console.log('file.size: ' + file.size);
+            console.log('file.type: ' + file.type);
+            console.log('file.name: ' + file.name);  */
+
+            let fileName = ''
+            for(i = 0; i < files.length; i++) {
+                if (fileName !== '') {
+                    fileName += ','
+                }
+                fileName += files[i].name
+            }
+
+            fileNameArea.textContent = fileName
+            setResetButton(
+                fileInputAreaId,
+                fileResetId,
+                fileNameId,
+                previewImageId,
+                previewChildImageId,
+                fileArea,
+                fileInput,
+                preview,
+                fileNameArea,
+                isPreview
+            )
+
+            if (!isMultiple && isPreview) {
+                setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameArea, preview)
+                // ファイル名
+                // fileNameArea.textContent = file.name
+
+                /*
+                if (isPreview) {
+                    // ファイルの読み込み
+                    const reader = new FileReader()
+                        reader.onload = () => {
+                            ImageData = reader.result?.toString();
+                            console.log('ImageData: ' + ImageData);
+                    }
+                    reader.readAsDataURL(file);
+                }
+                */
+            }
+            fileArea.classList.add('upload-area_uploaded');
+        });
+
     </script>
 @stop
