@@ -29,6 +29,7 @@
 </div>
 
 @section('css')
+    @parent
     <style>
         .upload-area {
             margin: auto;
@@ -92,6 +93,7 @@
 @stop
 
 @section('js')
+    @parent
     <script>
         console.log('Sample File Input');
 
