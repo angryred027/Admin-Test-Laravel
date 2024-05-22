@@ -4,6 +4,7 @@
     'value' => null,
     'required' => false,
     'isDateOnly' => false,
+    'isSetLimitTime' => false,
 ])
 <div class="sample-date-input form-group col-md-6">
     <label for="$name">inputDate</label>
@@ -28,6 +29,9 @@
                 step="1"
                 class="form-control @error($name .'_time') is-invalid @enderror"
             />
+        @endif
+        @if (!$isSetLimitTime)
+            <x-adminlte-button label="copy" theme="secondary" icon="fas fa-clock" />
         @endif
     </div>
     @error(($name || $name . '_time'))
