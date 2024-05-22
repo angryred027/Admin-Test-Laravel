@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <form method="POST" enctype="multipart/form-data" action={{route('admin.sampleImageUploader1.post')}}>
+                <form id="createForm" method="POST" enctype="multipart/form-data" action={{route('admin.sampleImageUploader1.post')}}>
                     @csrf
                     <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" value={{$name}}/>
                     <x-form.sample-select name="testSelet1" value="" label="testSelet1" placeholder="placeholder" :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']"/>
@@ -71,7 +71,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <x-adminlte-button label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up"/>
+                                    <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>
                                 </div>
                             </div>
                         </div>
@@ -92,4 +92,48 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    @parent
+    <script>
+        initFormComponent('createForm', 'createFormButton');
+
+        /**
+        * initialize
+        * @param {string} id
+        * @param {string} submitId
+        * @return {void}
+        */
+        function initFormComponent(id, submitId) {
+            const submitButton = document.getElementById(submitId);
+            const inputList = document.querySelectorAll(`#${id} input`);
+
+            let isValid = false;
+            // すべてのinput要素の入力中にバリデーションをチェックする
+            for (const input of inputList) {
+                input.addEventListener('input', () => {
+                    // バリデーション状態の結果に応じてボタンの活性状態を切り替え
+                    submitButton.disabled = !isValidateInput(inputList)
+                });
+            }
+        }
+
+        /**
+        * validate input.
+        * @param {NodeList<Element>} inputList
+        * @return {boolean}
+        */
+        function isValidateInput(inputList) {
+            const validList = [];
+            for (const input of inputList) {
+                const isValid = input.checkValidity()
+                validList.push(isValid);
+                if (!isValid) {
+                    break
+                }
+            }
+            return validList.every((v) => !!v);
+        }
+    </script>
 @stop
