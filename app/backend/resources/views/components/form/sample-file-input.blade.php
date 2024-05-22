@@ -7,7 +7,7 @@
     'isPreview' => false,
 ])
 <div class="">
-    <div id="{{$name . '_input-file-area'}}" class="upload-area d-flex justify-content-center">
+    <div id="{{$name . '_input-file-area'}}" class="upload-area d-flex justify-content-center @error($name . '_input-files') is-invalid @enderror">
         <div class="d-flex justify-content-center flex-column">
             <i class="fas fa-cloud-upload-alt fa-5x"></i>
             <p>Click OR Drag and drop a file</p>
@@ -19,13 +19,18 @@
             value="{{$value ?? ''}}"
             {{$required ? 'required' : ''}}
             {{$isMultiple ? 'multiple' : ''}}
-            class="upload_file"
+            class="upload_file @error($name . '_input-files') is-invalid @enderror"
         >
     </div>
     <p id="{{$name . '_file-name'}}" class="upload_file_name"></p>
     @if ($isPreview)
         <div id="{{$name . '_preview-image'}}" class="preview-image"></>
     @endif
+    @error ($name . '_input-files')
+        <span class="invalid-feedback d-block" role="alert">
+            <p>{{$message}}</p>
+        </span>
+    @enderror
 </div>
 
 @section('css')
@@ -37,6 +42,10 @@
             height: 200px;
             position: relative;
             border: 2px dotted rgba(0, 0, 0, .4);
+        }
+        .upload-area.invalid {
+            color: #dc3545;
+            border-color: #dc3545;
         }
         .upload-area i {
             opacity: .1;
