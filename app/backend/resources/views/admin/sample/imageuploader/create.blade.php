@@ -64,10 +64,10 @@
 
                     <div class="form-group col-md-6">
                         <label for="testImage">inputDate</label>
-                        <x-form.sample-file-input name="testFileTest" value="" :isPreview="true" :isMultiple="true" />
+                        <x-form.sample-file-input name="testFileTest" value="" :isPreview="true" :isMultiple="false" />
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 my-2">
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">

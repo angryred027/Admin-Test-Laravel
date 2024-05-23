@@ -22,7 +22,9 @@
             class="upload_file @error($name . '_input-files') is-invalid @enderror"
         >
     </div>
-    <p id="{{$name . '_file-name'}}" class="upload_file_name"></p>
+    <div id="{{$name . '_file-name-area'}}">
+        <span id="{{$name . '_file-name'}}" class="upload_file_name"></span>
+    </div>
     @if ($isPreview)
         <div id="{{$name . '_preview-image'}}" class="preview-image"></>
     @endif
@@ -162,6 +164,7 @@
                         fileInput,
                         preview,
                         fileNameArea,
+                        isMultiple,
                         isPreview
                     )
 
@@ -270,6 +273,7 @@
                 fileNameArea.textContent = null
 
                 if (!isMultiple && isPreview) {
+                    console.log('remove image: ');
                     const tmpImg = document.getElementById(previewChildImageId)
                     tmpImg.remove()
                 }
