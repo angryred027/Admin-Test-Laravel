@@ -24,6 +24,8 @@
                     </x-adminlte-select>  --}}
                     <x-form.sample-input-date name="statr_time" value="" startValue=""/>
 
+                    <x-form.sample-text-area name="testTestArea" value=""/>
+
                     {{--  <div class="form-group col-md-6">
                         <label for="testDate">inputDate</label>
                         <div class="input-group @error('testDate') adminlte-invalid-igroup @enderror  @error('testTime') adminlte-invalid-igroup @enderror">
@@ -41,13 +43,12 @@
                             </span>
                         @enderror
                     </div>  --}}
-                    <div class="form-group col-md-6">
+                    {{--  <div class="form-group col-md-6">
                         <label for="exampleFormControlFile1">Example file input</label>
                         <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="exampleFormControlFile1">Example file input</label>
-                        {{--  <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">  --}}
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
@@ -55,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" :value="$image"/>
+                    <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" :value="$image"/>  --}}
                     {{--  <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
                         <option>Option 1</option>
                         <option disabled>Option 2</option>
