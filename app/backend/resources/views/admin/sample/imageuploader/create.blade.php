@@ -27,6 +27,7 @@
                     <x-form.sample-text-area name="testTestArea" value=""/>
 
                     <x-form.sample-checkbox name="testCheckbox" value=""/>
+                    <x-form.sample-radio-button name="testRadioButton" value=""/>
 
                     {{--  <div class="form-group col-md-6">
                         <label for="testDate">inputDate</label>
