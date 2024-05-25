@@ -98,7 +98,11 @@
               cursor: pointer;
               border-color: #5f6674;
             }
-          }
+        }
+
+        .preview-image img {
+            height: 100px;
+        }
 
     </style>
 @stop
