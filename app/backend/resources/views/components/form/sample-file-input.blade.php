@@ -289,7 +289,7 @@
             fileNameArea.classList.remove('upload_file_name_area_no_uploaded')
 
             const tmpResetButton = document.createElement('span')
-            tmpResetButton.textContent = 'x'
+            tmpResetButton.textContent = 'X'
             tmpResetButton.classList.add(
                 'btn-light',
                 'text-secondary',
