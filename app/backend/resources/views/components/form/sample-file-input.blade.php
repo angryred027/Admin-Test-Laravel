@@ -169,7 +169,10 @@
                         if (fileName !== '') {
                             fileName += ','
                         }
-                        fileName += files[i].name
+
+                        // fileName += files[i].name
+                        const file = files[i]
+                        fileName += `${file.name} ${Math.floor(file.size / 1024)} KB`
                     }
 
                     fileNameContents.textContent = fileName
@@ -224,7 +227,9 @@
                     if (fileName !== '') {
                         fileName += ','
                     }
-                    fileName += files[i].name
+                    // fileName += files[i].name
+                    const file = files[i]
+                    fileName += `${file.name} ${Math.floor(file.size / 1024)} KB`
                 }
 
                 fileNameContents.textContent = fileName
