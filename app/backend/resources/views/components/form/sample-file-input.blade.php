@@ -30,7 +30,7 @@
             <p>{{$message}}</p>
         </span>
     @enderror
-    <div id="{{$name . '_file-name-area'}}" class="upload_file_name_area upload_file_name_area_no_uploaded">
+    <div id="{{$name . '_file-name-area'}}" class="upload_file_name_area upload_file_name_area_no_uploaded my-2">
         <span id="{{$name . '_file-name'}}" class="upload_file_name"></span>
     </div>
 </div>
@@ -86,12 +86,20 @@
         }
 
         .upload_file_name {
-            &:hover {
+            /* &:hover {
                 cursor: pointer;
             }
+            */
         }
 
         .upload_file_name_reset-file-icon {
+            padding: .0rem .25rem;
+
+            &:hover {
+                cursor: pointer;
+                border-color: #5f6674;
+            }
+            /*
             color: #ff0000;
             padding: 0 8px;
             font-size: 16px;
@@ -102,6 +110,7 @@
               cursor: pointer;
               border-color: #5f6674;
             }
+            */
         }
 
         .preview-image img {
@@ -271,12 +280,23 @@
             isMultiple,
             isPreview,
         ) {
+            // 親要素の表示
             fileNameArea.classList.remove('upload_file_name_area_no_uploaded')
 
             const tmpResetButton = document.createElement('span')
             tmpResetButton.textContent = 'x'
-            tmpResetButton.classList.add('upload_file_name_reset-file-icon');
+            tmpResetButton.classList.add(
+                'btn-light',
+                'text-secondary',
+                'btn-xs',
+                'rounded-circle',
+                'font-monospace',
+                'ml-1',
+                'upload_file_name_reset-file-icon'
+            );
             tmpResetButton.setAttribute('id', fileResetId)
+
+            fileNameContents.classList.add('btn-secondary', 'btn-sm', 'rounded-pill');
 
             fileNameContents.appendChild(tmpResetButton)
 
