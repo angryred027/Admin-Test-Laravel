@@ -26,10 +26,10 @@
                     {{ $required ? 'required' : '' }}
                     {{ $disabled ? 'disabled' : '' }}
                     class="form-control @error($name) is-invalid @enderror"
-                >{{$value}}</textarea>
+                >{{$value ?? ''}}</textarea>
             </div>
             <div class="d-flex justify-content-end text-secondary text-sm">
-                <span id="{{$name . '_text_counter'}}">{{mb_strlen($value)}}</span>/{{$maxLength}}
+                <span id="{{$name . '_text_counter'}}">{{mb_strlen($value ?? '')}}</span>/{{$maxLength}}
             </div>
         </div>
     </div>
