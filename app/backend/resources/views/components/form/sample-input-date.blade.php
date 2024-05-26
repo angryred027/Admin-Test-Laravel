@@ -10,7 +10,7 @@
     <label for="$name">inputDate</label>
     <div class="input-group @error(($name || $name . '_time')) adminlte-invalid-igroup @enderror">
         <input
-            name="$name"
+            name="{{$name}}"
             type="date"
             placeholder="input date"
             label="$name"

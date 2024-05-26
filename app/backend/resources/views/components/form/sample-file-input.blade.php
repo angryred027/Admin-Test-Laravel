@@ -22,15 +22,17 @@
             class="upload_file @error($name . '_input-files') is-invalid @enderror"
         >
     </div>
-    <p id="{{$name . '_file-name'}}" class="upload_file_name"></p>
     @if ($isPreview)
-        <div id="{{$name . '_preview-image'}}" class="preview-image"></>
+        <div id="{{$name . '_preview-image'}}" class="preview-image"></div>
     @endif
     @error ($name . '_input-files')
         <span class="invalid-feedback d-block" role="alert">
             <p>{{$message}}</p>
         </span>
     @enderror
+    <div id="{{$name . '_file-name-area'}}" class="upload_file_name_area upload_file_name_area_no_uploaded my-2">
+        <span id="{{$name . '_file-name'}}" class="upload_file_name"></span>
+    </div>
 </div>
 
 @section('css')
@@ -79,13 +81,25 @@
             }
         }
 
+        .upload_file_name_area_no_uploaded {
+            display: none;
+        }
+
         .upload_file_name {
-            &:hover {
+            /* &:hover {
                 cursor: pointer;
             }
+            */
         }
 
         .upload_file_name_reset-file-icon {
+            padding: .0rem .25rem;
+
+            &:hover {
+                cursor: pointer;
+                border-color: #5f6674;
+            }
+            /*
             color: #ff0000;
             padding: 0 8px;
             font-size: 16px;
@@ -96,7 +110,12 @@
               cursor: pointer;
               border-color: #5f6674;
             }
-          }
+            */
+        }
+
+        .preview-image img {
+            height: 100px;
+        }
 
     </style>
 @stop
@@ -124,6 +143,7 @@
         function initFileInputComponent(name, isMultiple, isPreview) {
             const fileInputAreaId = name + '_input-file-area'
             const fileInputId = name + '_input-files'
+            const fileNamAreaId = name + '_file-name-area'
             const fileNameId = name + '_file-name'
             const fileResetId = name + '_file-reset'
             const previewImageId = name + '_preview-image'
@@ -131,7 +151,8 @@
 
             const fileArea = document.getElementById(fileInputAreaId);
             const fileInput = document.getElementById(fileInputId);
-            const fileNameArea = document.getElementById(fileNameId);
+            const fileNameArea = document.getElementById(fileNamAreaId);
+            const fileNameContents = document.getElementById(fileNameId);
             const preview = document.getElementById(previewImageId);
             // const previewChildImage = document.getElementById(previewChildImageId);
 
@@ -148,10 +169,13 @@
                         if (fileName !== '') {
                             fileName += ','
                         }
-                        fileName += files[i].name
+
+                        // fileName += files[i].name
+                        const file = files[i]
+                        fileName += `${file.name} ${Math.floor(file.size / 1024)} KB`
                     }
 
-                    fileNameArea.textContent = fileName
+                    fileNameContents.textContent = fileName
                     setResetButton(
                         fileInputAreaId,
                         fileResetId,
@@ -162,11 +186,13 @@
                         fileInput,
                         preview,
                         fileNameArea,
+                        fileNameContents,
+                        isMultiple,
                         isPreview
                     )
 
                     if (!isMultiple && isPreview) {
-                        setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameArea, preview)
+                        setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameContents, preview)
                     }
 
                     fileArea.classList.add('upload-area_uploaded');
@@ -201,10 +227,12 @@
                     if (fileName !== '') {
                         fileName += ','
                     }
-                    fileName += files[i].name
+                    // fileName += files[i].name
+                    const file = files[i]
+                    fileName += `${file.name} ${Math.floor(file.size / 1024)} KB`
                 }
 
-                fileNameArea.textContent = fileName
+                fileNameContents.textContent = fileName
                 setResetButton(
                     fileInputAreaId,
                     fileResetId,
@@ -215,12 +243,13 @@
                     fileInput,
                     preview,
                     fileNameArea,
+                    fileNameContents,
                     isMultiple,
                     isPreview
                 )
 
                 if (!isMultiple && isPreview) {
-                    setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameArea, preview)
+                    setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameContents, preview)
                 }
                 fileArea.classList.add('upload-area_uploaded');
             });
@@ -237,6 +266,7 @@
         * @param {HTMLElement} fileInput
         * @param {HTMLElement} preview
         * @param {HTMLElement} fileNameArea
+        * @param {HTMLElement} fileNameContents
         * @param {boolean} isMultiple
         * @param {boolean} isPreview
         * @return {void}
@@ -251,15 +281,29 @@
             fileInput,
             preview,
             fileNameArea,
+            fileNameContents,
             isMultiple,
             isPreview,
         ) {
+            // 親要素の表示
+            fileNameArea.classList.remove('upload_file_name_area_no_uploaded')
+
             const tmpResetButton = document.createElement('span')
-            tmpResetButton.textContent = 'x'
-            tmpResetButton.classList.add('upload_file_name_reset-file-icon');
+            tmpResetButton.textContent = 'X'
+            tmpResetButton.classList.add(
+                'btn-light',
+                'text-secondary',
+                'btn-xs',
+                'rounded-circle',
+                'font-monospace',
+                'ml-1',
+                'upload_file_name_reset-file-icon'
+            );
             tmpResetButton.setAttribute('id', fileResetId)
 
-            fileNameArea.appendChild(tmpResetButton)
+            fileNameContents.classList.add('btn-secondary', 'btn-sm', 'rounded-pill');
+
+            fileNameContents.appendChild(tmpResetButton)
 
             tmpResetButton.addEventListener('click', function(evt){
                 evt.preventDefault();
@@ -267,9 +311,11 @@
 
                 fileInput.files = null
                 fileInput.value = null
-                fileNameArea.textContent = null
+                fileNameContents.textContent = null
+                fileNameArea.classList.add('upload_file_name_area_no_uploaded')
 
                 if (!isMultiple && isPreview) {
+                    console.log('remove image: ');
                     const tmpImg = document.getElementById(previewChildImageId)
                     tmpImg.remove()
                 }
@@ -286,11 +332,11 @@
         * @param {File} file
         * @param {HTMLElement} fileArea
         * @param {HTMLElement} fileInput
-        * @param {HTMLElement} fileNameArea
+        * @param {HTMLElement} fileNameContents
         * @param {HTMLElement} preview
         * @return {void}
         */
-        function setImage(previewChildImageId, file, fileArea, fileInput, fileNameArea, preview) {
+        function setImage(previewChildImageId, file, fileArea, fileInput, fileNameContents, preview) {
             // ファイルの読み込み
             const reader = new FileReader()
                 reader.onload = () => {
