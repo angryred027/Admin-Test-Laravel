@@ -16,7 +16,7 @@
                     name="{{$name . '[]'}}"
                     value="{{$value}}"
                     {{in_array($value, $valueList, true) ? 'checked' : ''}}
-                    {{$required ? 'required' : ''}}
+                    {{($required && empty($valueList)) ? 'required' : ''}}
                     {{$disabled ? 'disabled' : ''}}
                 >
                 <label for="{{$name . "_checkbox_$value"}}" class="mb-0">{{$label}}</label>
