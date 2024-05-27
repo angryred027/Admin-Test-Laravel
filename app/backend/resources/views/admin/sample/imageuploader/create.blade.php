@@ -26,7 +26,11 @@
 
                     <x-form.sample-text-area name="testTestArea" value=""/>
 
-                    <x-form.sample-checkbox name="testCheckbox" value=""/>
+                    <x-form.sample-checkbox
+                        name="testCheckbox"
+                        :valueList="[2]"
+                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
+                    />
                     <x-form.sample-radio-button name="testRadioButton" value=""/>
 
                     {{--  <div class="form-group col-md-6">
