@@ -17,6 +17,15 @@
                 <form id="createForm" method="POST" enctype="multipart/form-data" action={{route('admin.sampleImageUploader1.post')}}>
                     @csrf
                     <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" value={{$name}}/>
+
+                    {{--  検証用  --}}
+                    <x-form.sample-checkbox
+                        name="testCheckbox"
+                        :valueList="[2]"
+                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
+                        :required="true"
+                    />
+
                     <x-form.sample-select name="testSelet1" value="" label="testSelet1" placeholder="placeholder" :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']"/>
                     {{--  <x-adminlte-select name="testSelet1" label="testSelect1" fgroup-class="col-md-6">
                         <x-adminlte-options :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']" disabled="1"
@@ -26,11 +35,6 @@
 
                     <x-form.sample-text-area name="testTestArea" value=""/>
 
-                    <x-form.sample-checkbox
-                        name="testCheckbox"
-                        :valueList="[2]"
-                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
-                    />
                     <x-form.sample-radio-button name="testRadioButton" value=""/>
 
                     {{--  <div class="form-group col-md-6">
@@ -79,7 +83,8 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>
+                                    {{--  <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>  --}}
+                                    <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up"/>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +110,8 @@
 @section('js')
     @parent
     <script>
-        initFormComponent('createForm', 'createFormButton');
+        // TODO checkboxとの兼ね合いの為、一時コメントアウト
+        // initFormComponent('createForm', 'createFormButton');
 
         /**
         * initialize
