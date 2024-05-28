@@ -8,18 +8,19 @@
 ])
 <div class="form-group col-md-6">
     <div class="d-flex flex-column">
-        @foreach($optionList as $value => $label)
-            <div class="icheck-danger">
+        @foreach($optionList as $optionValue => $label)
+            <div class="custom-checkbox">
                 <input
                     type="checkbox"
-                    id="{{$name . "_checkbox_$value"}}"
+                    id="{{$name . "_checkbox_$optionValue"}}"
                     name="{{$name . '[]'}}"
-                    value="{{$value}}"
-                    {{in_array($value, $valueList, true) ? 'checked' : ''}}
-                    {{($required && empty($valueList)) ? 'required' : ''}}
+                    value="{{$optionValue}}"
+                    {{in_array($optionValue, $valueList, true) ? 'checked' : ''}}
                     {{$disabled ? 'disabled' : ''}}
+                    class="custom-control-input custom-control-input-primary custom-control-input-outline"
+                    {{($required && empty($valueList)) ? 'required' : ''}}
                 >
-                <label for="{{$name . "_checkbox_$value"}}" class="mb-0">{{$label}}</label>
+                <label for="{{$name . "_checkbox_$optionValue"}}" class="custom-control-label font-weight-normal">{{$label}}</label>
             </div>
         @endforeach
     </div>
@@ -29,8 +30,8 @@
     @parent
     <script>
         if (!!`{{$required}}`) {
-            initCheckBoxComponent(`{{$name}}`, JSON.parse(`{{json_encode(array_keys($optionList))}}`))
-            // initCheckBoxComponent(`{{$name}}`, {{json_encode(array_keys($optionList))}})
+            // initCheckBoxComponent(`{{$name}}`, JSON.parse(`{{json_encode(array_keys($optionList))}}`))
+            initCheckBoxComponent(`{{$name}}`, {{json_encode(array_keys($optionList))}})
         }
 
         /**
