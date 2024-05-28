@@ -2,21 +2,26 @@
     'class' => '',
     'name' => '',
     'value' => null,
+    'optionList' => [],
     'required' => false,
+    'disabled' => false,
 ])
 <div class="form-group clearfix col-md-6">
     <div class="d-flex flex-column">
-        <div class="icheck-primary">
-            <input type="radio" id="radioPrimary1" name={{$name}} checked="" value="1">
-            <label for="radioPrimary1">radio label1</label>
-        </div>
-        <div class="icheck-primarye">
-            <input type="radio" id="radioPrimary2" name={{$name}} value="2">
-            <label for="radioPrimary2">radio label2</label>
-        </div>
-        <div class="icheck-primary">
-            <input type="radio" id="radioPrimary3" name={{$name}} value="3">
-            <label for="radioPrimary3">radio label3</label>
-        </div>
+        @foreach($optionList as $optionValue => $label)
+            <div class="custom-radio">
+                <input
+                    type="radio"
+                    id="{{$name . "_radio_$optionValue"}}"
+                    name={{$name}}
+                    {{($optionValue === (int)$value) ? 'checked' : ''}}
+                    value="{{$optionValue}}"
+                    {{$disabled ? 'disabled' : ''}}
+                    {{$required ? 'required' : ''}}
+                    class="custom-control-input custom-control-input-primary custom-control-input-outline"
+                />
+                <label for="{{$name . "_radio_$optionValue"}}" class="custom-control-label font-weight-normal">{{$label}}</label>
+            </div>
+        @endforeach
     </div>
 </div>
