@@ -160,10 +160,10 @@
                 console.log('change: ');
                 // console.log('change2: ' + JSON.stringify(fileInput.files, null ,2));
 
-                evt.preventDefault();
+                // evt.preventDefault();
                 const files = fileInput.files;
                 // ファイルをアップロードした時
-                if (files) {
+                if (files.length > 0) {
                     let fileName = ''
                     for(i = 0; i < files.length; i++) {
                         if (fileName !== '') {
@@ -322,6 +322,8 @@
 
                 fileArea.classList.remove('upload-area_uploaded');
                 tmpResetButton.remove()
+                // inputのchangeイベントの発火
+                fileInput.dispatchEvent(new Event('change'))
 
             });
         }

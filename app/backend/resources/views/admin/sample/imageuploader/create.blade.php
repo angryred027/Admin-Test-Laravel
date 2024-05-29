@@ -130,7 +130,7 @@
             let isValid = false;
             // すべてのinput要素の入力中にバリデーションをチェックする
             for (const input of inputList) {
-                input.addEventListener('input', () => {
+                input.addEventListener('change', () => {
                     // バリデーション状態の結果に応じてボタンの活性状態を切り替え
                     submitButton.disabled = !isValidateInput(inputList)
                 });
