@@ -2106,6 +2106,13 @@ php artisan make:component sample.sampleInput --view
 
 ```
 
+### Chart.Jsのインストール
+
+```shell
+### artisanコマンドでインストール
+php artisan adminlte:plugins install --plugin=chartJs
+```
+
 ---
 
 ### Docker Container内のユーザーの変更

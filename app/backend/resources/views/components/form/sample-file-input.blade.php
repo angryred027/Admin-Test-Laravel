@@ -160,22 +160,11 @@
                 console.log('change: ');
                 // console.log('change2: ' + JSON.stringify(fileInput.files, null ,2));
 
-                evt.preventDefault();
+                // evt.preventDefault();
                 const files = fileInput.files;
                 // ファイルをアップロードした時
-                if (files) {
-                    let fileName = ''
-                    for(i = 0; i < files.length; i++) {
-                        if (fileName !== '') {
-                            fileName += ','
-                        }
-
-                        // fileName += files[i].name
-                        const file = files[i]
-                        fileName += `${file.name} ${Math.floor(file.size / 1024)} KB`
-                    }
-
-                    fileNameContents.textContent = fileName
+                if (files.length > 0) {
+                    fileNameContents.textContent = getFileNameContents(files)
                     setResetButton(
                         fileInputAreaId,
                         fileResetId,
@@ -222,17 +211,7 @@
                 }
                 fileInput.files = files;
 
-                let fileName = ''
-                for(i = 0; i < files.length; i++) {
-                    if (fileName !== '') {
-                        fileName += ','
-                    }
-                    // fileName += files[i].name
-                    const file = files[i]
-                    fileName += `${file.name} ${Math.floor(file.size / 1024)} KB`
-                }
-
-                fileNameContents.textContent = fileName
+                fileNameContents.textContent = getFileNameContents(files)
                 setResetButton(
                     fileInputAreaId,
                     fileResetId,
@@ -322,6 +301,8 @@
 
                 fileArea.classList.remove('upload-area_uploaded');
                 tmpResetButton.remove()
+                // inputのchangeイベントの発火
+                fileInput.dispatchEvent(new Event('change'))
 
             });
         }
@@ -349,6 +330,24 @@
                     preview.appendChild(tmpImg)
             }
             reader.readAsDataURL(file);
+        }
+
+        /**
+        * get file name contents.
+        * @param {FileList} fileList
+        * @return {string}
+        */
+        function getFileNameContents(fileList) {
+            let fileName = ''
+            for(i = 0; i < fileList.length; i++) {
+                if (fileName !== '') {
+                    fileName += ','
+                }
+
+                const file = fileList[i]
+                fileName += `${file.name} ${Math.floor(file.size / 1024)} KB`
+            }
+            return fileName
         }
     </script>
 @stop

@@ -10,6 +10,7 @@
     <label for="$name">inputDate</label>
     <div class="input-group @error(($name || $name . '_time')) adminlte-invalid-igroup @enderror">
         <input
+            id="{{$name . '_date'}}"
             name="{{$name}}"
             type="date"
             placeholder="input date"
@@ -20,7 +21,8 @@
         />
         @if (!$isDateOnly)
             <input
-                name={{$name . '_time'}}
+                id="{{$name . '_time'}}"
+                name="{{$name . '_time'}}"
                 type="time"
                 placeholder="HH:mm"
                 label={{$name . '_time'}}
@@ -30,8 +32,8 @@
                 class="form-control @error($name .'_time') is-invalid @enderror"
             />
         @endif
-        @if (!$isSetLimitTime)
-            <x-adminlte-button label="copy" theme="secondary" icon="fas fa-clock" />
+        @if ($isSetLimitTime)
+            <x-adminlte-button id="{{$name . '_copy_btn'}}" label="copy" theme="secondary" icon="fas fa-clock" />
         @endif
     </div>
     @error(($name || $name . '_time'))
@@ -40,3 +42,35 @@
         </span>
     @enderror
 </div>
+
+@section('js')
+    @parent
+    <script>
+        if (!!`{{$isSetLimitTime}}`) {
+            initDatetimeComponent(`{{$name}}`)
+        }
+
+        /**
+        * initialize
+        * @param {string} name
+        * @return {void}
+        */
+        function initDatetimeComponent(name) {
+            const copyButton = document.getElementById(`${name}_copy_btn`)
+
+            copyButton.addEventListener('click', function(evt){
+                const dateForm = document.getElementById(`${name}_date`)
+                const timeForm = document.getElementById(`${name}_time`)
+
+                if (dateForm && timeForm) {
+                    dateForm.value = '2030-12-21'
+                    timeForm.value = '23:59:59'
+                    // イベント発行
+                    dateForm.dispatchEvent(new Event('change'))
+                    timeForm.dispatchEvent(new Event('change'))
+                }
+            });
+        }
+
+    </script>
+@stop

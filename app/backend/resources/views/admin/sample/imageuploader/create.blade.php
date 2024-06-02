@@ -26,16 +26,20 @@
                         :required="true"
                     />
 
+                    <x-form.sample-radio-button
+                        name="testRadioButton"
+                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
+                        :required="true"
+                    />
+
                     <x-form.sample-select name="testSelet1" value="" label="testSelet1" placeholder="placeholder" :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']"/>
                     {{--  <x-adminlte-select name="testSelet1" label="testSelect1" fgroup-class="col-md-6">
                         <x-adminlte-options :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']" disabled="1"
                             empty-option="Select an option..."/>
                     </x-adminlte-select>  --}}
-                    <x-form.sample-input-date name="statr_time" value="" startValue=""/>
+                    <x-form.sample-input-date name="statr_time" value="" startValue="" :isSetLimitTime="true"/>
 
                     <x-form.sample-text-area name="testTestArea" value=""/>
-
-                    <x-form.sample-radio-button name="testRadioButton" value=""/>
 
                     {{--  <div class="form-group col-md-6">
                         <label for="testDate">inputDate</label>
@@ -126,7 +130,7 @@
             let isValid = false;
             // すべてのinput要素の入力中にバリデーションをチェックする
             for (const input of inputList) {
-                input.addEventListener('input', () => {
+                input.addEventListener('change', () => {
                     // バリデーション状態の結果に応じてボタンの活性状態を切り替え
                     submitButton.disabled = !isValidateInput(inputList)
                 });
