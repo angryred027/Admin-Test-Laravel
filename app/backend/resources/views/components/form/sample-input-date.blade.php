@@ -65,6 +65,9 @@
                 if (dateForm && timeForm) {
                     dateForm.value = '2030-12-21'
                     timeForm.value = '23:59:59'
+                    // イベント発行
+                    dateForm.dispatchEvent(new Event('change'))
+                    timeForm.dispatchEvent(new Event('change'))
                 }
             });
         }
