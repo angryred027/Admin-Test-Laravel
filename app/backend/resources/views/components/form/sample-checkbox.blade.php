@@ -58,7 +58,7 @@
         * initialize
         * @param {string} name
         * @param {number[]} valueList
-        * @return {void}
+        * @return {boolean}
         */
         function validateCheckbox(name, valueList) {
             const checkboxList = []
@@ -83,6 +83,8 @@
                     checkbox.removeAttribute('required')
                 }
             }
+
+            return isValid
         }
     </script>
 @stop

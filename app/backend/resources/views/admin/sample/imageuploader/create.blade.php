@@ -125,14 +125,31 @@
         */
         function initFormComponent(id, submitId) {
             const submitButton = document.getElementById(submitId);
-            const inputList = document.querySelectorAll(`#${id} input`);
+            let inputList = document.querySelectorAll(`#${id} input`);
+            const textareaList = document.querySelectorAll(`#${id} textarea`);
+            const selectList = document.querySelectorAll(`#${id} select`);
+
+            inputList = [...inputList, ...textareaList, ...selectList];
+
+            // checkbox
+            const checkboxNameValueDict = {}
+            for (const input of inputList) {
+                if (input.getAttribute('type') !== 'checkbox') {
+                    continue
+                }
+                const name = input.getAttribute('name')
+                if (!checkboxNameValueDict[name]) {
+                    checkboxNameValueDict[name] = []
+                }
+                checkboxNameValueDict[name].push(input.value)
+            }
 
             let isValid = false;
             // すべてのinput要素の入力中にバリデーションをチェックする
             for (const input of inputList) {
                 input.addEventListener('change', () => {
                     // バリデーション状態の結果に応じてボタンの活性状態を切り替え
-                    submitButton.disabled = !isValidateInput(inputList)
+                    submitButton.disabled = !isValidateInput(inputList, checkboxNameValueDict)
                 });
             }
         }
@@ -140,12 +157,28 @@
         /**
         * validate input.
         * @param {NodeList<Element>} inputList
+        * @param {Record<string, number[]>} checkboxNameValueDict
         * @return {boolean}
         */
-        function isValidateInput(inputList) {
+        function isValidateInput(inputList, checkboxNameValueDict) {
             const validList = [];
+            const validatedCheckboxDict = []
             for (const input of inputList) {
-                const isValid = input.checkValidity()
+                let isValid = false
+                if (input.getAttribute('type') === 'checkbox') {
+                    const name = input.getAttribute('name')
+                    if (validatedCheckboxDict[name]) {
+                        continue
+                    }
+
+                    if (name && checkboxNameValueDict[name]) {
+                        isValid = validateCheckbox(name.slice(0, -2), checkboxNameValueDict[name])
+                        validatedCheckboxDict[name] = 1
+                    }
+                } else {
+                    isValid = input.checkValidity()
+                }
+
                 validList.push(isValid);
                 if (!isValid) {
                     break
