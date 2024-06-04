@@ -5,6 +5,9 @@
     'required' => false,
     'isMultiple' => false,
     'isPreview' => false,
+    'maxFileLength' => 1,
+    'maxFileSize' => 3145728, // 3MB
+    'accept' => 'image/png,image/jpeg,image/gif',
 ])
 <div class="">
     <div id="{{$name . '_input-file-area'}}" class="upload-area d-flex justify-content-center @error($name . '_input-files') is-invalid @enderror">
@@ -131,16 +134,33 @@
         // const fileArea = document.getElementById('input-file-area');
         // const fileInput = document.getElementById('input-files');
 
-        initFileInputComponent(`{{$name}}`, !!`{{$isMultiple}}`, !!`{{$isPreview}}`);
+        initFileInputComponent(
+            `{{$name}}`,
+            !!`{{$isMultiple}}`,
+            !!`{{$isPreview}}`,
+            {{$maxFileLength}},
+            {{$maxFileSize}},
+            `{{$accept}}`
+            );
 
         /**
         * initialize
         * @param {string} name
         * @param {boolean} isMultiple
         * @param {boolean} isPreview
+        * @param {int} maxFileLength
+       `* @param {int} maxFileSize
+        * @param {string} accept
         * @return {void}
         */
-        function initFileInputComponent(name, isMultiple, isPreview) {
+        function initFileInputComponent(
+            name,
+            isMultiple,
+            isPreview,
+            maxFileLength,
+            maxFileSize,
+            accept
+        ) {
             const fileInputAreaId = name + '_input-file-area'
             const fileInputId = name + '_input-files'
             const fileNamAreaId = name + '_file-name-area'
@@ -394,7 +414,7 @@
         function validateFileLength(
             fileList,
             maxFileLength
-        ): boolean {
+        ) {
             return fileList.length <= maxFileLength
         }
 
@@ -407,7 +427,7 @@
         function validateFileSize(
             file,
             maxFileSize
-        ): boolean {
+        ) {
             return file.size <= maxFileSize
         }
 
@@ -420,7 +440,7 @@
         function validateFileType(
             file,
             accept
-        ): boolean {
+        ) {
             if (typeof accept === 'string') {
             // wildcard check
             const wildcardIndex = accept.indexOf('/*')
@@ -432,7 +452,7 @@
                 )
             }
             } else {
-            return accept.includes(file.type)
+                return accept.includes(file.type)
             }
         }
 
