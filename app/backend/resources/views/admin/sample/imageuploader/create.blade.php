@@ -89,7 +89,7 @@
                                 <div class="row">
                                     <div class="col-sm">
                                         {{--  <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>  --}}
-                                        <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up"/>
+                                        <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" class="form_submit_button" />
                                     </div>
                                 </div>
                             </div>
@@ -112,6 +112,17 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('css')
+    @parent
+    <style>
+        /* form内のinputにバリデーションエラーがあればボタン非活性化 */
+        form:has(input:invalid, textarea:invalid, select:invalid) .form_submit_button {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
 @stop
 
 @section('js')
