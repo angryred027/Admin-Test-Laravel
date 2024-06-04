@@ -349,5 +349,92 @@
             }
             return fileName
         }
+
+        /**
+        * get file name contents.
+        * @param {FileList} fileList
+        * @param {int} maxFileLength
+       `* @param {int} maxFileSize
+        * @param {string} accept
+        * @return {?string}
+        */
+        function validateFileList(fileList, maxFileLength, maxFileSize, accept) {
+            let message = null;
+            let accepts = null;
+
+            if (!validateFileLength(fileList, maxFileLength)) {
+                message = 'ファイル数不正'
+                return message
+            }
+
+            if (accept.includes(',')) {
+              accepts = accept.split(',')
+            }
+
+            for (const file of fileList) {
+                if (!validateFileSize(file, maxFileSize)) {
+                    message = `ファイルサイズ不正 ${Math.floor(file.size / 1024)} KB`
+                    break;
+                }
+                if (!validateFileType(file, accepts ?? accept)) {
+                    message = 'ファイル種別不正'
+                    break;
+                }
+            }
+
+            return message
+        }
+
+        /**
+        * check file length.
+        * @param {FileList} fileList
+        * @param {number} maxFileLength
+        * @return {boolean}
+        */
+        function validateFileLength(
+            fileList,
+            maxFileLength
+        ): boolean {
+            return fileList.length <= maxFileLength
+        }
+
+        /**
+        * check file size(byte size).
+        * @param {File} file
+        * @param {number} maxFileSize
+        * @return {boolean}
+        */
+        function validateFileSize(
+            file,
+            maxFileSize
+        ): boolean {
+            return file.size <= maxFileSize
+        }
+
+        /**
+        * check file type.
+        * @param {File} file
+        * @param {string | string[]} accept
+        * @return {boolean}
+        */
+        function validateFileType(
+            file,
+            accept
+        ): boolean {
+            if (typeof accept === 'string') {
+            // wildcard check
+            const wildcardIndex = accept.indexOf('/*')
+            if (wildcardIndex === -1) {
+                return file.type === accept
+            } else {
+                return (
+                file.type.slice(0, wildcardIndex) === accept.slice(0, wildcardIndex)
+                )
+            }
+            } else {
+            return accept.includes(file.type)
+            }
+        }
+
     </script>
 @stop
