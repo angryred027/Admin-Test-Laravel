@@ -184,6 +184,12 @@
                 const files = fileInput.files;
                 // ファイルをアップロードした時
                 if (files.length > 0) {
+                    const errorMessage = validateFileListByParameter(files, maxFileLength, maxFileSize, accept)
+                    if (errorMessage !== null) {
+                        fileInput.value = null
+                        alert(errorMessage)
+                        throw new Error(errorMessage)
+                    }
                     fileNameContents.textContent = getFileNameContents(files)
                     setResetButton(
                         fileInputAreaId,
@@ -224,8 +230,14 @@
                 evt.preventDefault();
                 fileArea.classList.remove('upload-area_dragover');
                 const files = evt.dataTransfer.files;
+
+                let errorMessage = null;
                 if (!isMultiple && files.length > 1) {
-                    const errorMessage = 'drooped multi files'
+                    errorMessage = 'drooped multi files'
+                } else {
+                    errorMessage = validateFileListByParameter(files, maxFileLength, maxFileSize, accept)
+                }
+                if (errorMessage !== null) {
                     alert(errorMessage)
                     throw new Error(errorMessage)
                 }
@@ -378,7 +390,7 @@
         * @param {string} accept
         * @return {?string}
         */
-        function validateFileList(fileList, maxFileLength, maxFileSize, accept) {
+        function validateFileListByParameter(fileList, maxFileLength, maxFileSize, accept) {
             let message = null;
             let accepts = null;
 
