@@ -16,81 +16,79 @@
             <div class="col-sm">
                 <form id="createForm" method="POST" enctype="multipart/form-data" action={{route('admin.sampleImageUploader1.post')}}>
                     @csrf
-                    <div>
-                        <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" value={{$name}}/>
+                    <x-adminlte-input name="name" label="name" placeholder="name" fgroup-class="col-md-6" value={{$name}}/>
 
-                        {{--  検証用  --}}
-                        <x-form.sample-checkbox
-                            name="testCheckbox"
-                            :valueList="[2]"
-                            :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
-                            :required="true"
-                        />
+                    {{--  検証用  --}}
+                    <x-form.sample-checkbox
+                        name="testCheckbox"
+                        :valueList="[2]"
+                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
+                        :required="true"
+                    />
 
-                        <x-form.sample-radio-button
-                            name="testRadioButton"
-                            :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
-                            :required="true"
-                        />
+                    <x-form.sample-radio-button
+                        name="testRadioButton"
+                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
+                        :required="true"
+                    />
 
-                        <x-form.sample-select name="testSelet1" value="" label="testSelet1" placeholder="placeholder" :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']"/>
-                        {{--  <x-adminlte-select name="testSelet1" label="testSelect1" fgroup-class="col-md-6">
-                            <x-adminlte-options :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']" disabled="1"
-                                empty-option="Select an option..."/>
-                        </x-adminlte-select>  --}}
-                        <x-form.sample-input-date name="statr_time" value="" startValue="" :isSetLimitTime="true"/>
+                    <x-form.sample-select name="testSelet1" value="" label="testSelet1" placeholder="placeholder" :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']"/>
+                    {{--  <x-adminlte-select name="testSelet1" label="testSelect1" fgroup-class="col-md-6">
+                        <x-adminlte-options :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']" disabled="1"
+                            empty-option="Select an option..."/>
+                    </x-adminlte-select>  --}}
+                    <x-form.sample-input-date name="statr_time" value="" startValue="" :isSetLimitTime="true"/>
 
-                        <x-form.sample-text-area name="testTestArea" value=""/>
+                    <x-form.sample-text-area name="testTestArea" value=""/>
 
-                        {{--  <div class="form-group col-md-6">
-                            <label for="testDate">inputDate</label>
-                            <div class="input-group @error('testDate') adminlte-invalid-igroup @enderror  @error('testTime') adminlte-invalid-igroup @enderror">
-                                <input name="testDate" type="date" placeholder="input date" label="testDate" required="true" class="form-control @error('testDate') is-invalid @enderror"/>
-                                <input name="testTime" type="time" placeholder="HH:mm" label="testTime" required="true" class="form-control @error('testTime') is-invalid @enderror"/>
-                            </div>
-                            @error('testDate')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{$message}}</strong>
-                                </span>
-                            @enderror
-                            @error('testTime')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{$message}}</strong>
-                                </span>
-                            @enderror
-                        </div>  --}}
-                        {{--  <div class="form-group col-md-6">
-                            <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
+                    {{--  <div class="form-group col-md-6">
+                        <label for="testDate">inputDate</label>
+                        <div class="input-group @error('testDate') adminlte-invalid-igroup @enderror  @error('testTime') adminlte-invalid-igroup @enderror">
+                            <input name="testDate" type="date" placeholder="input date" label="testDate" required="true" class="form-control @error('testDate') is-invalid @enderror"/>
+                            <input name="testTime" type="time" placeholder="HH:mm" label="testTime" required="true" class="form-control @error('testTime') is-invalid @enderror"/>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleFormControlFile1">Example file input</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
-                                    <label class="custom-file-label text-truncate" for="file"></label>
-                                </div>
+                        @error('testDate')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
+                        @error('testTime')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
+                    </div>  --}}
+                    {{--  <div class="form-group col-md-6">
+                        <label for="exampleFormControlFile1">Example file input</label>
+                        <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlFile1">Example file input</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="exampleFormControlFile1" placeholder="input file" :value=$image class="form-control-file">
+                                <label class="custom-file-label text-truncate" for="file"></label>
                             </div>
                         </div>
-                        <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" :value="$image"/>  --}}
-                        {{--  <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
-                            <option>Option 1</option>
-                            <option disabled>Option 2</option>
-                            <option selected>Option 3</option>
-                        </x-adminlte-select2>  --}}
+                    </div>
+                    <x-adminlte-input-file name="file" label="upload file" fgroup-class="col-md-6" :value="$image"/>  --}}
+                    {{--  <x-adminlte-select2 name="testSelet2" label="testSelect2" fgroup-class="col-md-6">
+                        <option>Option 1</option>
+                        <option disabled>Option 2</option>
+                        <option selected>Option 3</option>
+                    </x-adminlte-select2>  --}}
 
-                        <div class="form-group col-md-6">
-                            <label for="testImage">inputDate</label>
-                            <x-form.sample-file-input name="testFileTest" value="" :isPreview="true" :isMultiple="false" />
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label for="testImage">inputDate</label>
+                        <x-form.sample-file-input name="testFileTest" value="" :isPreview="true" :isMultiple="false" />
+                    </div>
 
-                        <div class="form-group col-md-6 my-2">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        {{--  <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>  --}}
-                                        <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" class="form_submit_button" />
-                                    </div>
+                    <div class="form-group col-md-6 my-2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    {{--  <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>  --}}
+                                    <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" class="form_submit_button" />
                                 </div>
                             </div>
                         </div>
