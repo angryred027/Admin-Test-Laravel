@@ -20,6 +20,7 @@
             id="{{$name . '_input-files'}}"
             name="{{$name}}"
             value="{{$value ?? ''}}"
+            accept="{{$accept}}"
             {{$required ? 'required' : ''}}
             {{$isMultiple ? 'multiple' : ''}}
             class="upload_file @error($name . '_input-files') is-invalid @enderror"
