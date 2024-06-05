@@ -78,7 +78,8 @@ class AuthController extends Controller
         // *ハッシュアルゴリズムがconfigに設定されているものと異なる場合はattempt()が使えない為、
         // レコードのパスワード値とリクエストを該当アルゴリズムでハッシュ化させた値を比較した後に手動でログインさせる必要がある。
         // guardがデフォルトでは無い場合は必ず指定すること。
-        // \Illuminate\Support\Facades\Auth::guard('api-admins')->login();
+        // \Illuminate\Support\Facades\Auth::guard('api-admins')->login($user = Modelインスタンス);
+        // ログイン後はAuth::guard('api-admins')->user();でログイン情報が取れる
 
         // json形式のレスポンスを返す場合
         // return $this->respondWithToken($token);
