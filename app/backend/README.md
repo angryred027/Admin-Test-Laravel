@@ -2028,6 +2028,14 @@ php artisan adminlte:install --only=auth_views
 
 ```
 
+### admin LTEのコードを上書きをした場合、下記のコマンドを実行すれば`resources/views/vendor`内にコードがコピーされる。
+
+```shell
+php artisan adminlte:install --with=basic_views
+php artisan adminlte:install --with=auth_views
+php artisan adminlte:install --with=main_views
+```
+
 ### ログイン画面の表示
 
 `routes/web.php`に下記の記述を追加
