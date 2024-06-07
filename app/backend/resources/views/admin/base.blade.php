@@ -10,8 +10,14 @@
     <p>Welcome to this beautiful base admin panel.</p>
 @stop
 
-@section('css')
+@section('adminlte_css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    {{--  動的に設定するCSS  --}}
+    <style>
+        .brand-link-color {
+            background-color: {{ config('myapp.mainColor') }};
+        }
+    </style>
 @stop
 
 @section('js')

@@ -71,4 +71,5 @@ return [
             'baseConnectionName' => 'sqlite',
         ],
     ],
+    'mainColor' => env('MAIN_COLOR', '#343a40'),
 ];
