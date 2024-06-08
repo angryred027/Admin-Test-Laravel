@@ -12,7 +12,7 @@
     @if($layoutHelper->isLayoutTopnavEnabled())
         class="navbar-brand {{ config('adminlte.classes_brand') }}"
     @else
-        class="brand-link {{ config('adminlte.classes_brand') }}"
+        class="brand-link brand-link-color {{ config('adminlte.classes_brand') }}"
     @endif>
 
     {{-- Small brand logo --}}
