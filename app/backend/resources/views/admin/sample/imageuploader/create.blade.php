@@ -112,7 +112,7 @@
     </div>
 @stop
 
-@section('css')
+@section('adminlte_css')
     @parent
     <style>
         /* form内のinputにバリデーションエラーがあればボタン非活性化 */
