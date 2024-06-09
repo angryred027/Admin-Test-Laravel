@@ -464,6 +464,7 @@ return [
         [
             'text' => 'important',
             'icon_color' => 'red',
+            'icon' => 'fas fa-fw fa-circle fa-xs',
             'url' => '#',
         ],
         [
