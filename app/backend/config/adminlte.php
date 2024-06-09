@@ -306,6 +306,10 @@ return [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        [
+            'type' => 'darkmode-widget',
+            'topnav_right' => true,
+        ],
 
         // Sidebar items:
         [
@@ -460,6 +464,7 @@ return [
         [
             'text' => 'important',
             'icon_color' => 'red',
+            'icon' => 'fas fa-fw fa-circle fa-xs',
             'url' => '#',
         ],
         [

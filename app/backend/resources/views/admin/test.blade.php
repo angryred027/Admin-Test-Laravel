@@ -1,5 +1,5 @@
 {{-- @extends('adminlte::page') --}}
-@extends('admin.base')
+@extends('admin.layout')
 
 @section('title', 'Dashboard')
 

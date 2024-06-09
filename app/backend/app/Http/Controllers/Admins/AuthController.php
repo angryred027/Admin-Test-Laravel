@@ -75,6 +75,12 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        // *ハッシュアルゴリズムがconfigに設定されているものと異なる場合はattempt()が使えない為、
+        // レコードのパスワード値とリクエストを該当アルゴリズムでハッシュ化させた値を比較した後に手動でログインさせる必要がある。
+        // guardがデフォルトでは無い場合は必ず指定すること。
+        // \Illuminate\Support\Facades\Auth::guard('api-admins')->login($user = Modelインスタンス);
+        // ログイン後はAuth::guard('api-admins')->user();でログイン情報が取れる
+
         // json形式のレスポンスを返す場合
         // return $this->respondWithToken($token);
         // ホーム画面のviewにリダイレクトする場合
@@ -120,11 +126,16 @@ class AuthController extends Controller
      * @header Accept application/json
      * @header Authorization Bearer
      *
+     * @param Request $request
      * @return JsonResponse|Redirector|RedirectResponse
      */
-    public function logout(): JsonResponse|Redirector|RedirectResponse
+    public function logout(Request $request): JsonResponse|Redirector|RedirectResponse
     {
-        auth('api-admins')->logout();
+        auth('api-admins')->logout(); // or
+        // 又は、\Illuminate\Support\Facades\Auth::guard('api-admins')->logout();
+
+        $request->session()->invalidate(); // セッションIDの再作成&セッションから全てのデータの削除
+        $request->session()->regenerate(); // セッションIDの再発行
 
         // APIで返す場合
         // return response()->json(['message' => 'Successfully logged out']);

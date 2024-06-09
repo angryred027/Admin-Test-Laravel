@@ -40,7 +40,7 @@
     @enderror
 </div>
 
-@section('css')
+@section('adminlte_css')
     @parent
     <style>
         .text_area_test_counter.text_area_test_counter_is_max_length {

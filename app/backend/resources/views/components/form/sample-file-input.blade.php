@@ -39,7 +39,7 @@
     </div>
 </div>
 
-@section('css')
+@section('adminlte_css')
     @parent
     <style>
         .upload-area {

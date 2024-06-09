@@ -1,19 +1,11 @@
-@extends('adminlte::page')
+@extends('admin.layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard Test')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Dashboard Test</h1>
 @stop
 
 @section('content')
     <p>Welcome to this beautiful admin panel.</p>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Home!'); </script>
 @stop

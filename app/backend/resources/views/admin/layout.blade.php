@@ -11,6 +11,7 @@
 @stop
 
 @section('adminlte_css')
+    @parent
     <link rel="stylesheet" href="/css/admin_custom.css">
     {{--  動的に設定するCSS  --}}
     <style>
