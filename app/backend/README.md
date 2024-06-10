@@ -2123,6 +2123,16 @@ php artisan adminlte:plugins install --plugin=chartJs
 
 ---
 
+### laravel-breadcrumbsのインストール
+
+```shell
+### compserでインストール
+composer require diglactic/laravel-breadcrumbs
+```
+
+
+---
+
 ### Docker Container内のユーザーの変更
 
 ユーザーのUID/GUIDの確認
