@@ -56,6 +56,15 @@
         * @return {void}
         */
         function initDatetimeComponent(name) {
+            initCopyButtonComponent(name)
+        }
+
+        /**
+        * initialize copy button
+        * @param {string} name
+        * @return {void}
+        */
+        function initCopyButtonComponent(name) {
             const copyButton = document.getElementById(`${name}_copy_btn`)
 
             copyButton.addEventListener('click', function(evt){
