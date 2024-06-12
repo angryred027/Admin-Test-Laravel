@@ -2128,6 +2128,9 @@ php artisan adminlte:plugins install --plugin=chartJs
 ```shell
 ### compserでインストール
 composer require diglactic/laravel-breadcrumbs
+
+### configの出力
+php artisan vendor:publish --tag=breadcrumbs-config
 ```
 
 
