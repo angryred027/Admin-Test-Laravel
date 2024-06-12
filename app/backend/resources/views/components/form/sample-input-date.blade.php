@@ -81,5 +81,25 @@
             });
         }
 
+        /**
+        * validate datetime number
+        * @param {string} datetime
+        * @param {null|number} targetNumber
+        * @return {boolean}
+        */
+        function validateDatetimeNumber(datetime, targetNumber) {
+            return new Date(datetime)->getDay() === targetNumber
+        }
+
+        /**
+        * validate datetime greater
+        * @param {string} datetime
+        * @param {null|string} targetDatetime
+        * @return {boolean}
+        */
+        function validateGreaterThan(datetime, targetDatetime) {
+            return new Date(targetDatetime)->getTime() < new Date(datetime)->getTime()
+        }
+
     </script>
 @stop
