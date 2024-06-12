@@ -22,7 +22,7 @@ class BreadcrumbsLibrary
      */
     public static function push(array $item, string $parentRouteName): void
     {
-        Breadcrumbs::for($item['name'], function (BreadcrumbTrail $trail, ?int $id) use ($item, $parentRouteName) {
+        Breadcrumbs::for($item['name'], function (BreadcrumbTrail $trail, ?int $id = null) use ($item, $parentRouteName) {
             $trail->parent($parentRouteName);
             $trail->push(
                 $item['title'],
