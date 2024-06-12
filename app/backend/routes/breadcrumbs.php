@@ -10,7 +10,7 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 // TOP 第1階層
 Breadcrumbs::for('admin.home', function (BreadcrumbTrail $trail, ?int $id) {
     $trail->push('HOME', route('admin.home'));
-    foreach(config('breadcrumbs.list')['list'] as $item) {
+    foreach(config('breadcrumbs.routes')['list'] as $item) {
         Breadcrumbs::for($item['name'], function (BreadcrumbTrail $trail, ?int $id) use ($item) {
             $trail->parent('admin.home');
             $trail->push(
