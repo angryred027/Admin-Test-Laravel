@@ -4,6 +4,8 @@
     'value' => null,
     'required' => false,
     'isDateOnly' => false,
+    'targetNumber' => null,
+    'targetName' => null,
     'isSetLimitTime' => false,
 ])
 <div class="sample-date-input form-group col-md-6">
@@ -47,15 +49,30 @@
     @parent
     <script>
         if (!!`{{$isSetLimitTime}}`) {
-            initDatetimeComponent(`{{$name}}`)
+            initDatetimeComponent(
+                `{{$name}}`,
+                @if (is_null($targetNumber)) null @else {{$targetNumber}} @endif,
+                @if (is_null($targetName)) null @else `{{$targetName}}` @endif,
+            )
         }
 
         /**
         * initialize
         * @param {string} name
+        * @param {null|number} targetNumber
+        * @param {null|string} targetName
         * @return {void}
         */
-        function initDatetimeComponent(name) {
+        function initDatetimeComponent(name, targetNumber, targetName) {
+            const dateInput = document.getElementById(`${name}_date`)
+            const timeInput = document.getElementById(`${name}_time`)
+
+            dateInput.addEventListener('cahnge', function(evt){
+
+            })
+            timeInput.addEventListener('cahnge', function(evt){
+
+            })
             initCopyButtonComponent(name)
         }
 
@@ -83,12 +100,85 @@
 
         /**
         * validate datetime number
+        * @param {HTMLElement} datetime
+        * @param {HTMLElement} timeInput
+        * @param {null|number} targetNumber
+        * @param {null|string} targetName
+        * @return {boolean}
+        */
+        function initValidateDatetime(dateInput, timeInput, targetNumber, targetName) {
+            const message = validateDatetime(
+                dateInput.value && timeInput.value ? `${dateInput.value} ${timeInput.value}` : null,
+                targetNumber,
+                targetName
+            )
+
+            if (message) {
+                setValidationErrorMessage(message, dateInput)
+                dateInput.setCustomValidity(message)
+            }
+
+        }
+
+        /**
+        * validate datetime number
+        * @param {null|string} message
+        * @param {HTMLElement} input
+        * @return {void}
+        */
+        function setValidationErrorMessage(message, input) {
+            const parent = input.closest('.form-group').lastChildElemnt
+            const parentLastChild = parent.lastChildElemnt
+
+            if (parentLastChild.tag() === 'SPAN' && parentLastChild.classList.includes('invalid')) {
+                parentLastChild.lastChildElemnt.textContent = message
+            } else {
+                const span = document.createElement('span')
+                span.classList.add('invalid')
+                const b = document.createElement('b')
+                b.textContent = message
+                span.appendChild(b)
+
+                parent.appendChild(span)
+            }
+        }
+
+        /**
+        * validate datetime number
+        * @param {null|string} value
+        * @param {null|number} targetNumber
+        * @param {null|string} targetName
+        * @return {null|string}
+        */
+        function validateDatetime(value, targetNumber, targetName) {
+            if (!value) {
+                return null;
+            }
+            if ((targetNumber !== null) && !validateDatetimeNumber(value, targetNumber)) {
+                return 'invalid select weekday.'
+            }
+
+            if (targetName) {
+                const targetDateInput = document.getElementById(`${targetName}_date`)
+                const targetTimeInput = document.getElementById(`${targetName}_time`)
+                if (targetDateInput && targetTimeInput) {
+                    if (!validateGreaterThan(value, `${targetDateInput} ${targetTimeInput}`)) {
+                        return 'lesser than target.'
+                    }
+                }
+            }
+
+            return null
+        }
+
+        /**
+        * validate datetime number
         * @param {string} datetime
         * @param {null|number} targetNumber
         * @return {boolean}
         */
         function validateDatetimeNumber(datetime, targetNumber) {
-            return new Date(datetime)->getDay() === targetNumber
+            return (new Date(datetime).getDay()) === targetNumber
         }
 
         /**
@@ -98,7 +188,7 @@
         * @return {boolean}
         */
         function validateGreaterThan(datetime, targetDatetime) {
-            return new Date(targetDatetime)->getTime() < new Date(datetime)->getTime()
+            return new Date(targetDatetime).getTime() < new Date(datetime).getTime()
         }
 
     </script>
