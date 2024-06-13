@@ -3,7 +3,10 @@
 @section('title', 'Base Dashboard')
 
 @section('content_header')
-    <h1>Base Dashboard</h1>
+    {{--  {{ Breadcrumbs::render('admin.home') }}  --}}
+    {{--  {{ Breadcrumbs::render('admin.sampleImageUploader1') }}  --}}
+    {{--  {{ Breadcrumbs::render(request()->route()->getName()) }}  --}}
+    {{--  <h1>Base Dashboard</h1>  --}}
 @stop
 
 @section('content')

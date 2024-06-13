@@ -3,6 +3,7 @@
 @section('title', 'Dashboard Test')
 
 @section('content_header')
+    @parent
     <h1>Dashboard Test</h1>
 @stop
 
