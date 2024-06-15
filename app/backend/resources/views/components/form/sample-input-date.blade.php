@@ -71,11 +71,11 @@
             const timeInput = document.getElementById(`${name}_time`)
 
             if (!isDateOnly) {
-                if (targetNumber !== null && targetName) {
-                    dateInput.addEventListener('cahnge', function(event){
+                if (targetNumber !== null || targetName) {
+                    dateInput.addEventListener('change', function(event){
                         initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
                     })
-                    timeInput.addEventListener('cahnge', function(event){
+                    timeInput.addEventListener('change', function(event){
                         initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
                     })
 
@@ -83,10 +83,10 @@
                     const targetDateInput = document.getElementById(`${targetName}_date`)
                     const targetTimeInput = document.getElementById(`${targetName}_time`)
                     if (targetDateInput && targetTimeInput) {
-                        targetDateInput.addEventListener('cahnge', function(event){
+                        targetDateInput.addEventListener('change', function(event){
                             initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
                         })
-                        targetTimeInput.addEventListener('cahnge', function(event){
+                        targetTimeInput.addEventListener('change', function(event){
                             initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
                         })
                     }
@@ -148,11 +148,11 @@
         * @return {void}
         */
         function setValidationErrorMessage(message, input) {
-            const parent = input.closest('.form-group').lastChildElemnt
-            const parentLastChild = parent.lastChildElemnt
+            const parent = input.closest('.form-group')
+            const parentLastChild = parent.lastElementChild
 
             if (parentLastChild.tagName === 'SPAN' && parentLastChild.classList.includes('invalid-feedback')) {
-                parentLastChild.lastChildElemnt.textContent = message
+                parentLastChild.lastElementChild.textContent = message
             } else {
                 const span = document.createElement('span')
                 span.classList.add('invalid-feedback', 'd-block')
