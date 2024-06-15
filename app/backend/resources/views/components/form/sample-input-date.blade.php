@@ -49,14 +49,13 @@
 @section('js')
     @parent
     <script>
-        if (!!`{{$isSetLimitTime}}`) {
-            initDatetimeComponent(
-                `{{$name}}`,
-                !!`{{$isDateOnly}}`,
-                @if (is_null($targetNumber)) null @else {{$targetNumber}} @endif,
-                @if (is_null($targetName)) null @else `{{$targetName}}` @endif,
-            )
-        }
+        initDatetimeComponent(
+            `{{$name}}`,
+            !!`{{$isDateOnly}}`,
+            @if (is_null($targetNumber)) null @else {{$targetNumber}} @endif,
+            @if (is_null($targetName)) null @else `{{$targetName}}` @endif,
+            !!`{{$isSetLimitTime}}`
+        )
 
         /**
         * initialize
@@ -64,9 +63,10 @@
         * @param {boolean} isDateOnly
         * @param {null|number} targetNumber
         * @param {null|string} targetName
+        * @param {boolean} isSetLimitTime
         * @return {void}
         */
-        function initDatetimeComponent(name, isDateOnly, targetNumber, targetName) {
+        function initDatetimeComponent(name, isDateOnly, targetNumber, targetName, isSetLimitTime) {
             const dateInput = document.getElementById(`${name}_date`)
             const timeInput = document.getElementById(`${name}_time`)
 
@@ -92,7 +92,9 @@
                     }
                 }
             }
-            initCopyButtonComponent(name)
+            if (isSetLimitTime) {
+                initCopyButtonComponent(name)
+            }
         }
 
         /**
