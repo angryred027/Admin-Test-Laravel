@@ -37,8 +37,8 @@
                         <x-adminlte-options :options="[1 => 'Option 1', 2 => 'Option 2', 3 => 'Option 3']" disabled="1"
                             empty-option="Select an option..."/>
                     </x-adminlte-select>  --}}
-                    <x-form.sample-input-date name="statr_time" value="{{\App\Library\Time\TimeLibrary::getCurrentDateTime('Y-m-d')}}"/>
-                    <x-form.sample-input-date name="end_time" value="" startTimeValue="" :isSetLimitTime="true"/>
+                    <x-form.sample-input-date name="start_time" value="{{\App\Library\Time\TimeLibrary::getCurrentDateTime('Y-m-d')}}"/>
+                    <x-form.sample-input-date name="end_time" value="" targetName="start_time" :isSetLimitTime="true"/>
 
                     <x-form.sample-text-area name="testTestArea" value=""/>
 

@@ -134,11 +134,8 @@
                 targetName
             )
 
-            if (message) {
-                setValidationErrorMessage(message, dateInput)
-                dateInput.setCustomValidity(message)
-            }
-
+            setValidationErrorMessage(message, dateInput)
+            dateInput.setCustomValidity(message ?? '')
         }
 
         /**
@@ -184,7 +181,7 @@
                 const targetDateInput = document.getElementById(`${targetName}_date`)
                 const targetTimeInput = document.getElementById(`${targetName}_time`)
                 if (targetDateInput && targetTimeInput) {
-                    if (!validateGreaterThan(value, `${targetDateInput} ${targetTimeInput}`)) {
+                    if (!validateGreaterThan(value, `${targetDateInput.value} ${targetTimeInput.value}`)) {
                         return 'lesser than target.'
                     }
                 }
