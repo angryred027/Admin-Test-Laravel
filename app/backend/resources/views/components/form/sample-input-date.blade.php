@@ -51,6 +51,7 @@
         if (!!`{{$isSetLimitTime}}`) {
             initDatetimeComponent(
                 `{{$name}}`,
+                !!`{{$isDateOnly}}`,
                 @if (is_null($targetNumber)) null @else {{$targetNumber}} @endif,
                 @if (is_null($targetName)) null @else `{{$targetName}}` @endif,
             )
@@ -59,20 +60,37 @@
         /**
         * initialize
         * @param {string} name
+        * @param {boolean} isDateOnly
         * @param {null|number} targetNumber
         * @param {null|string} targetName
         * @return {void}
         */
-        function initDatetimeComponent(name, targetNumber, targetName) {
+        function initDatetimeComponent(name, isDateOnly, targetNumber, targetName) {
             const dateInput = document.getElementById(`${name}_date`)
             const timeInput = document.getElementById(`${name}_time`)
 
-            dateInput.addEventListener('cahnge', function(evt){
+            if (!isDateOnly) {
+                if (targetNumber !== null && targetName) {
+                    dateInput.addEventListener('cahnge', function(event){
+                        initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
+                    })
+                    timeInput.addEventListener('cahnge', function(event){
+                        initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
+                    })
 
-            })
-            timeInput.addEventListener('cahnge', function(evt){
-
-            })
+                    // 比較先も検証
+                    const targetDateInput = document.getElementById(`${targetName}_date`)
+                    const targetTimeInput = document.getElementById(`${targetName}_time`)
+                    if (targetDateInput && targetTimeInput) {
+                        targetDateInput.addEventListener('cahnge', function(event){
+                            initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
+                        })
+                        targetTimeInput.addEventListener('cahnge', function(event){
+                            initValidateDatetime(dateInput, timeInput, targetNumber, targetName)
+                        })
+                    }
+                }
+            }
             initCopyButtonComponent(name)
         }
 
@@ -84,7 +102,7 @@
         function initCopyButtonComponent(name) {
             const copyButton = document.getElementById(`${name}_copy_btn`)
 
-            copyButton.addEventListener('click', function(evt){
+            copyButton.addEventListener('click', function(event){
                 const dateForm = document.getElementById(`${name}_date`)
                 const timeForm = document.getElementById(`${name}_time`)
 
@@ -130,14 +148,14 @@
             const parent = input.closest('.form-group').lastChildElemnt
             const parentLastChild = parent.lastChildElemnt
 
-            if (parentLastChild.tag() === 'SPAN' && parentLastChild.classList.includes('invalid')) {
+            if (parentLastChild.tagName === 'SPAN' && parentLastChild.classList.includes('invalid')) {
                 parentLastChild.lastChildElemnt.textContent = message
             } else {
                 const span = document.createElement('span')
                 span.classList.add('invalid')
-                const b = document.createElement('b')
-                b.textContent = message
-                span.appendChild(b)
+                const strong = document.createElement('strong')
+                strong.textContent = message
+                span.appendChild(strong)
 
                 parent.appendChild(span)
             }
