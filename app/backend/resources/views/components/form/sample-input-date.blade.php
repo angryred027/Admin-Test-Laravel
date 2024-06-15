@@ -30,7 +30,7 @@
                 placeholder="HH:mm"
                 label={{$name . '_time'}}
                 {{ $required ? 'required' : '' }}
-                value="{{$startTimeValue ?? ''}}"
+                value="{{$startTimeValue ?? '00:00:00'}}"
                 step="1"
                 class="form-control @error($name .'_time') is-invalid @enderror"
             />
@@ -149,11 +149,12 @@
             const parent = input.closest('.form-group').lastChildElemnt
             const parentLastChild = parent.lastChildElemnt
 
-            if (parentLastChild.tagName === 'SPAN' && parentLastChild.classList.includes('invalid')) {
+            if (parentLastChild.tagName === 'SPAN' && parentLastChild.classList.includes('invalid-feedback')) {
                 parentLastChild.lastChildElemnt.textContent = message
             } else {
                 const span = document.createElement('span')
-                span.classList.add('invalid')
+                span.classList.add('invalid-feedback', 'd-block')
+                span.setAttribute('role', 'alert')
                 const strong = document.createElement('strong')
                 strong.textContent = message
                 span.appendChild(strong)
