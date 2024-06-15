@@ -2,6 +2,7 @@
     'class' => '',
     'name' => '',
     'value' => null,
+    'startTimeValue' => null,
     'required' => false,
     'isDateOnly' => false,
     'targetNumber' => null,
@@ -18,7 +19,7 @@
             placeholder="input date"
             label="$name"
             {{ $required ? 'required' : '' }}
-            value="$value"
+            value="{{$value}}"
             class="form-control @error($name) is-invalid @enderror"
         />
         @if (!$isDateOnly)
@@ -29,7 +30,7 @@
                 placeholder="HH:mm"
                 label={{$name . '_time'}}
                 {{ $required ? 'required' : '' }}
-                value="$startValue"
+                value="{{$startTimeValue ?? ''}}"
                 step="1"
                 class="form-control @error($name .'_time') is-invalid @enderror"
             />
