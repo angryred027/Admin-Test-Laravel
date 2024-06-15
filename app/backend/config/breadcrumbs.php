@@ -74,32 +74,34 @@ return [
 
     // Routes
     'routes' => [
-        'name' => 'admin.home',
-        'title' => 'Home',
-        'hasParam' => false,
-        'list' => [
-            [
-                'name' => 'admin.test',
-                'hasParam' => false,
-                'title' => 'Test',
-            ],
-            [
-                'name' => 'admin.sampleImageUploader1',
-                'hasParam' => false,
-                'title' => 'sampleImageUploader1 Top',
-                'list' => [
-                    [
-                        'name' => 'admin.sampleImageUploader1.create',
-                        'hasParam' => false,
-                        'title' => 'sampleImageUploader1 Create',
-                    ],
-                    [
-                        'name' => 'admin.sampleImageUploader1.edit',
-                        'hasParam' => false,
-                        'title' => 'sampleImageUploader1 Edit',
+        'admin.home' => [
+            'name' => 'admin.home',
+            'title' => 'Home',
+            'hasParam' => false,
+            'list' => [
+                'admin.test' => [
+                    'name' => 'admin.test',
+                    'hasParam' => false,
+                    'title' => 'Test',
+                ],
+                'admin.sampleImageUploader1' => [
+                    'name' => 'admin.sampleImageUploader1',
+                    'hasParam' => false,
+                    'title' => 'sampleImageUploader1 Top',
+                    'list' => [
+                        'admin.sampleImageUploader1.create' => [
+                            'name' => 'admin.sampleImageUploader1.create',
+                            'hasParam' => false,
+                            'title' => 'sampleImageUploader1 Create',
+                        ],
+                        'admin.sampleImageUploader1.edit' => [
+                            'name' => 'admin.sampleImageUploader1.edit',
+                            'hasParam' => false,
+                            'title' => 'sampleImageUploader1 Edit',
+                        ],
                     ],
                 ],
             ],
-        ],
+        ]
     ],
 ];

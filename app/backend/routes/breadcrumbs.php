@@ -9,9 +9,19 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 }); */
 
 // TOP 第1階層
-Breadcrumbs::for('admin.home', function (BreadcrumbTrail $trail, ?int $id = null) {
+/* Breadcrumbs::for('admin.home', function (BreadcrumbTrail $trail, ?int $id = null) {
     $trail->push('HOME', route('admin.home'));
     foreach(config('breadcrumbs.routes')['list'] as $item) {
         BreadcrumbsLibrary::push($item, 'admin.home');
     }
+}); */
+
+// Breadcrumbs::macro('getResource', function (BreadcrumbTrail $trail, array $requestParam = []) {
+    Breadcrumbs::macro('getResource', function (?string $routeName, array $requestParam = []) {
+    // $trail->push('HOME', route('admin.home'));
+    /* foreach(config('breadcrumbs.routes') as $item) {
+        // BreadcrumbsLibrary::push($item, 'admin.home');
+        BreadcrumbsLibrary::push($item, 'admin.home');
+    } */
+    BreadcrumbsLibrary::push(config('breadcrumbs.routes')['admin.home']);
 });

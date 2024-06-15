@@ -16,14 +16,23 @@ class BreadcrumbsLibrary
      * push breadcrumbs setting.
      *
      * @param array $item
-     * @param string $parentRouteName
+     * @param ?string $parentRouteName
+     * @param ?string $currentRouteName
+     * @param array $requestParam = []
      * @return void
      * @see config/breadcrumbs.php
      */
-    public static function push(array $item, string $parentRouteName): void
-    {
-        Breadcrumbs::for($item['name'], function (BreadcrumbTrail $trail, ?int $id = null) use ($item, $parentRouteName) {
-            $trail->parent($parentRouteName);
+    public static function push(
+        array $item,
+        ?string $parentRouteName = null,
+        ?string $currentRouteName = null,
+        array $requestParam = []
+    ): void {
+        Breadcrumbs::for($item['name'], function (BreadcrumbTrail $trail, ?int $id = null) use ($item, $parentRouteName, $currentRouteName, $requestParam) {
+            if (!empty($parentRouteName)) {
+                $trail->parent($parentRouteName);
+            }
+
             $trail->push(
                 $item['title'],
                 route(
@@ -34,8 +43,8 @@ class BreadcrumbsLibrary
 
             // 子設定がある場合は再起的に設定する
             if (!empty($item['list'])) {
-                foreach($item['list'] as $childItem) {
-                    self::push($childItem, $item['name']);
+                foreach($item['list'] as $name => $childItem) {
+                    self::push($childItem, $item['name'], $currentRouteName, $requestParam);
                 }
             }
         });
