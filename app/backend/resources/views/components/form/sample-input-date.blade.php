@@ -151,7 +151,7 @@
             const parent = input.closest('.form-group')
             const parentLastChild = parent.lastElementChild
 
-            if (parentLastChild.tagName === 'SPAN' && parentLastChild.classList.includes('invalid-feedback')) {
+            if (parentLastChild.tagName === 'SPAN' && parentLastChild.className.includes('invalid-feedback')) {
                 parentLastChild.lastElementChild.textContent = message
             } else {
                 const span = document.createElement('span')
