@@ -10,14 +10,14 @@
     'isSetLimitTime' => false,
 ])
 <div class="sample-date-input form-group col-md-6">
-    <label for="$name">inputDate</label>
+    <label for="{{$name}}">inputDate</label>
     <div class="input-group @error(($name || $name . '_time')) adminlte-invalid-igroup @enderror">
         <input
             id="{{$name . '_date'}}"
             name="{{$name}}"
             type="date"
             placeholder="input date"
-            label="$name"
+            label="{{$name}}"
             {{ $required ? 'required' : '' }}
             value="{{$value}}"
             class="form-control @error($name) is-invalid @enderror"

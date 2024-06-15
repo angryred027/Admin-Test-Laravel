@@ -11,7 +11,7 @@
     'rows' => 2,
 ])
 <div class="sample-date-input form-group col-md-6">
-    <label for="$name">{{$lable}}</label>
+    <label for="{{$name}}">{{$lable}}</label>
     <div class="input-group @error($name) adminlte-invalid-igroup @enderror">
         <div class="d-flex flex-column flex-grow-1">
             <div>
