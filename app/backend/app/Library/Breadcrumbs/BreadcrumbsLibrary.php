@@ -40,13 +40,13 @@ class BreadcrumbsLibrary
                     $item['hasParam'] ? ['id' => $id] : [], false
                 )
             );
-
-            // 子設定がある場合は再起的に設定する
-            if (!empty($item['list'])) {
-                foreach($item['list'] as $name => $childItem) {
-                    self::push($childItem, $item['name'], $currentRouteName, $requestParam);
-                }
-            }
         });
+
+        // 子設定がある場合は再起的にBreadcrumbs::for()を実行する
+        if (!empty($item['list'])) {
+            foreach($item['list'] as $name => $childItem) {
+                self::push($childItem, $item['name'], $currentRouteName, $requestParam);
+            }
+        }
     }
 }

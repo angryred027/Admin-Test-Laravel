@@ -6,6 +6,9 @@
     {{--  {{ Breadcrumbs::render('admin.home') }}  --}}
     {{--  {{ Breadcrumbs::render('admin.sampleImageUploader1') }}  --}}
     {{--  {{ Breadcrumbs::render(request()->route()->getName()) }}  --}}
+
+    {{ Breadcrumbs::getResource(request()->route()->getName(), request()->route()->originalParameters()) }}
+    {{ Breadcrumbs::render() }}
     {{--  <h1>Base Dashboard</h1>  --}}
 @stop
 

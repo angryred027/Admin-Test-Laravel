@@ -1,8 +1,9 @@
-@extends('admin.base')
+@extends('admin.layout')
 
 @section('title', 'Dashboard')
 
 @section('content_header')
+    @parent
     <h1>Test Dashboard</h1>
 @stop
 
