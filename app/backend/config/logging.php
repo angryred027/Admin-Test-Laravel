@@ -142,6 +142,12 @@ return [
             'level'  => env('LOG_BATCH_LEVEL', 'debug'),
         ],
 
+        'adminActionLog' => [
+            'driver' => 'daily',
+            'path'   => env('LOG_ADIMIN_ACTION_PATH', storage_path('logs/admin/action.log')),
+            'level'  => env('LOG_ADIMIN_ACTION_LEVEL', 'info'),
+        ],
+
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,
