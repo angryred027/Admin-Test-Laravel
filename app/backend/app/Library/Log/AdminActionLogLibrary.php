@@ -47,6 +47,10 @@ class AdminActionLogLibrary
         '_debugbar',
     ];
 
+    public const ROUTE_NAME_LIST = [
+        'sampleImageUploader1',
+    ];
+
     /**
      * check current path is log exclude path.
      *

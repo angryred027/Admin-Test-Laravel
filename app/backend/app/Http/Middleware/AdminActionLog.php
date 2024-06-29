@@ -26,6 +26,11 @@ class AdminActionLog
         if (!str_contains($request->url(), '/admin')) {
             return $next($request);
         }
+        // GETリクエストは対象外
+        if ($request->getMethod() === 'GET') {
+            return $next($request);
+        }
+
         if (AdminActionLogLibrary::isExcludePath($request->path())) {
             return $next($request);
         }
