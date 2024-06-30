@@ -57,6 +57,13 @@ class AdminActionLog
         $response = $next($request);
 
         $routeName= request()->route()?->getName();
+        $descriptionPrefix = '汎用項目';
+        foreach (AdminActionLogLibrary::ROUTE_NAME_LIST as $key => $name) {
+            if (str_contains($routeName, $key)) {
+                $descriptionPrefix = $name;
+                break;
+            }
+        }
 
         $responseTime = (string)(microtime(true) - $startTime);
         $memory = memory_get_usage();
@@ -64,7 +71,7 @@ class AdminActionLog
 
         [$statusCode] = AdminActionLogLibrary::getLogParameterByResponse($response);
 
-        $description = '';
+        $description = $descriptionPrefix . '';
 
         // log出力
         AdminActionLogLibrary::outputLog(

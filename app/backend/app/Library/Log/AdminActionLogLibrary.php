@@ -48,7 +48,7 @@ class AdminActionLogLibrary
     ];
 
     public const ROUTE_NAME_LIST = [
-        'sampleImageUploader1',
+        'sampleImageUploader1' => 'テストアップロード処理',
     ];
 
     /**
