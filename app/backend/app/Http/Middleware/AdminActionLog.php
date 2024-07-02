@@ -24,7 +24,7 @@ class AdminActionLog
     public function handle(Request $request, Closure $next)
     {
         // 管理画面以外
-        if (!str_contains($request->url(), '/admin')) {
+        if (!str_contains($request->url(), '/admin/')) {
             return $next($request);
         }
         // GETリクエストは対象外
