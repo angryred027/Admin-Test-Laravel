@@ -53,6 +53,12 @@ class AdminActionLogLibrary
         'sampleImageUploader1' => 'テストアップロード処理',
     ];
 
+    public const SUCCESS_STATUS_CODE_LIST = [
+        200,
+        201,
+        302,
+    ];
+
     /**
      * check current path is log exclude path.
      *
@@ -96,6 +102,18 @@ class AdminActionLogLibrary
         return [
             $response->getStatusCode(),
         ];
+    }
+
+    /**
+     * is success status code.
+     *
+     * @param RedirectResponse|Response|JsonResponse|BinaryFileResponse $response
+     * @return bool
+     */
+    public static function isSuccess(
+        RedirectResponse | Response | JsonResponse | BinaryFileResponse $response
+    ): bool {
+        return in_array($response->getStatusCode(), self::SUCCESS_STATUS_CODE_LIST, true);
     }
 
     /**

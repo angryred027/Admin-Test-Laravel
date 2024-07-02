@@ -57,6 +57,11 @@ class AdminActionLog
 
         $response = $next($request);
 
+        // リクエストが失敗している場合はログに出力しない
+        if (!AdminActionLogLibrary::isSuccess($response)){
+            return $response;
+        }
+
         $routeName= request()->route()?->getName();
         $descriptionPrefix = 'アクション';
         foreach (AdminActionLogLibrary::ROUTE_NAME_LIST as $key => $name) {
