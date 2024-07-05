@@ -8,7 +8,7 @@
 ])
 <div class="form-group clearfix col-md-6">
     <div class="d-flex flex-column">
-        @foreach($optionList as $optionValue => $label)
+        @foreach($optionList as $optionValue => $optionLabel)
             <div class="custom-radio">
                 <input
                     type="radio"
@@ -20,7 +20,7 @@
                     {{$required ? 'required' : ''}}
                     class="custom-control-input custom-control-input-primary custom-control-input-outline"
                 />
-                <label for="{{$name . "_radio_$optionValue"}}" class="custom-control-label font-weight-normal">{{$label}}</label>
+                <label for="{{$name . "_radio_$optionValue"}}" class="custom-control-label font-weight-normal">{{$optionLabel}}</label>
             </div>
         @endforeach
     </div>

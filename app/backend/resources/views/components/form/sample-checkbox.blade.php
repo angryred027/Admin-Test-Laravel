@@ -8,7 +8,7 @@
 ])
 <div class="form-group col-md-6">
     <div class="d-flex flex-column">
-        @foreach($optionList as $optionValue => $label)
+        @foreach($optionList as $optionValue => $optionLabel)
             <div class="custom-checkbox">
                 <input
                     type="checkbox"
@@ -20,7 +20,7 @@
                     class="custom-control-input custom-control-input-primary custom-control-input-outline"
                     {{($required && empty($valueList)) ? 'required' : ''}}
                 />
-                <label for="{{$name . "_checkbox_$optionValue"}}" class="custom-control-label font-weight-normal">{{$label}}</label>
+                <label for="{{$name . "_checkbox_$optionValue"}}" class="custom-control-label font-weight-normal">{{$optionLabel}}</label>
             </div>
         @endforeach
     </div>
