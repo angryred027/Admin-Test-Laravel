@@ -32,7 +32,10 @@
         if (!!`{{$required}}`) {
             // initCheckBoxComponent(`{{$name}}`, JSON.parse(`{{json_encode(array_keys($optionList))}}`))
             // initCheckBoxComponent(`{{$name}}`, {{json_encode(array_keys($optionList))}})
-            initCheckBoxComponent(`{{$name}}`, {{json_encode(array_values($optionList))}})
+            // initCheckBoxComponent(`{{$name}}`, {{json_encode(array_values($optionList))}}) // 文字列があるとエスケープされてエラー
+            // initCheckBoxComponent(`{{$name}}`,  JSON.parse(`{{json_encode(array_values($optionList))}}`)) // 文字列があるとエスケープされてエラー
+            initCheckBoxComponent(`{{$name}}`, {!! json_encode(array_values($optionList)) !!}) // エスケープされない
+            // initCheckBoxComponent(`{{$name}}`, @json(array_values($optionList))) // エラーにならない
         }
 
         /**

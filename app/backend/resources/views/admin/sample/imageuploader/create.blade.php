@@ -24,6 +24,7 @@
                         name="testCheckbox"
                         :valueList="[2]"
                         :optionList="['label1' => 1, 'label2' => 2, 'label3' => 3]"
+                        {{--  :optionList="['label1' => '1', 'label2' => '2', 'label3' => '3']"  --}}
                         :required="true"
                     />
 
