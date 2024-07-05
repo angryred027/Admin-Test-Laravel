@@ -8,7 +8,7 @@
 ])
 <div class="form-group col-md-6">
     <div class="d-flex flex-column">
-        @foreach($optionList as $optionValue => $optionLabel)
+        @foreach($optionList as $optionLabel => $optionValue)
             <div class="custom-checkbox">
                 <input
                     type="checkbox"
@@ -31,7 +31,8 @@
     <script>
         if (!!`{{$required}}`) {
             // initCheckBoxComponent(`{{$name}}`, JSON.parse(`{{json_encode(array_keys($optionList))}}`))
-            initCheckBoxComponent(`{{$name}}`, {{json_encode(array_keys($optionList))}})
+            // initCheckBoxComponent(`{{$name}}`, {{json_encode(array_keys($optionList))}})
+            initCheckBoxComponent(`{{$name}}`, {{json_encode(array_values($optionList))}})
         }
 
         /**

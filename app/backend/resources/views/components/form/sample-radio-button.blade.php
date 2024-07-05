@@ -8,13 +8,17 @@
 ])
 <div class="form-group clearfix col-md-6">
     <div class="d-flex flex-column">
-        @foreach($optionList as $optionValue => $optionLabel)
+        @foreach($optionList as $optionLabel => $optionValue)
             <div class="custom-radio">
                 <input
                     type="radio"
                     id="{{$name . "_radio_$optionValue"}}"
                     name={{$name}}
-                    {{($optionValue === (int)$value) ? 'checked' : ''}}
+                    @if (is_int($optionValue))
+                        {{($optionValue === (int)$value) ? 'checked' : ''}}
+                    @else
+                        {{($optionValue === $value) ? 'checked' : ''}}
+                    @endif
                     value="{{$optionValue}}"
                     {{$disabled ? 'disabled' : ''}}
                     {{$required ? 'required' : ''}}
