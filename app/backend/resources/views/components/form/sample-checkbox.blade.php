@@ -15,7 +15,11 @@
                     id="{{$name . "_checkbox_$optionValue"}}"
                     name="{{$name . '[]'}}"
                     value="{{$optionValue}}"
-                    {{in_array($optionValue, $valueList, true) ? 'checked' : ''}}
+                    @if (is_int($optionValue))
+                    @else
+                        {{in_array($optionValue, array_map('intval', $valueList), true) ? 'checked' : ''}}
+                    @endif
+                        {{in_array($optionValue, $valueList, true) ? 'checked' : ''}}
                     {{$disabled ? 'disabled' : ''}}
                     class="custom-control-input custom-control-input-primary custom-control-input-outline"
                     {{($required && empty($valueList)) ? 'required' : ''}}
