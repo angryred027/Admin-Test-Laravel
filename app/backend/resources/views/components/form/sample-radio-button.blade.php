@@ -14,11 +14,7 @@
                     type="radio"
                     id="{{$name . "_radio_$optionValue"}}"
                     name={{$name}}
-                    @if (is_int($optionValue))
-                        {{($optionValue === (int)$value) ? 'checked' : ''}}
-                    @else
-                        {{($optionValue === $value) ? 'checked' : ''}}
-                    @endif
+                    {{($optionValue === $value) ? 'checked' : ''}}
                     value="{{$optionValue}}"
                     {{$disabled ? 'disabled' : ''}}
                     {{$required ? 'required' : ''}}
