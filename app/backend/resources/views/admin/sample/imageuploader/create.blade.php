@@ -23,13 +23,15 @@
                     <x-form.sample-checkbox
                         name="testCheckbox"
                         :valueList="[2]"
-                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
+                        :optionList="['label1' => 1, 'label2' => 2, 'label3' => 3]"
+                        {{--  :optionList="['label1' => '1', 'label2' => '2', 'label3' => '3']"  --}}
                         :required="true"
                     />
 
                     <x-form.sample-radio-button
                         name="testRadioButton"
-                        :optionList="[1 => 'label1', 2 => 'label2', 3 => 'label3']"
+                        {{--  value="1"  --}}
+                        :optionList="['label1' => 1, 'label2' => 2, 'label3' => 3]"
                         :required="true"
                     />
 
