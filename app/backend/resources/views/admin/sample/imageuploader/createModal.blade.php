@@ -93,6 +93,9 @@
                                 <div class="col-sm">
                                     {{--  <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>  --}}
                                     <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" class="form_submit_button" />
+                                    <button type="button" class="btn btn-info form_submit_button" id="createFormButton1">
+                                        <i class="fas fa-cloud"></i>TestOpenModal
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -107,10 +110,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <x-adminlte-button label="Danger" theme="danger" icon="fas fa-ban"/>
-                <x-adminlte-button label="Back" theme="secondary" icon="fas fa-thumbs-down" onclick="location.href='{{route('admin.sampleImageUploader1')}}'"/>
                 <x-adminlte-button label="Back" theme="secondary" icon="fas fa-arrow-left"  onclick="location.href='{{route('admin.sampleImageUploader1')}}'"/>
-                <x-adminlte-button label="Success" theme="success" icon="fas fa-thumbs-up"/>
             </div>
         </div>
     </div>
