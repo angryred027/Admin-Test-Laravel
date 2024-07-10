@@ -196,4 +196,21 @@ class AdminSampleController extends Controller
             ['subTitle' => 'testSubTitle1']
         );
     }
+
+    /**
+     * sample image uploader create.
+     *
+     * @return View|Factory
+     */
+    public function sampleImageUploader1CreateModal(): View|Factory
+    {
+        return view(
+            '/admin/sample/imageUploader/createModal',
+            [
+                'subTitle' => 'testSubTitle1_Modal',
+                'name' => '',
+                'image' => null,
+            ]
+        );
+    }
 }
