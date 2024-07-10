@@ -93,9 +93,16 @@
                                 <div class="col-sm">
                                     {{--  <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" disabled/>  --}}
                                     <x-adminlte-button id="createFormButton" label="Submit" type="submit" theme="success" icon="fas fa-thumbs-up" class="form_submit_button" />
+                                    {{--  <button type="button" class="btn btn-info form_submit_button" id="createFormButton1">
+                                        <i class="fas fa-cloud"></i>TestOpenModal
+                                    </button>  --}}
                                     <button type="button" class="btn btn-info form_submit_button" id="createFormButton1">
                                         <i class="fas fa-cloud"></i>TestOpenModal
                                     </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#testModal_modal">
+                                        Launch demo modal
+                                    </button>
+                                    <x-message.sample-modal name="testModal" title="testTitle" />
                                 </div>
                             </div>
                         </div>
