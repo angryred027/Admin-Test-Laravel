@@ -99,6 +99,11 @@ return [
                             'hasParam' => false,
                             'title' => 'sampleImageUploader1 Edit',
                         ],
+                        'admin.sampleImageUploader1.createModal' => [
+                            'name' => 'admin.sampleImageUploader1.createModal',
+                            'hasParam' => false,
+                            'title' => 'sampleImageUploader1 CreateModal',
+                        ],
                     ],
                 ],
             ],
