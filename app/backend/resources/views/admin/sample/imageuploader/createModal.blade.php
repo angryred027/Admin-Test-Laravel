@@ -59,9 +59,9 @@
                                     {{--  <button type="button" class="btn btn-info form_submit_button" id="createFormButton1">
                                         <i class="fas fa-cloud"></i>TestOpenModal
                                     </button>  --}}
-                                    <button type="button" class="btn btn-info form_submit_button" id="createFormButton1">
+                                    {{--  <button type="button" class="btn btn-info form_submit_button" id="createFormButton1">
                                         <i class="fas fa-cloud"></i>TestOpenModal
-                                    </button>
+                                    </button>  --}}
                                     <button type="button" class="btn btn-primary form_submit_button" data-toggle="modal" data-target="#testModal_modal">
                                         Launch demo modal
                                     </button>
@@ -102,6 +102,7 @@
     <script>
         // TODO checkboxとの兼ね合いの為、一時コメントアウト
         // initFormComponent('createForm', 'createFormButton');
+        initFormComponentTest2('createForm', 'createFormButton');
 
         /**
         * initialize
@@ -138,6 +139,39 @@
                     submitButton.disabled = !isValidateInput(inputList, checkboxNameValueDict)
                 });
             }
+        }
+
+        // submitによるモーダル開閉検証
+        function initFormComponentTest2(id, submitId) {
+            let formTag = document.getElementById(`${id}`);
+            let inputList = document.querySelectorAll(`#${id} input`);
+            const textareaList = document.querySelectorAll(`#${id} textarea`);
+            const selectList = document.querySelectorAll(`#${id} select`);
+
+            // 1つにまとめる。
+            inputList = [...inputList, ...textareaList, ...selectList];
+
+            // 確認用
+            // console.log('inputList:' + JSON.stringify(inputList, null, 2));
+            for (const input of inputList) {
+                console.log('input:' + JSON.stringify(input.name, null, 2));
+            }
+
+            formTag.addEventListener('submit', function(event){
+                for (const input of inputList) {
+                    console.log('input.name: ' + JSON.stringify(input.name, null , 2))
+                    // console.log('input.validity: ' + JSON.stringify(input.validity, null , 2)) // 中身を参照出来ない
+                    console.log('input.validity.valid: ' + JSON.stringify(input.validity.valid, null , 2))
+                    // console.log('input.ValidityState: ' + JSON.stringify(input.ValidityState(), null , 2)) //　取得出来ない
+
+                    if (input.validity === false) {
+                        event.preventDefault();
+                        alert('errror')
+                        return false;
+                    }
+                    sleep(3)
+                }
+            })
         }
 
         /**
