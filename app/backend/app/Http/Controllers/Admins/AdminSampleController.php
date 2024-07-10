@@ -213,4 +213,65 @@ class AdminSampleController extends Controller
             ]
         );
     }
+
+    /**
+     * sample image uploader post.
+     *
+     * @param Request $request
+     * @return View|Factory|RedirectResponse
+     */
+    public function sampleImageUploader1CreateModalPost(Request $request): View|Factory|RedirectResponse
+    {
+        // バリデーションチェック
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => ['required','string'],
+                'testSelet1' => ['required','int', 'min:1'],
+                'testDate' => ['required','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH],
+                'testTime' => ['nullable','date', 'date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH, 'after:start_at'],
+                'file' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpg,png', 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600'],
+                // 'start_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH,
+                // 'end_at' => 'required|date|date_format:'.TimeLibrary::DEFAULT_DATE_TIME_FORMAT_SLASH.'|after:start_at',
+                //'image'  => 'file|image|max:512|mimes:png|mimetypes:application/png', // 最大512KB
+            ]
+        );
+
+        // 検証用
+        $files = $request->files;
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            return redirect(route('admin.sampleImageUploader1.createModal'))->withErrors($validator);
+            /* throw new MyApplicationHttpException(
+                StatusCodeMessages::STATUS_422,
+                'validation error',
+                $validator->errors()->toArray()
+            ); */
+        }
+        $name = $request->name;
+        $file = $request->file;
+        // ファイルのアップロード処理
+        if (!is_null($file)) {
+            // アップロードするディレクトリ名を指定
+            $directory = BannerLibrary::getBannerStorageDirctory();
+            $fileResource = ImageLibrary::getFileResource($file);
+            // ファイル名
+            $storageFileName = $fileResource[ImageLibrary::RESOURCE_KEY_NAME] . '.' . $fileResource[ImageLibrary::RESOURCE_KEY_EXTENTION];
+            $uuid = $fileResource[ImageLibrary::RESOURCE_KEY_UUID];
+
+            $result = $file->storeAs("$directory$uuid/", $storageFileName, FileLibrary::getStorageDiskByEnv());
+            if (!$result) {
+                throw new MyApplicationHttpException(
+                    StatusCodeMessages::STATUS_500,
+                    'store file failed.'
+                );
+            }
+        }
+
+        return view(
+            '/admin/sample/imageUploader/createModal',
+            []
+        );
+    }
 }
