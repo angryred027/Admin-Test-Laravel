@@ -155,22 +155,32 @@
             // console.log('inputList:' + JSON.stringify(inputList, null, 2));
             for (const input of inputList) {
                 console.log('input:' + JSON.stringify(input.name, null, 2));
+                // console.log('input.validity.valid: ' + JSON.stringify(input.validity.valid ?? undefined, null, 2))
             }
 
             formTag.addEventListener('submit', function(event){
+                let result = true;
                 for (const input of inputList) {
                     console.log('input.name: ' + JSON.stringify(input.name, null , 2))
                     // console.log('input.validity: ' + JSON.stringify(input.validity, null , 2)) // 中身を参照出来ない
-                    console.log('input.validity.valid: ' + JSON.stringify(input.validity.valid, null , 2))
+                    console.log('input.validity.valid: ' + JSON.stringify(input.validity.valid ?? undefined, null, 2))
                     // console.log('input.ValidityState: ' + JSON.stringify(input.ValidityState(), null , 2)) //　取得出来ない
 
-                    if (input.validity === false) {
-                        event.preventDefault();
-                        alert('errror')
-                        return false;
+                    if (input.validity.valid === false) {
+                        result = false
+                        break
                     }
-                    sleep(3)
+
+                    // if (input.validity === false) {
+                    //     event.preventDefault();
+                    //     alert('errror')
+                    //     return false;
+                    // }
+
+                    // submit処理を止めたい場合
+                    // event.preventDefault();
                 }
+                return result
             })
         }
 
