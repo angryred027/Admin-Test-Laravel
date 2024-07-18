@@ -68,6 +68,10 @@
             border: 4px dotted rgba(0, 0, 0, .4);
         }
 
+        .upload-area_focusin {
+            border: 4px dotted rgba(0, 0, 0, .4);
+        }
+
         .upload-area_uploaded {
             display: none !important;
         }
@@ -264,6 +268,14 @@
                     setImage(previewChildImageId, files[0], fileArea, fileInput, fileNameContents, preview)
                 }
                 fileArea.classList.add('upload-area_uploaded');
+            });
+
+            // タブキーでフォーカス遷移時の制御
+            fileInput.addEventListener('focusin', function(evt){
+                fileArea.classList.add('upload-area_focusin');
+            });
+            fileInput.addEventListener('focusout', function(evt){
+                fileArea.classList.remove('upload-area_focusin');
             });
         }
 
