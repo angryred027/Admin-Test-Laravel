@@ -84,7 +84,14 @@
 
                     <div class="form-group col-md-6">
                         <label for="testImage">inputDate</label>
-                        <x-form.sample-file-input name="testFileTest" value="" :isPreview="true" :isMultiple="false" />
+                        <x-form.sample-file-input
+                            name="testFileTest"
+                            value=""
+                            :isPreview="true"
+                            :isMultiple="false"
+                            :widthSize="null"
+                            :heightSize="null"
+                        />
                     </div>
 
                     <div class="form-group col-md-6 my-2">

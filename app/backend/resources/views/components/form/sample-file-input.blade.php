@@ -8,6 +8,8 @@
     'maxFileLength' => 1,
     'maxFileSize' => 3145728, // 3MB
     'accept' => 'image/png,image/jpeg,image/gif',
+    'widthSize' => null,
+    'heightSize' => null,
 ])
 <div class="">
     <div id="{{$name . '_input-file-area'}}" class="upload-area d-flex justify-content-center @error($name . '_input-files') is-invalid @enderror">
@@ -145,8 +147,10 @@
             !!`{{$isPreview}}`,
             {{$maxFileLength}},
             {{$maxFileSize}},
-            `{{$accept}}`
-            );
+            `{{$accept}}`,
+            @if (is_null($widthSize)) null @else {{$widthSize}} @endif,
+            @if (is_null($heightSize)) null @else {{$heightSize}} @endif,
+        );
 
         /**
         * initialize
@@ -156,6 +160,8 @@
         * @param {int} maxFileLength
        `* @param {int} maxFileSize
         * @param {string} accept
+        * @param {null|number} widthSize
+        * @param {null|number} heightSize
         * @return {void}
         */
         function initFileInputComponent(
@@ -164,7 +170,9 @@
             isPreview,
             maxFileLength,
             maxFileSize,
-            accept
+            accept,
+            widthSize,
+            heightSize
         ) {
             const fileInputAreaId = name + '_input-file-area'
             const fileInputId = name + '_input-files'
@@ -181,7 +189,7 @@
             const preview = document.getElementById(previewImageId);
             // const previewChildImage = document.getElementById(previewChildImageId);
 
-            fileInput.addEventListener('change', function(evt){
+            fileInput.addEventListener('change', async function(evt){
                 console.log('change: ');
                 // console.log('change2: ' + JSON.stringify(fileInput.files, null ,2));
 
@@ -189,7 +197,7 @@
                 const files = fileInput.files;
                 // ファイルをアップロードした時
                 if (files.length > 0) {
-                    const errorMessage = validateFileListByParameter(files, maxFileLength, maxFileSize, accept)
+                    const errorMessage = await validateFileListByParameter(files, maxFileLength, maxFileSize, accept, widthSize, heightSize)
                     if (errorMessage !== null) {
                         fileInput.value = null
                         alert(errorMessage)
@@ -230,7 +238,7 @@
                 evt.preventDefault();
                 fileArea.classList.remove('upload-area_dragover');
             });
-            fileArea.addEventListener('drop', function(evt){
+            fileArea.addEventListener('drop', async function(evt){
                 console.log('drop: ');
                 evt.preventDefault();
                 fileArea.classList.remove('upload-area_dragover');
@@ -240,7 +248,7 @@
                 if (!isMultiple && files.length > 1) {
                     errorMessage = 'drooped multi files'
                 } else {
-                    errorMessage = validateFileListByParameter(files, maxFileLength, maxFileSize, accept)
+                    errorMessage = await validateFileListByParameter(files, maxFileLength, maxFileSize, accept, widthSize, heightSize)
                 }
                 if (errorMessage !== null) {
                     alert(errorMessage)
@@ -401,9 +409,18 @@
         * @param {int} maxFileLength
        `* @param {int} maxFileSize
         * @param {string} accept
-        * @return {?string}
+        * @param {null|number} widthSize
+        * @param {null|number} heightSize
+        * @return {Promise<string|null>}
         */
-        function validateFileListByParameter(fileList, maxFileLength, maxFileSize, accept) {
+        async function validateFileListByParameter(
+            fileList,
+            maxFileLength,
+            maxFileSize,
+            accept,
+            widthSize,
+            heightSize
+        ) {
             let message = null;
             let accepts = null;
 
@@ -424,6 +441,15 @@
                 if (!validateFileType(file, accepts ?? accept)) {
                     message = 'ファイル種別不正'
                     break;
+                }
+
+                if ((widthSize !== null) || (heightSize !== null)) {
+                    const asyncResult = await validateFileHeightAndWidthSize(file, widthSize, heightSize)
+                    if (!asyncResult) {
+                        const suffix = (widthSize ? `width ${widthSize}px ` : '') + (heightSize ? `heightSize ${heightSize}px ` : '')
+                        message = `ファイル縦横サイズ不正\n${suffix}の画像の設定`
+                        break;
+                    }
                 }
             }
 
@@ -479,6 +505,56 @@
             } else {
                 return accept.includes(file.type)
             }
+        }
+
+        /**
+        * check file width, height.
+        * @param {File} file
+        * @param {null|number} widthSize
+        * @param {null|number} heightSize
+        * @return {Promise<boolean>}
+        */
+        async function validateFileHeightAndWidthSize(
+            file,
+            widthSize,
+            heightSize,
+        ) {
+            const [width, height] = await getImageWidthAndHeight(file)
+            console.log('width: ' + width)
+            console.log('height: ' + height)
+            if ((widthSize !== null) && (heightSize !== null)) {
+                return (widthSize === width) && (heightSize === height)
+            } else if(widthSize !== null) {
+                return (widthSize === width)
+            } else if(heightSize !== null) {
+                return (heightSize === height)
+            }
+            return true
+        }
+
+        /**
+        * get image width,height.
+        * @param {File} file
+        * @return {Promise<number[]>}
+        */
+        function getImageWidthAndHeight(file) {
+            const image = new Image()
+            return new Promise(
+                (resolve, reject) => {
+                    image.onload = () => {
+                        const width = image.naturalWidth
+                        const height = image.naturalHeight
+                        // 読み込んだ結果をresolve(解決)する
+                        resolve([width, height])
+                    }
+                    image.onerror = (error) => {
+                        reject(error)
+                    }
+
+                    // 読み込み
+                    image.src = URL.createObjectURL(file)
+                }
+            )
         }
 
     </script>
